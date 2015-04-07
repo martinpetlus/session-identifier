@@ -15,37 +15,36 @@ import sk.stuba.fiit.ms.document.DocumentContent;
 import sk.stuba.fiit.ms.session.Result;
 import sk.stuba.fiit.ms.session.Session;
 
-
 public final class FileDatabase implements Database {
-	
+
 	private static FileDatabase instance;
-	
+
 	private static final String FILE = "docs.ser";
-	
+
 	private final Map<String, DocumentContent> docs;
-	
+
 	@SuppressWarnings("unchecked")
 	private FileDatabase() {
 		Map<String, DocumentContent> docs = null;
-		
+
 		try {
 			InputStream file = new FileInputStream(FILE);
 			ObjectInput input = new ObjectInputStream (file);
-			
+
 			docs = (Map<String, DocumentContent>) input.readObject();
-			
+
 			System.out.println("Number of loaded downloaded docs: " + docs.size());
-			
+
 			input.close();
 		} catch (Exception ex) {
 			System.err.println("Cannot load: " + FILE);
-	    }
-		
+		}
+
 		if (docs != null && !docs.isEmpty()) {
-    		this.docs = docs;
-    	} else {
-    		this.docs = new HashMap<String, DocumentContent>();
-    	}
+			this.docs = docs;
+		} else {
+			this.docs = new HashMap<String, DocumentContent>();
+		}
 	}
 
 	@Override
@@ -57,12 +56,12 @@ public final class FileDatabase implements Database {
 	public DocumentContent getContent(final String url) {
 		return docs.get(url);
 	}
-	
+
 	@Override
 	public void save(final DocumentContent doc) {
 		docs.put(doc.getUrl(), doc);
 	}
-	
+
 	@Override
 	public int size() {
 		return docs.size();
@@ -73,14 +72,14 @@ public final class FileDatabase implements Database {
 		try {
 			FileOutputStream file = new FileOutputStream(FILE);
 			ObjectOutputStream oos = new ObjectOutputStream(file);
-			
+
 			oos.writeObject(docs);
 			oos.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public List<DocumentContent> getAllContents() {
 		return new ArrayList<DocumentContent>(docs.values());
@@ -91,7 +90,7 @@ public final class FileDatabase implements Database {
 		for (Session session : sessions) {
 			for (Result result : session.getAllResults()) {
 				String url = result.getUrl();
-				
+
 				if (this.containsContent(url)) {
 					DocumentContent doc = this.getContent(url);
 					result.setContent(doc.getContent());
@@ -99,12 +98,12 @@ public final class FileDatabase implements Database {
 			}
 		}
 	}
-	
+
 	public synchronized static FileDatabase getInstance() {
 		if (instance == null) {
 			instance = new FileDatabase();
 		}
-		
+
 		return instance;
 	}
 
