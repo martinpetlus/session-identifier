@@ -18,46 +18,46 @@ import sk.stuba.fiit.ms.session.SearchResult;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class SessionExtractor {
-	
-	private final FeaturesExtractor featuresExtractor;
-	
-	public SessionExtractor(final LDAModel model) {
-		this.featuresExtractor = addFeatures(model);
-	}
-	
-	private FeaturesExtractor addFeatures(final LDAModel model) {
-		FeaturesExtractor.Builder builder = new FeaturesExtractor.Builder();
 
-		// Lexical features
-		builder.addPairFeature(new QuerySimilarity(Cosine.getInstance()));
-		builder.addPairFeature(new QuerySimilarity(Jaccard.getInstance()));
-		builder.addPairFeature(new QueryTitleSimilarity(Cosine.getInstance()));
-		builder.addPairFeature(new QueryTitleSimilarity(Jaccard.getInstance()));
-		builder.addPairFeature(new QueryCommonWords(QueryCommonWords.Direction.NO));
+    private final FeaturesExtractor featuresExtractor;
 
-		builder.addPairFeature(new CommonUrls());
-		builder.addPairFeature(new CommonClickedUrls());
-		builder.addPairFeature(new NumberOfClicks());
-		builder.addPairFeature(new NumberOfResults());
-		builder.addPairFeature(new SpentTimeOnClicks());
+    public SessionExtractor(final LDAModel model) {
+        this.featuresExtractor = addFeatures(model);
+    }
 
-		// Semantic features
-		builder.addPairFeature(new ClickedResults(model, 0.6));
-		builder.addPairFeature(new CosineOfClickedResults(model));
-		builder.addPairFeature(new CosineOfResults(model));
+    private FeaturesExtractor addFeatures(final LDAModel model) {
+        FeaturesExtractor.Builder builder = new FeaturesExtractor.Builder();
 
-		// Session features
-		builder.addSessionFeature(new QuerySimilarity(Cosine.getInstance()));
-		builder.addSessionFeature(new QueryTitleSimilarity(Cosine.getInstance()));
+        // Lexical features
+        builder.addPairFeature(new QuerySimilarity(Cosine.getInstance()));
+        builder.addPairFeature(new QuerySimilarity(Jaccard.getInstance()));
+        builder.addPairFeature(new QueryTitleSimilarity(Cosine.getInstance()));
+        builder.addPairFeature(new QueryTitleSimilarity(Jaccard.getInstance()));
+        builder.addPairFeature(new QueryCommonWords(QueryCommonWords.Direction.NO));
 
-		builder.addSessionFeature(new CommonClickedUrls());
-		builder.addSessionFeature(new CommonUrls());
-		
-		return builder.build();
-	}
+        builder.addPairFeature(new CommonUrls());
+        builder.addPairFeature(new CommonClickedUrls());
+        builder.addPairFeature(new NumberOfClicks());
+        builder.addPairFeature(new NumberOfResults());
+        builder.addPairFeature(new SpentTimeOnClicks());
 
-	public double[] extractFeatures(final Session session, final SearchResult searchResult) {
-		return featuresExtractor.extractFeatures(session, searchResult);
-	}
-	
+        // Semantic features
+        builder.addPairFeature(new ClickedResults(model, 0.6));
+        builder.addPairFeature(new CosineOfClickedResults(model));
+        builder.addPairFeature(new CosineOfResults(model));
+
+        // Session features
+        builder.addSessionFeature(new QuerySimilarity(Cosine.getInstance()));
+        builder.addSessionFeature(new QueryTitleSimilarity(Cosine.getInstance()));
+
+        builder.addSessionFeature(new CommonClickedUrls());
+        builder.addSessionFeature(new CommonUrls());
+
+        return builder.build();
+    }
+
+    public double[] extractFeatures(final Session session, final SearchResult searchResult) {
+        return featuresExtractor.extractFeatures(session, searchResult);
+    }
+
 }

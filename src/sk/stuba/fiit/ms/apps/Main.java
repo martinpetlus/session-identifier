@@ -24,126 +24,126 @@ import sk.stuba.fiit.ms.session.Session;
 
 public class Main {
 
-	public static void main(String[] args) {
-		System.out.println("Loading sessions from files...");
+    public static void main(String[] args) {
+        System.out.println("Loading sessions from files...");
 
-		List<Session> sessions = new ArrayList<Session>();
+        List<Session> sessions = new ArrayList<Session>();
 
-		SessionTrackParser parser = new SessionTrackParser();
+        SessionTrackParser parser = new SessionTrackParser();
 
-		parser.setSessionTrack(new SessionTrack2013());
-		parser.parse("data/sessiontrack2013.xml", sessions);
+        parser.setSessionTrack(new SessionTrack2013());
+        parser.parse("data/sessiontrack2013.xml", sessions);
 
-		parser.setSessionTrack(new SessionTrack2012());
-		parser.parse("data/sessiontrack2012.xml", sessions);
+        parser.setSessionTrack(new SessionTrack2012());
+        parser.parse("data/sessiontrack2012.xml", sessions);
 
-		parser.setSessionTrack(new SessionTrack2011());
-		parser.parse("data/sessiontrack2011.RL4.xml", sessions);
+        parser.setSessionTrack(new SessionTrack2011());
+        parser.parse("data/sessiontrack2011.RL4.xml", sessions);
 
-		System.out.println("Number of loaded sessions from files: " + sessions.size());
+        System.out.println("Number of loaded sessions from files: " + sessions.size());
 
-//		Load and download results contents
-		Database db = FileDatabase.getInstance();
-		db.setResultsContent(sessions);
+        // Load and download results contents
+        Database db = FileDatabase.getInstance();
+        db.setResultsContent(sessions);
 
-//		SessionDownloader sd = new SessionDownloader(db);
-//		sd.addAll(sessions);
-//		sd.downloadClicked(true);
+//        SessionDownloader sd = new SessionDownloader(db);
+//        sd.addAll(sessions);
+//        sd.downloadClicked(true);
 
-//		Separate train and test sessions
-		int index = 25;
-		List<Session> testSessions  = sessions.subList(0, index);
-		List<Session> trainSessions = sessions.subList(index, sessions.size());
+        // Separate train and test sessions
+        int index = 25;
+        List<Session> testSessions  = sessions.subList(0, index);
+        List<Session> trainSessions = sessions.subList(index, sessions.size());
 
-//		Print number of test queries
-		int testQueries = 0;
+        // Print number of test queries
+        int testQueries = 0;
 
-		for (Session testSession : testSessions) {
-			testQueries += testSession.getNumberOfSearchResults();
-		}
+        for (Session testSession : testSessions) {
+            testQueries += testSession.getNumberOfSearchResults();
+        }
 
-		System.out.println("Number of test queries: " + testQueries);
+        System.out.println("Number of test queries: " + testQueries);
 
-//		Print number of train queries
-		int trainQueries = 0;
+        // Print number of train queries
+        int trainQueries = 0;
 
-		for (Session trainSession : trainSessions) {
-			trainQueries += trainSession.getNumberOfSearchResults();
-		}
+        for (Session trainSession : trainSessions) {
+            trainQueries += trainSession.getNumberOfSearchResults();
+        }
 
-		System.out.println("Number of train queries: " + trainQueries);
+        System.out.println("Number of train queries: " + trainQueries);
 
-//		Write train sessions to file for LDA
-		LDAFileFormatter formatter = new LDAFileFormatter(true, true, false);
-		formatter.write(trainSessions);
+        // Write train sessions to file for LDA
+        LDAFileFormatter formatter = new LDAFileFormatter(true, true, false);
+        formatter.write(trainSessions);
 
-//		Train LDA model from train sessions
-		System.out.println("Traning LDA model...");
+        // Train LDA model from train sessions
+        System.out.println("Traning LDA model...");
 
-		int topics = 100;
-		LDAModel lda = LDAModel.estimate(LDAFileFormatter.FILE, formatter, topics);
+        int topics = 100;
+        LDAModel lda = LDAModel.estimate(LDAFileFormatter.FILE, formatter, topics);
 
-		System.out.println("Traning LDA model done");
+        System.out.println("Traning LDA model done");
 
-//		Create session extractor with trained LDA
-		SessionExtractor extractor = new SessionExtractor(lda);
+        // Create session extractor with trained LDA
+        SessionExtractor extractor = new SessionExtractor(lda);
 
-//		Generate training examples
-		System.out.println("Generating training examples...");
+        // Generate training examples
+        System.out.println("Generating training examples...");
 
-		SetGenerator generator = new SetGenerator(extractor, 2, 20);
-		DataSet set = generator.generateSet(trainSessions);
+        SetGenerator generator = new SetGenerator(extractor, 2, 20);
+        DataSet set = generator.generateSet(trainSessions);
 
-		double[][] trainingExamples = set.getExamples();
-		double[] trainingLabels = set.getLabels();
+        double[][] trainingExamples = set.getExamples();
+        double[] trainingLabels = set.getLabels();
 
-		FeatureNormalizer normalizer = new FeatureNormalizer(trainingExamples);
-		normalizer.normalizeInPlace();
+        FeatureNormalizer normalizer = new FeatureNormalizer(trainingExamples);
+        normalizer.normalizeInPlace();
 
-		System.out.println("Number of generated training examples: " + trainingExamples.length);
+        System.out.println("Number of generated training examples: " + trainingExamples.length);
 
-//		Train SVM from training examples
-		System.out.println("Traning SVM classifier...");
+        // Train SVM from training examples
+        System.out.println("Traning SVM classifier...");
 
-		SVM svm = SVM.train(trainingExamples, trainingLabels);
+        SVM svm = SVM.train(trainingExamples, trainingLabels);
 
-		System.out.println("Traning SVM classifier done");
+        System.out.println("Traning SVM classifier done");
 
-		svm.printModel();
+        svm.printModel();
 
-//		Print original test sessions queries
-		System.out.println();
+        // Print original test sessions queries
+        System.out.println();
 
-		for (Session session : testSessions) {
-			System.out.println(session.getTopic());
-			for (SearchResult result : session.getAllSearchResults()) {
-				System.out.println(result.getQuery());
-			}
-			System.out.println("-----------------");
-		}
+        for (Session session : testSessions) {
+            System.out.println(session.getTopic());
+            for (SearchResult result : session.getAllSearchResults()) {
+                System.out.println(result.getQuery());
+            }
+            System.out.println("-----------------");
+        }
 
-		System.out.println("\n***********************\n");
+        System.out.println("\n***********************\n");
 
-//		Shuffle test sessions search results for session identification
-		Shuffler shuffler = new Shuffler();
-		List<SearchResult> searchResults = shuffler.shuffle(testSessions);
+        // Shuffle test sessions search results for session identification
+        Shuffler shuffler = new Shuffler();
+        List<SearchResult> searchResults = shuffler.shuffle(testSessions);
 
-//		Identify session from test shuffled search results
-		SessionsIdentifier identifier = new SessionsIdentifier(extractor, svm, normalizer);
+        // Identify session from test shuffled search results
+        SessionsIdentifier identifier = new SessionsIdentifier(extractor, svm, normalizer);
 
-		identifier.addAll(searchResults);
+        identifier.addAll(searchResults);
 
-//		Print identified sessions from test sessions
-		for (Session session : identifier.getSessions()) {
-			for (SearchResult result : session.getAllSearchResults()) {
-				System.out.println(result.getQuery());
-			}
-			System.out.println("-----------------");
-		}
+        // Print identified sessions from test sessions
+        for (Session session : identifier.getSessions()) {
+            for (SearchResult result : session.getAllSearchResults()) {
+                System.out.println(result.getQuery());
+            }
+            System.out.println("-----------------");
+        }
 
-//		Evaluate results
-		Evaluator.Results evalResults = Evaluator.evaluate(testSessions, identifier.getSessions());
-		System.out.println(evalResults);
-	}
+        // Evaluate results
+        Evaluator.Results evalResults = Evaluator.evaluate(testSessions, identifier.getSessions());
+        System.out.println(evalResults);
+    }
 
 }

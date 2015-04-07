@@ -10,76 +10,76 @@ import sk.stuba.fiit.ms.session.SearchResult;
 import sk.stuba.fiit.ms.session.Session;
 
 public class SessionsIdentifier {
-	
-	private final SVM model;
-	
-	private final SessionExtractor extractor;
-	
-	private final List<Session> sessions;
 
-	private final FeatureNormalizer normalizer;
+    private final SVM model;
 
-	public SessionsIdentifier(final SessionExtractor extractor, final SVM model) {
-		this(extractor, model, null);
-	}
+    private final SessionExtractor extractor;
 
-	public SessionsIdentifier(final SessionExtractor extractor, final SVM model, final FeatureNormalizer normalizer) {
-		this.model = model;
-		
-		this.extractor = extractor;
-		
-		this.sessions = new ArrayList<Session>();
+    private final List<Session> sessions;
 
-		this.normalizer = normalizer;
-	}
-	
-	private void addSession(final SearchResult searchResult) {
-		Session session = new Session();
-		
-		session.add(searchResult);
-		
-		sessions.add(session);
-	}
-	
-	public void add(final SearchResult searchResult) {
-		if (sessions.isEmpty()) {
-			addSession(searchResult);
-		} else {
-			int i;
-			
-			for (i = sessions.size() - 1; i >= 0; i--) {
-				Session session = sessions.get(i);
+    private final FeatureNormalizer normalizer;
 
-				double[] features = extractor.extractFeatures(session, searchResult);
+    public SessionsIdentifier(final SessionExtractor extractor, final SVM model) {
+        this(extractor, model, null);
+    }
 
-				if (normalizer != null) {
-					normalizer.normalizeInPlace(features);
-				}
-				
-				if (model.predict(features)) {
-					session.add(searchResult);
-					
-					sessions.remove(i);
-					sessions.add(session);
-					
-					break;
-				}
-			}
-			
-			if (i < 0) {
-				addSession(searchResult);
-			}
-		}
-	}
-	
-	public void addAll(final List<SearchResult> searchResults) {
-		for (SearchResult searchResult : searchResults) {
-			add(searchResult);
-		}
-	}
-	
-	public List<Session> getSessions() {
-		return new ArrayList<Session>(sessions);
-	}
-	
+    public SessionsIdentifier(final SessionExtractor extractor, final SVM model, final FeatureNormalizer normalizer) {
+        this.model = model;
+
+        this.extractor = extractor;
+
+        this.sessions = new ArrayList<Session>();
+
+        this.normalizer = normalizer;
+    }
+
+    private void addSession(final SearchResult searchResult) {
+        Session session = new Session();
+
+        session.add(searchResult);
+
+        sessions.add(session);
+    }
+
+    public void add(final SearchResult searchResult) {
+        if (sessions.isEmpty()) {
+            addSession(searchResult);
+        } else {
+            int i;
+
+            for (i = sessions.size() - 1; i >= 0; i--) {
+                Session session = sessions.get(i);
+
+                double[] features = extractor.extractFeatures(session, searchResult);
+
+                if (normalizer != null) {
+                    normalizer.normalizeInPlace(features);
+                }
+
+                if (model.predict(features)) {
+                    session.add(searchResult);
+
+                    sessions.remove(i);
+                    sessions.add(session);
+
+                    break;
+                }
+            }
+
+            if (i < 0) {
+                addSession(searchResult);
+            }
+        }
+    }
+
+    public void addAll(final List<SearchResult> searchResults) {
+        for (SearchResult searchResult : searchResults) {
+            add(searchResult);
+        }
+    }
+
+    public List<Session> getSessions() {
+        return new ArrayList<Session>(sessions);
+    }
+
 }

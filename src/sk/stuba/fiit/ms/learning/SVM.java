@@ -7,188 +7,188 @@ import libsvm.svm_parameter;
 import libsvm.svm_problem;
 
 public final class SVM {
-	
-	private final svm_model model;
-	
-	private SVM(final svm_model model) {
-		this.model = model;
-	}
 
-	public static SVM train(final double[][] trainSet, final double[] trainLabels) {
-		final svm_problem prob = new svm_problem();
-		
-		int dataLength = trainSet.length;
-		
-		prob.y = trainLabels;
-		prob.l = dataLength;
-		prob.x = new svm_node[dataLength][];
-		
-		for (int i = 0; i < dataLength; i++) {
-			double[] features = trainSet[i];
-			
-			prob.x[i] = new svm_node[features.length];
-			
-			for (int j = 0; j < features.length; j++) {
-				svm_node node = new svm_node();
+    private final svm_model model;
 
-				node.index = j + 1;
-				node.value = features[j];
+    private SVM(final svm_model model) {
+        this.model = model;
+    }
 
-				prob.x[i][j] = node;
-			}
-		}
+    public static SVM train(final double[][] trainSet, final double[] trainLabels) {
+        final svm_problem prob = new svm_problem();
 
-		svm_parameter param = new svm_parameter();
+        int dataLength = trainSet.length;
 
-		param.probability = 1;
-		param.gamma = 0.5;
-		param.nu = 0.5;
-		param.C = 1;
-		param.svm_type = svm_parameter.C_SVC;
-		param.kernel_type = svm_parameter.LINEAR;
-		param.cache_size = 20000;
-		param.eps = 0.001;
+        prob.y = trainLabels;
+        prob.l = dataLength;
+        prob.x = new svm_node[dataLength][];
 
-		return new SVM(svm.svm_train(prob, param));
-	}
+        for (int i = 0; i < dataLength; i++) {
+            double[] features = trainSet[i];
 
-	public boolean predict(final double[] features) {
-		svm_node[] nodes = new svm_node[features.length];
-		
-		for (int i = 0; i < features.length; i++) {
-			svm_node node = new svm_node();
-			
-			node.index = i + 1;
-			node.value = features[i];
-			
-			nodes[i] = node;
-		}
-		
-		int totalClasses = 2;
-		
-		int[] labels = new int[totalClasses];
-		
-		svm.svm_get_labels(this.model, labels);
-		
-		double[] prob_estimates = new double[totalClasses];
-		
-		double v = svm.svm_predict_probability(this.model, nodes, prob_estimates);
-		
-		/*for (int i = 0; i < totalClasses; i++) {
-		    System.out.print("(" + labels[i] + ":" + prob_estimates[i] + ")");
-		}
-		
-		System.out.println(" Prediction:" + v + ")");*/
-		
-		return Double.compare(v, 1.0) == 0 ? true : false;
-	}
+            prob.x[i] = new svm_node[features.length];
 
-	public void printModel() {
-		System.out.println("Support vectors:");
+            for (int j = 0; j < features.length; j++) {
+                svm_node node = new svm_node();
 
-		System.out.print("[");
+                node.index = j + 1;
+                node.value = features[j];
 
-		for (int i = 0; i < model.SV.length; i++) {
-			for (int j = 0; j < model.SV[i].length; j++) {
-				if (j > 0) {
-					System.out.print(" ");
-				}
+                prob.x[i][j] = node;
+            }
+        }
 
-				System.out.print(model.SV[i][j].value);
-			}
+        svm_parameter param = new svm_parameter();
 
-			if (i + 1 < model.SV.length) {
-				System.out.println(";");
-			}
-		}
+        param.probability = 1;
+        param.gamma = 0.5;
+        param.nu = 0.5;
+        param.C = 1;
+        param.svm_type = svm_parameter.C_SVC;
+        param.kernel_type = svm_parameter.LINEAR;
+        param.cache_size = 20000;
+        param.eps = 0.001;
 
-		System.out.println("]");
+        return new SVM(svm.svm_train(prob, param));
+    }
 
-		System.out.println("Dual coefs:");
+    public boolean predict(final double[] features) {
+        svm_node[] nodes = new svm_node[features.length];
 
-		System.out.print("[");
+        for (int i = 0; i < features.length; i++) {
+            svm_node node = new svm_node();
 
-		for (int i = 0; i < model.sv_coef.length; i++) {
-			for (int j = 0; j < model.sv_coef[i].length; j++) {
-				if (j > 0) {
-					System.out.print(" ");
-				}
+            node.index = i + 1;
+            node.value = features[i];
 
-				System.out.print(model.sv_coef[i][j]);
-			}
+            nodes[i] = node;
+        }
 
-			if (i + 1 < model.sv_coef.length) {
-				System.out.println(";");
-			}
-		}
+        int totalClasses = 2;
 
-		System.out.println("]");
-	}
+        int[] labels = new int[totalClasses];
 
-	/*public Model getModel() {
-		final double[][] coef = model.sv_coef;
+        svm.svm_get_labels(this.model, labels);
 
-		final svm_node[][] tSVs = transposeSVs(model.SV);
+        double[] prob_estimates = new double[totalClasses];
 
-		final double[] result = new double[tSVs.length];
+        double v = svm.svm_predict_probability(this.model, nodes, prob_estimates);
 
-		for (int row = 0; row < tSVs.length; row++) {
-			double res = 0.0;
+        /*for (int i = 0; i < totalClasses; i++) {
+            System.out.print("(" + labels[i] + ":" + prob_estimates[i] + ")");
+        }
 
-			for (int col = 0; col < tSVs[row].length; col++) {
-				res += tSVs[row][col].value * coef[coef.length - col - 1][row];
-			}
+        System.out.println(" Prediction:" + v + ")");*/
 
-			result[row] = res;
-		}
+        return Double.compare(v, 1.0) == 0 ? true : false;
+    }
 
-		return new Model(result, -model.rho[0]);
-	}
+    public void printModel() {
+        System.out.println("Support vectors:");
 
-	private svm_node[][] transposeSVs(final svm_node[][] SVs) {
-		final int tCols = SVs.length;
+        System.out.print("[");
 
-		final int tRows = SVs[0].length;
+        for (int i = 0; i < model.SV.length; i++) {
+            for (int j = 0; j < model.SV[i].length; j++) {
+                if (j > 0) {
+                    System.out.print(" ");
+                }
 
-		final svm_node[][] tSVs = new svm_node[tRows][];
+                System.out.print(model.SV[i][j].value);
+            }
 
-		for (int i = 0; i < tRows; i++) {
-			tSVs[i] = new svm_node[tCols];
-		}
+            if (i + 1 < model.SV.length) {
+                System.out.println(";");
+            }
+        }
 
-		for (int row = 0; row < SVs.length; row++) {
-			for (int col = 0; col < SVs[row].length; col++) {
-				tSVs[col][row] = SVs[row][col];
-			}
-		}
+        System.out.println("]");
 
-		return tSVs;
-	}*/
+        System.out.println("Dual coefs:");
 
-	public static final class Model {
+        System.out.print("[");
 
-		private final double[] w;
+        for (int i = 0; i < model.sv_coef.length; i++) {
+            for (int j = 0; j < model.sv_coef[i].length; j++) {
+                if (j > 0) {
+                    System.out.print(" ");
+                }
 
-		private final double b;
+                System.out.print(model.sv_coef[i][j]);
+            }
 
-		private Model(final double[] w, final double b) {
-			this.w = w;
-			this.b = b;
-		}
+            if (i + 1 < model.sv_coef.length) {
+                System.out.println(";");
+            }
+        }
 
-		public double getB() {
-			return b;
-		}
+        System.out.println("]");
+    }
 
-		public double[] getW() {
-			return w;
-		}
+    /*public Model getModel() {
+        final double[][] coef = model.sv_coef;
 
-		@Override
-		public String toString() {
-			return "Model[b=" + b + " w=" + java.util.Arrays.toString(w) + "]";
-		}
+        final svm_node[][] tSVs = transposeSVs(model.SV);
 
-	}
-	
+        final double[] result = new double[tSVs.length];
+
+        for (int row = 0; row < tSVs.length; row++) {
+            double res = 0.0;
+
+            for (int col = 0; col < tSVs[row].length; col++) {
+                res += tSVs[row][col].value * coef[coef.length - col - 1][row];
+            }
+
+            result[row] = res;
+        }
+
+        return new Model(result, -model.rho[0]);
+    }
+
+    private svm_node[][] transposeSVs(final svm_node[][] SVs) {
+        final int tCols = SVs.length;
+
+        final int tRows = SVs[0].length;
+
+        final svm_node[][] tSVs = new svm_node[tRows][];
+
+        for (int i = 0; i < tRows; i++) {
+            tSVs[i] = new svm_node[tCols];
+        }
+
+        for (int row = 0; row < SVs.length; row++) {
+            for (int col = 0; col < SVs[row].length; col++) {
+                tSVs[col][row] = SVs[row][col];
+            }
+        }
+
+        return tSVs;
+    }*/
+
+    public static final class Model {
+
+        private final double[] w;
+
+        private final double b;
+
+        private Model(final double[] w, final double b) {
+            this.w = w;
+            this.b = b;
+        }
+
+        public double getB() {
+            return b;
+        }
+
+        public double[] getW() {
+            return w;
+        }
+
+        @Override
+        public String toString() {
+            return "Model[b=" + b + " w=" + java.util.Arrays.toString(w) + "]";
+        }
+
+    }
+
 }

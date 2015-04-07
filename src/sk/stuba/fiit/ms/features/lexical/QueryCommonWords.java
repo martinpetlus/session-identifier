@@ -5,72 +5,72 @@ import sk.stuba.fiit.ms.features.Util;
 import sk.stuba.fiit.ms.session.SearchResult;
 
 public final class QueryCommonWords implements PairFeature {
-	
-	private final Direction dir;
-	
-	public QueryCommonWords(final Direction dir) {
-		this.dir = dir;
-	}
-	
-	public enum Direction {
-		
-		LEFT {
 
-			@Override
-			int compute(final String[] one, final String[] two) {
-				int count = 0;
-				
-				for (int i = 0; i < one.length && i < two.length; i++) {
-					if (one[i].equals(two[i])) {
-						count++;
-					} else {
-						break;
-					}
-				}
-				
-				return count;
-			}
-			
-		},
-		
-		RIGHT {
+    private final Direction dir;
 
-			@Override
-			int compute(final String[] one, final String[] two) {
-				int count = 0;
-				
-				for (int i = one.length - 1, j = two.length - 1; i >= 0 && j >= 0; i--, j--) {
-					if (one[i].equals(two[j])) {
-						count++;
-					} else {
-						break;
-					}
-				}
-				
-				return count;
-			}
-			
-		},
-		
-		NO {
+    public QueryCommonWords(final Direction dir) {
+        this.dir = dir;
+    }
 
-			@Override
-			int compute(final String[] one, final String[] two) {
-				return Util.intersection(one, two).length;
-			}
-			
-		};
-		
-		abstract int compute(final String[] one, final String[] two);
-		
-	}
+    public enum Direction {
 
-	@Override
-	public double extract(SearchResult searchResult, SearchResult compareTo) {
-		String[] query1 = TextNormalizer.split(searchResult.getQuery());
-		String[] query2 = TextNormalizer.split(compareTo.getQuery()); 
-		
-		return dir.compute(query1, query2);
-	}
+        LEFT {
+
+            @Override
+            int compute(final String[] one, final String[] two) {
+                int count = 0;
+
+                for (int i = 0; i < one.length && i < two.length; i++) {
+                    if (one[i].equals(two[i])) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+
+                return count;
+            }
+
+        },
+
+        RIGHT {
+
+            @Override
+            int compute(final String[] one, final String[] two) {
+                int count = 0;
+
+                for (int i = one.length - 1, j = two.length - 1; i >= 0 && j >= 0; i--, j--) {
+                    if (one[i].equals(two[j])) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+
+                return count;
+            }
+
+        },
+
+        NO {
+
+            @Override
+            int compute(final String[] one, final String[] two) {
+                return Util.intersection(one, two).length;
+            }
+
+        };
+
+        abstract int compute(final String[] one, final String[] two);
+
+    }
+
+    @Override
+    public double extract(SearchResult searchResult, SearchResult compareTo) {
+        String[] query1 = TextNormalizer.split(searchResult.getQuery());
+        String[] query2 = TextNormalizer.split(compareTo.getQuery());
+
+        return dir.compute(query1, query2);
+    }
 
 }

@@ -4,50 +4,50 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class Util {
-	
-	private Util() {}
 
-	public static String[] union(final String[][] sentences) {
-		Set<String> set = new HashSet<String>();
+    private Util() {}
 
-		for (String[] sentence : sentences) {
-			for (String word : sentence) {
-				set.add(word);
-			}
-		}
+    public static String[] union(final String[][] sentences) {
+        Set<String> set = new HashSet<String>();
 
-		return set.toArray(new String[set.size()]);
-	}
+        for (String[] sentence : sentences) {
+            for (String word : sentence) {
+                set.add(word);
+            }
+        }
 
-	public static String[] union(final String[] one, final String[] two) {
-		Set<String> set = new HashSet<String>();
+        return set.toArray(new String[set.size()]);
+    }
 
-		for (String el : one) {
-			set.add(el);
-		}
-		
-		for (String el : two) {
-			set.add(el);
-		}
-		
-		return set.toArray(new String[set.size()]);
-	}
-	
-	public static String[] intersection(final String[] one, final String[] two) {
-		Set<String> set1 = new HashSet<String>();
-		Set<String> set2 = new HashSet<String>();
+    public static String[] union(final String[] one, final String[] two) {
+        Set<String> set = new HashSet<String>();
 
-		for (String el : one) {
-			set1.add(el);
-		}
-		
-		for (String el : two) {
-			if (set1.contains(el)) {
-				set2.add(el);
-			}
-		}
-		
-		return set2.toArray(new String[set2.size()]);
-	}
-	
+        for (String el : one) {
+            set.add(el);
+        }
+
+        for (String el : two) {
+            set.add(el);
+        }
+
+        return set.toArray(new String[set.size()]);
+    }
+
+    public static String[] intersection(final String[] one, final String[] two) {
+        Set<String> set1 = new HashSet<String>();
+        Set<String> set2 = new HashSet<String>();
+
+        for (String el : one) {
+            set1.add(el);
+        }
+
+        for (String el : two) {
+            if (set1.contains(el)) {
+                set2.add(el);
+            }
+        }
+
+        return set2.toArray(new String[set2.size()]);
+    }
+
 }

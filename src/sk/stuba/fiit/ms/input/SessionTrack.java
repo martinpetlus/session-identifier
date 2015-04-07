@@ -9,17 +9,17 @@ import sk.stuba.fiit.ms.session.Result;
 import sk.stuba.fiit.ms.session.Session;
 
 public interface SessionTrack {
-	
-	public Time parseTime(final String time);
-	
-	public SearchResult parseInteraction(final Node node);
-	
-	public Session parseSession(final Node node);
-	
-	public Result parseResult(final Node node);
-	
-	public Click parseClick(final Node node);
-	
-	public Topic parseTopic(final Node node);
-	
+
+    public Time parseTime(final String time);
+
+    public SearchResult parseInteraction(final Node node);
+
+    public Session parseSession(final Node node);
+
+    public Result parseResult(final Node node);
+
+    public Click parseClick(final Node node);
+
+    public Topic parseTopic(final Node node);
+
 }
