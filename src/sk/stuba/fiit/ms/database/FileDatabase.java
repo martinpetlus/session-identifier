@@ -29,7 +29,7 @@ public final class FileDatabase implements Database {
 
 		try {
 			InputStream file = new FileInputStream(FILE);
-			ObjectInput input = new ObjectInputStream (file);
+			ObjectInput input = new ObjectInputStream(file);
 
 			docs = (Map<String, DocumentContent>) input.readObject();
 
