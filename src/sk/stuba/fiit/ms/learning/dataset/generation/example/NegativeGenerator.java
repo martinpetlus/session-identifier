@@ -33,11 +33,11 @@ public final class NegativeGenerator extends Generator {
 
                 if (!session.equals(randomSession)) {
                     randomResult = randomSession.getSearch(
-                        random.nextInt(randomSession.results()));
+                        random.nextInt(randomSession.getNumberOfSearches()));
                 }
             }
 
-            int[] indices = randomIndices(queries, session.results());
+            int[] indices = randomIndices(queries, session.getNumberOfSearches());
 
             List<Search> randomResults =
                     new ArrayList<Search>(queries);
@@ -54,7 +54,7 @@ public final class NegativeGenerator extends Generator {
 
     @Override
     public boolean generatable(final int queries) {
-        if (queries > session.results()) {
+        if (queries > session.getNumberOfSearches()) {
             return false;
         }
 

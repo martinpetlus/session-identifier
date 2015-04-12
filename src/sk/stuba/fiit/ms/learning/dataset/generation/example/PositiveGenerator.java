@@ -24,9 +24,9 @@ public final class PositiveGenerator extends Generator {
     private void prepare(final int queries) {
         randomResults = new ArrayList<Search>(queries);
 
-        randomIndex = random.nextInt(session.results());
+        randomIndex = random.nextInt(session.getNumberOfSearches());
 
-        int[] randomIndices = randomIndices(queries, session.results(), randomIndex);
+        int[] randomIndices = randomIndices(queries, session.getNumberOfSearches(), randomIndex);
 
         for (int i = 0; i < queries; i++) {
             randomResults.add(session.getSearch(randomIndices[i]));
@@ -49,7 +49,7 @@ public final class PositiveGenerator extends Generator {
 
     @Override
     public boolean generatable(final int queries) {
-        if (session.results() > queries) {
+        if (session.getNumberOfSearches() > queries) {
             return true;
         } else {
             return false;

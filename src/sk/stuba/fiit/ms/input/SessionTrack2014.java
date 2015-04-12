@@ -2,6 +2,8 @@ package sk.stuba.fiit.ms.input;
 
 import org.w3c.dom.Node;
 
+import sk.stuba.fiit.ms.session.Search;
+import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.session.Time;
 
 public final class SessionTrack2014 extends SessionTrackSkeleton {
@@ -14,6 +16,12 @@ public final class SessionTrack2014 extends SessionTrackSkeleton {
     @Override
     public Topic parseTopic(final Node node) {
         return new Topic2014(Integer.parseInt(Util.getAttrValue(node, "num")));
+    }
+
+    @Override
+    public Search.Builder parseInteraction(final Node node, final Session session) {
+        Search.Builder builder = super.parseInteraction(node, session);
+        return  builder;
     }
 
     private static final class Topic2014 implements Topic {

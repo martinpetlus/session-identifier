@@ -15,7 +15,7 @@ public final class Shuffler {
         int count = 0;
 
         for (Session session : sessions) {
-            count += session.results();
+            count += session.getNumberOfSearches();
         }
 
         return count;

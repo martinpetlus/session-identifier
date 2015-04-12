@@ -63,7 +63,7 @@ public final class Evaluator {
     private static double computeRecall(final Cardinality c, final List<Session> sessions) {
         Session session = findSessionById(c.getSessionId(), sessions);
 
-        return ((double) c.getValue()) / session.results();
+        return ((double) c.getValue()) / session.getNumberOfSearches();
     }
 
     public static Results evaluate(final List<Session> correct, final List<Session> detected) {
