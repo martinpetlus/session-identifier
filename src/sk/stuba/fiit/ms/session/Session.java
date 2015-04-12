@@ -51,7 +51,11 @@ public final class Session {
     }
 
     public Search getLastSearch() {
-        return searches.get(searches.size() - 1);
+        if (searches.isEmpty()) {
+            return null;
+        } else {
+            return searches.get(searches.size() - 1);
+        }
     }
 
     public Search getSearch(int index) {
