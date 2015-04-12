@@ -19,13 +19,13 @@ public final class Session {
         this(null);
     }
 
-    public Session(final List<Search> results) {
+    public Session(final List<Search> searches) {
         this.id = ++numberOfSessions;
 
-        if (results == null) {
+        if (searches == null) {
             this.searches = new ArrayList<Search>();
         } else {
-            this.searches = new ArrayList<Search>(results);
+            this.searches = new ArrayList<Search>(searches);
         }
     }
 
@@ -48,6 +48,10 @@ public final class Session {
         } else {
             return false;
         }
+    }
+
+    public Search getLastSearch() {
+        return searches.get(searches.size() - 1);
     }
 
     public Search getSearch(int index) {
