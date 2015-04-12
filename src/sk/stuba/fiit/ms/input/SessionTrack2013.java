@@ -9,9 +9,9 @@ public final class SessionTrack2013 extends SessionTrackSkeleton {
     @Override
     public Time parseTime(final String time) {
         if (time.equals("NA")) {
-            return Time2013.ZERO;
+            return TimeInSeconds.ZERO;
         } else {
-            return new Time2013(Double.parseDouble(time));
+            return new TimeInSeconds(Double.parseDouble(time));
         }
     }
 
@@ -40,32 +40,6 @@ public final class SessionTrack2013 extends SessionTrackSkeleton {
         @Override
         public String toString() {
             return "Topic2013[" + id + "]";
-        }
-
-    }
-
-    private static final class Time2013 implements Time {
-
-        public static final Time2013 ZERO = new Time2013(0.0);
-
-        private final double value;
-
-        public Time2013(final double value) {
-            this.value = value;
-        }
-
-        @Override
-        public double getDifference(final Time time) {
-            if (this == ZERO || time == ZERO) {
-                return 0.0;
-            } else {
-                return Math.abs(this.value - ((Time2013) time).value);
-            }
-        }
-
-        @Override
-        public String toString() {
-            return "Time2013[" + value + "]";
         }
 
     }
