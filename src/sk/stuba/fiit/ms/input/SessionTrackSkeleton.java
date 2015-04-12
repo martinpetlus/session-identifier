@@ -30,7 +30,7 @@ public abstract class SessionTrackSkeleton implements SessionTrack {
             if (Util.isNode(child, "topic")) {
                 s.setTopic(parseTopic(child));
             } else if (Util.isNode(child, "interaction")) {
-                s.add(parseInteraction(child).build());
+                s.add(parseInteraction(child, s).build());
             }
         }
 
@@ -63,7 +63,7 @@ public abstract class SessionTrackSkeleton implements SessionTrack {
     }
 
     @Override
-    public Search.Builder parseInteraction(final Node node) {
+    public Search.Builder parseInteraction(final Node node, final Session session) {
         Search.Builder builder = new Search.Builder();
 
         NodeList childNodes = node.getChildNodes();
