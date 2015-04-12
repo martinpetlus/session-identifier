@@ -11,7 +11,7 @@ public final class Session {
 
     private final int id;
 
-    private final List<SearchResult> searchResults;
+    private final List<Search> searches;
 
     private Topic topic;
 
@@ -19,13 +19,13 @@ public final class Session {
         this(null);
     }
 
-    public Session(final List<SearchResult> results) {
+    public Session(final List<Search> results) {
         this.id = ++numberOfSessions;
 
         if (results == null) {
-            this.searchResults = new ArrayList<SearchResult>();
+            this.searches = new ArrayList<Search>();
         } else {
-            this.searchResults = new ArrayList<SearchResult>(results);
+            this.searches = new ArrayList<Search>(results);
         }
     }
 
@@ -41,43 +41,43 @@ public final class Session {
         this.topic = t;
     }
 
-    public boolean add(final SearchResult searchResult) {
-        if (searchResult.getResults().size() > 0) {
-            searchResults.add(searchResult);
+    public boolean add(final Search search) {
+        if (search.getResults().size() > 0) {
+            searches.add(search);
             return true;
         } else {
             return false;
         }
     }
 
-    public SearchResult getSearchResult(int index) {
-        return searchResults.get(index);
+    public Search getSearchResult(int index) {
+        return searches.get(index);
     }
 
-    public List<SearchResult> getAllSearchResults() {
-        return new ArrayList<SearchResult>(searchResults);
+    public List<Search> getAllSearchResults() {
+        return new ArrayList<Search>(searches);
     }
 
     public List<Result> getAllResults() {
         List<Result> results = new ArrayList<Result>();
 
-        for (SearchResult searchResult : searchResults) {
-            results.addAll(searchResult.getResults());
+        for (Search search : searches) {
+            results.addAll(search.getResults());
         }
 
         return results;
     }
 
     public int getNumberOfSearchResults() {
-        return searchResults.size();
+        return searches.size();
     }
 
     public int results() {
-        return searchResults.size();
+        return searches.size();
     }
 
     public boolean isEmpty() {
-        return searchResults.size() == 0;
+        return searches.size() == 0;
     }
 
     @Override

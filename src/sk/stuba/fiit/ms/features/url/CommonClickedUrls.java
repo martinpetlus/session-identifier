@@ -4,18 +4,18 @@ import java.util.List;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class CommonClickedUrls implements PairFeature, SessionFeature {
 
     @Override
-    public double extract(final SearchResult searchResult, final SearchResult compareTo) {
+    public double extract(final Search search, final Search compareTo) {
         List<String> clicked = compareTo.getClickedUrls();
 
         int count = 0;
 
-        for (String url : searchResult.getClickedUrls()) {
+        for (String url : search.getClickedUrls()) {
             if (clicked.contains(url)) {
                 count++;
             }
@@ -25,11 +25,11 @@ public final class CommonClickedUrls implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(final Session session, final SearchResult searchResult) {
+    public double extract(final Session session, final Search search) {
         int count = 0;
 
-        for (SearchResult sr : session.getAllSearchResults()) {
-            count += (int) this.extract(sr, searchResult);
+        for (Search sr : session.getAllSearchResults()) {
+            count += (int) this.extract(sr, search);
         }
 
         return count;

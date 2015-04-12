@@ -6,7 +6,7 @@ import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
 import sk.stuba.fiit.ms.features.Statistic;
 import sk.stuba.fiit.ms.features.Util;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.session.Result;
 
@@ -25,8 +25,8 @@ public final class QueryTitleSimilarity implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(final SearchResult searchResult, final SearchResult compareTo) {
-        String[] query = TextNormalizer.split(searchResult.getQuery());
+    public double extract(final Search search, final Search compareTo) {
+        String[] query = TextNormalizer.split(search.getQuery());
 
         List<Result> results = compareTo.getResults();
 
@@ -43,26 +43,26 @@ public final class QueryTitleSimilarity implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(final Session session, final SearchResult searchResult) {
-        List<SearchResult> searchResults = session.getAllSearchResults();
+    public double extract(final Session session, final Search search) {
+        List<Search> searches = session.getAllSearchResults();
 
-        String[][] titles = new String[searchResults.size()][];
+        String[][] titles = new String[searches.size()][];
 
-        for (int i = 0; i < searchResults.size(); i++) {
-            titles[i] = getTitles(searchResults.get(i));
+        for (int i = 0; i < searches.size(); i++) {
+            titles[i] = getTitles(searches.get(i));
         }
 
         String[] union = Util.union(titles);
 
-        return similarity.calculate(union, TextNormalizer.split(searchResult.getQuery()));
+        return similarity.calculate(union, TextNormalizer.split(search.getQuery()));
     }
 
-    private String[] getTitles(final SearchResult searchResult) {
-        String[][] titles = new String[searchResult.getNumberOfResults()][];
+    private String[] getTitles(final Search search) {
+        String[][] titles = new String[search.getNumberOfResults()][];
 
         int i = 0;
 
-        for (Result result : searchResult.getResults()) {
+        for (Result result : search.getResults()) {
             titles[i++] = TextNormalizer.split(result.getTitle());
         }
 

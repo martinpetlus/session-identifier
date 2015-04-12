@@ -4,7 +4,7 @@ import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.Statistic;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Result;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public final class CosineOfClickedResults extends Inferencer implements PairFeat
     }
 
     @Override
-    public double extract(final SearchResult searchResult, final SearchResult compareTo) {
-        List<Result> clicked1 = searchResult.getClickedResults(minimumTimeSpent);
+    public double extract(final Search search, final Search compareTo) {
+        List<Result> clicked1 = search.getClickedResults(minimumTimeSpent);
         List<Result> clicked2 = compareTo.getClickedResults(minimumTimeSpent);
 
         if (clicked1.isEmpty() || clicked2.isEmpty()) {

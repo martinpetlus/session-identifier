@@ -6,7 +6,7 @@ import java.util.List;
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
 import sk.stuba.fiit.ms.learning.train.Features;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class FeaturesExtractor {
@@ -20,14 +20,14 @@ public final class FeaturesExtractor {
         sessionFeatures = new ArrayList<SessionFeature>(builder.sessionFeatures);
     }
 
-    public double[] extractFeatures(final Session session, final SearchResult searchResult) {
+    public double[] extractFeatures(final Session session, final Search search) {
         final int numOfSessionFeatures = sessionFeatures.size();
         final int numOfPairFeatures = pairFeatures.size() * Features.transformExpansion();
 
         double[] featureVector = new double[numOfSessionFeatures + numOfPairFeatures];
 
-        double[] features1 = extractSessionFeatures(session, searchResult);
-        double[] features2 = extractPairFeatures(session, searchResult);
+        double[] features1 = extractSessionFeatures(session, search);
+        double[] features2 = extractPairFeatures(session, search);
 
         System.arraycopy(features1, 0, featureVector, 0, numOfSessionFeatures);
         System.arraycopy(features2, 0, featureVector, numOfSessionFeatures, numOfPairFeatures);
@@ -35,33 +35,33 @@ public final class FeaturesExtractor {
         return featureVector;
     }
 
-    private double[] extractSessionFeatures(final Session session, final SearchResult searchResult) {
+    private double[] extractSessionFeatures(final Session session, final Search search) {
         double[] featureVector = new double[sessionFeatures.size()];
 
         int i = 0;
 
         for (SessionFeature sessionFeature : sessionFeatures) {
-            featureVector[i++] = sessionFeature.extract(session, searchResult);
+            featureVector[i++] = sessionFeature.extract(session, search);
         }
 
         return featureVector;
     }
 
-    private double[] extractPairFeatures(final Session session, final SearchResult searchResult) {
-        List<SearchResult> searchResults = session.getAllSearchResults();
+    private double[] extractPairFeatures(final Session session, final Search search) {
+        List<Search> searches = session.getAllSearchResults();
 
         int i = 0;
 
-        double[][] features = new double[searchResults.size()][];
+        double[][] features = new double[searches.size()][];
 
-        for (SearchResult sr : searchResults) {
-            features[i++] = this.extractPairFeatures(searchResult, sr);
+        for (Search sr : searches) {
+            features[i++] = this.extractPairFeatures(search, sr);
         }
 
         return Features.transform(features);
     }
 
-    private double[] extractPairFeatures(final SearchResult sr1, final SearchResult sr2) {
+    private double[] extractPairFeatures(final Search sr1, final Search sr2) {
         int size = pairFeatures.size();
 
         double[] values = new double[size];

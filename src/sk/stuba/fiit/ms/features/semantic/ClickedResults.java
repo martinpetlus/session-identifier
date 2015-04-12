@@ -4,7 +4,7 @@ import java.util.List;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Result;
 
 public final class ClickedResults implements PairFeature {
@@ -19,8 +19,8 @@ public final class ClickedResults implements PairFeature {
     }
 
     @Override
-    public double extract(final SearchResult searchResult, final SearchResult compareTo) {
-        List<Result> clicked1 = searchResult.getClickedResults();
+    public double extract(final Search search, final Search compareTo) {
+        List<Result> clicked1 = search.getClickedResults();
         List<Result> clicked2 = compareTo.getClickedResults();
 
         if (!clicked1.isEmpty() && !clicked2.isEmpty()) {

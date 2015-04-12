@@ -10,16 +10,13 @@ import sk.stuba.fiit.ms.database.Database;
 import sk.stuba.fiit.ms.database.FileDatabase;
 import sk.stuba.fiit.ms.features.FeatureNormalizer;
 import sk.stuba.fiit.ms.features.extract.SessionExtractor;
-import sk.stuba.fiit.ms.input.SessionTrack2011;
-import sk.stuba.fiit.ms.input.SessionTrack2012;
-import sk.stuba.fiit.ms.input.SessionTrack2013;
-import sk.stuba.fiit.ms.input.SessionTrackParser;
+import sk.stuba.fiit.ms.input.*;
 import sk.stuba.fiit.ms.learning.SVM;
 import sk.stuba.fiit.ms.learning.DataSet;
 import sk.stuba.fiit.ms.learning.dataset.generation.SetGenerator;
 import sk.stuba.fiit.ms.semantic.lda.LDAFileFormatter;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public class Main {
@@ -116,7 +113,7 @@ public class Main {
 
         for (Session session : testSessions) {
             System.out.println(session.getTopic());
-            for (SearchResult result : session.getAllSearchResults()) {
+            for (Search result : session.getAllSearchResults()) {
                 System.out.println(result.getQuery());
             }
             System.out.println("-----------------");
@@ -126,16 +123,16 @@ public class Main {
 
         // Shuffle test sessions search results for session identification
         Shuffler shuffler = new Shuffler();
-        List<SearchResult> searchResults = shuffler.shuffle(testSessions);
+        List<Search> searches = shuffler.shuffle(testSessions);
 
         // Identify session from test shuffled search results
         SessionsIdentifier identifier = new SessionsIdentifier(extractor, svm, normalizer);
 
-        identifier.addAll(searchResults);
+        identifier.addAll(searches);
 
         // Print identified sessions from test sessions
         for (Session session : identifier.getSessions()) {
-            for (SearchResult result : session.getAllSearchResults()) {
+            for (Search result : session.getAllSearchResults()) {
                 System.out.println(result.getQuery());
             }
             System.out.println("-----------------");

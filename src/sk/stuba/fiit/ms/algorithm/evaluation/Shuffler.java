@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class Shuffler {
@@ -21,39 +21,39 @@ public final class Shuffler {
         return count;
     }
 
-    private static List<List<SearchResult>> copySessionSearchResults(final List<Session> sessions) {
-        List<List<SearchResult>> sessionSearchResults = new ArrayList<List<SearchResult>>();
+    private static List<List<Search>> copySessionSearchResults(final List<Session> sessions) {
+        List<List<Search>> sessionSearchResults = new ArrayList<List<Search>>();
 
         for (Session session : sessions) {
-            sessionSearchResults.add(new ArrayList<SearchResult>(session.getAllSearchResults()));
+            sessionSearchResults.add(new ArrayList<Search>(session.getAllSearchResults()));
         }
 
         return sessionSearchResults;
     }
 
-    public List<SearchResult> shuffle(final List<Session> sessions) {
-        final List<SearchResult> shuffled = new ArrayList<SearchResult>();
+    public List<Search> shuffle(final List<Session> sessions) {
+        final List<Search> shuffled = new ArrayList<Search>();
 
         final int numberOfSessions = sessions.size();
 
         final int numberOfSearchResults = countSearchResults(sessions);
 
-        final List<List<SearchResult>> copy = copySessionSearchResults(sessions);
+        final List<List<Search>> copy = copySessionSearchResults(sessions);
 
         for (int i = 0; i < numberOfSearchResults; i++) {
-            List<SearchResult> searchResults = null;
+            List<Search> searches = null;
 
-            while (searchResults == null) {
+            while (searches == null) {
                 int randomIndex = random.nextInt(numberOfSessions);
 
                 if (copy.get(randomIndex).size() > 0) {
-                    searchResults = copy.get(randomIndex);
+                    searches = copy.get(randomIndex);
                 }
             }
 
-            shuffled.add(searchResults.get(0));
+            shuffled.add(searches.get(0));
 
-            searchResults.remove(0);
+            searches.remove(0);
         }
 
         return shuffled;

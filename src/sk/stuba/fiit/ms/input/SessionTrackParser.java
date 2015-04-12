@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class SessionTrackParser {
@@ -62,7 +62,7 @@ public final class SessionTrackParser {
         if (!session.isEmpty()) {
             for (Session s : this.sessions) {
                 if (s.getTopic().same(session.getTopic())) {
-                    for (SearchResult sr : session.getAllSearchResults()) {
+                    for (Search sr : session.getAllSearchResults()) {
                         s.add(sr);
                     }
 

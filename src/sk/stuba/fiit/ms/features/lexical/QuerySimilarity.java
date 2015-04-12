@@ -3,7 +3,7 @@ package sk.stuba.fiit.ms.features.lexical;
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
 import sk.stuba.fiit.ms.features.Util;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public final class QuerySimilarity implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(final SearchResult sr1, final SearchResult sr2) {
+    public double extract(final Search sr1, final Search sr2) {
         String query1 = sr1.getQuery();
         String query2 = sr2.getQuery();
 
@@ -25,18 +25,18 @@ public final class QuerySimilarity implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(final Session session, final SearchResult searchResult) {
-        List<SearchResult> searchResults = session.getAllSearchResults();
+    public double extract(final Session session, final Search search) {
+        List<Search> searches = session.getAllSearchResults();
 
-        String[][] sentences = new String[searchResults.size()][];
+        String[][] sentences = new String[searches.size()][];
 
-        for (int i = 0; i < searchResults.size(); i++) {
-            sentences[i] = TextNormalizer.split(searchResults.get(i).getQuery());
+        for (int i = 0; i < searches.size(); i++) {
+            sentences[i] = TextNormalizer.split(searches.get(i).getQuery());
         }
 
         String[] union = Util.union(sentences);
 
-        return similarity.calculate(union, TextNormalizer.split(searchResult.getQuery()));
+        return similarity.calculate(union, TextNormalizer.split(search.getQuery()));
     }
 
 }

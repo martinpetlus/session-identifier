@@ -14,7 +14,7 @@ import sk.stuba.fiit.ms.features.time.SpentTimeOnClicks;
 import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
 import sk.stuba.fiit.ms.features.url.CommonUrls;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class SessionExtractor {
@@ -56,8 +56,8 @@ public final class SessionExtractor {
         return builder.build();
     }
 
-    public double[] extractFeatures(final Session session, final SearchResult searchResult) {
-        return featuresExtractor.extractFeatures(session, searchResult);
+    public double[] extractFeatures(final Session session, final Search search) {
+        return featuresExtractor.extractFeatures(session, search);
     }
 
 }

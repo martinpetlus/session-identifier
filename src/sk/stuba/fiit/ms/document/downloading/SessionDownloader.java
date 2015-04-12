@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sk.stuba.fiit.ms.database.Database;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Result;
 import sk.stuba.fiit.ms.session.Session;
 
@@ -33,8 +33,8 @@ public final class SessionDownloader {
         final List<Result> results = new ArrayList<Result>();
 
         for (Session session : this.sessions) {
-            for (SearchResult searchResult : session.getAllSearchResults()) {
-                results.addAll(searchResult.getClickedResults());
+            for (Search search : session.getAllSearchResults()) {
+                results.addAll(search.getClickedResults());
             }
         }
 

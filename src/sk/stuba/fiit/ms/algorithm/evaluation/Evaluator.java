@@ -7,18 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class Evaluator {
 
     private Evaluator() {}
 
-    private static int findSessionId(final SearchResult sr, final List<Session> sessions) {
+    private static int findSessionId(final Search sr, final List<Session> sessions) {
         for (Session session : sessions) {
-            List<SearchResult> searchResults = session.getAllSearchResults();
+            List<Search> searches = session.getAllSearchResults();
 
-            if (searchResults.indexOf(sr) > -1) {
+            if (searches.indexOf(sr) > -1) {
                 return session.getId();
             }
         }
@@ -76,14 +76,14 @@ public final class Evaluator {
         double recalls = 0.0;
 
         for (Session session : detected) {
-            List<SearchResult> searchResults = session.getAllSearchResults();
+            List<Search> searches = session.getAllSearchResults();
 
-            mapping[i] = new int[searchResults.size()];
+            mapping[i] = new int[searches.size()];
 
             int j = 0;
 
-            for (SearchResult searchResult : searchResults) {
-                mapping[i][j++] = findSessionId(searchResult, correct);
+            for (Search search : searches) {
+                mapping[i][j++] = findSessionId(search, correct);
             }
 
             Cardinality max = findMaximumCardinality(mapping[i]);

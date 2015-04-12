@@ -6,7 +6,7 @@ import java.util.List;
 import sk.stuba.fiit.ms.features.FeatureNormalizer;
 import sk.stuba.fiit.ms.features.extract.SessionExtractor;
 import sk.stuba.fiit.ms.learning.SVM;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class SessionsIdentifier {
@@ -33,31 +33,31 @@ public final class SessionsIdentifier {
         this.normalizer = normalizer;
     }
 
-    private void addSession(final SearchResult searchResult) {
+    private void addSession(final Search search) {
         Session session = new Session();
 
-        session.add(searchResult);
+        session.add(search);
 
         sessions.add(session);
     }
 
-    public void add(final SearchResult searchResult) {
+    public void add(final Search search) {
         if (sessions.isEmpty()) {
-            addSession(searchResult);
+            addSession(search);
         } else {
             int i;
 
             for (i = sessions.size() - 1; i >= 0; i--) {
                 Session session = sessions.get(i);
 
-                double[] features = extractor.extractFeatures(session, searchResult);
+                double[] features = extractor.extractFeatures(session, search);
 
                 if (normalizer != null) {
                     normalizer.normalizeInPlace(features);
                 }
 
                 if (model.predict(features)) {
-                    session.add(searchResult);
+                    session.add(search);
 
                     sessions.remove(i);
                     sessions.add(session);
@@ -67,14 +67,14 @@ public final class SessionsIdentifier {
             }
 
             if (i < 0) {
-                addSession(searchResult);
+                addSession(search);
             }
         }
     }
 
-    public void addAll(final List<SearchResult> searchResults) {
-        for (SearchResult searchResult : searchResults) {
-            add(searchResult);
+    public void addAll(final List<Search> searches) {
+        for (Search search : searches) {
+            add(search);
         }
     }
 

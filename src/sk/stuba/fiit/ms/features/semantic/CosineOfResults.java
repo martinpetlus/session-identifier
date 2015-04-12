@@ -3,7 +3,7 @@ package sk.stuba.fiit.ms.features.semantic;
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.Statistic;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Result;
 
 import java.util.List;
@@ -15,8 +15,8 @@ public final class CosineOfResults extends Inferencer implements PairFeature {
     }
 
     @Override
-    public double extract(final SearchResult searchResult, final SearchResult compareTo) {
-        List<Result> results1 = searchResult.getResults();
+    public double extract(final Search search, final Search compareTo) {
+        List<Result> results1 = search.getResults();
         List<Result> results2 = compareTo.getResults();
 
         double inferences = 0.0;

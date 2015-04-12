@@ -2,7 +2,7 @@ package sk.stuba.fiit.ms.features.lexical;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.Util;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 
 public final class QueryCommonWords implements PairFeature {
 
@@ -66,8 +66,8 @@ public final class QueryCommonWords implements PairFeature {
     }
 
     @Override
-    public double extract(SearchResult searchResult, SearchResult compareTo) {
-        String[] query1 = TextNormalizer.split(searchResult.getQuery());
+    public double extract(Search search, Search compareTo) {
+        String[] query1 = TextNormalizer.split(search.getQuery());
         String[] query2 = TextNormalizer.split(compareTo.getQuery());
 
         return dir.compute(query1, query2);

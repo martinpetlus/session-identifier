@@ -4,11 +4,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import sk.stuba.fiit.ms.features.lexical.TextNormalizer;
-import sk.stuba.fiit.ms.session.Click;
-import sk.stuba.fiit.ms.session.Result;
-import sk.stuba.fiit.ms.session.SearchResult;
-import sk.stuba.fiit.ms.session.Session;
-import sk.stuba.fiit.ms.session.Time;
+import sk.stuba.fiit.ms.session.*;
+import sk.stuba.fiit.ms.session.Search;
 
 public abstract class SessionTrackSkeleton implements SessionTrack {
 
@@ -66,8 +63,8 @@ public abstract class SessionTrackSkeleton implements SessionTrack {
     }
 
     @Override
-    public SearchResult parseInteraction(final Node node) {
-        SearchResult.Builder builder = new SearchResult.Builder();
+    public Search parseInteraction(final Node node) {
+        Search.Builder builder = new Search.Builder();
 
         NodeList childNodes = node.getChildNodes();
 
@@ -98,7 +95,7 @@ public abstract class SessionTrackSkeleton implements SessionTrack {
         return new Click(num, rank, startTime, endTime);
     }
 
-    private void parseResults(final Node node, final SearchResult.Builder b) {
+    private void parseResults(final Node node, final Search.Builder b) {
         NodeList childNodes = node.getChildNodes();
 
         for (int i = 0; i < childNodes.getLength(); i++) {
@@ -108,7 +105,7 @@ public abstract class SessionTrackSkeleton implements SessionTrack {
         }
     }
 
-    private void parseClicked(final Node node, final SearchResult.Builder b) {
+    private void parseClicked(final Node node, final Search.Builder b) {
         NodeList childNodes = node.getChildNodes();
 
         for (int i = 0; i < childNodes.getLength(); i++) {

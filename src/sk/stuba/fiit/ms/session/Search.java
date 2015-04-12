@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public final class SearchResult {
+public final class Search {
 
     private static int numberOfSearchResults = 0;
 
@@ -17,7 +17,7 @@ public final class SearchResult {
 
     private final List<Click> clicks;
 
-    private SearchResult(final Builder builder) {
+    private Search(final Builder builder) {
         this.id = ++numberOfSearchResults;
 
         this.query = builder.query;
@@ -120,7 +120,7 @@ public final class SearchResult {
 
     @Override
     public String toString() {
-        return "SearchResult[id= " + id +
+        return "Search[id= " + id +
                 "query=" + query +
                 " results=" + results.size() +
                 " clicks=" + clicks.size() + "]";
@@ -149,8 +149,8 @@ public final class SearchResult {
             clicks.add(click);
         }
 
-        public SearchResult build() {
-            return new SearchResult(this);
+        public Search build() {
+            return new Search(this);
         }
     }
 

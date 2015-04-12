@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sk.stuba.fiit.ms.features.extract.SessionExtractor;
-import sk.stuba.fiit.ms.session.SearchResult;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
 public final class PositiveGenerator extends Generator {
 
     private final SessionExtractor extractor;
 
-    private List<SearchResult> randomResults;
+    private List<Search> randomResults;
 
     private int randomIndex;
 
@@ -22,7 +22,7 @@ public final class PositiveGenerator extends Generator {
     }
 
     private void prepare(final int queries) {
-        randomResults = new ArrayList<SearchResult>(queries);
+        randomResults = new ArrayList<Search>(queries);
 
         randomIndex = random.nextInt(session.results());
 
@@ -39,7 +39,7 @@ public final class PositiveGenerator extends Generator {
             prepare(queries);
 
             Session session = new Session(this.randomResults);
-            SearchResult result = this.session.getSearchResult(this.randomIndex);
+            Search result = this.session.getSearchResult(this.randomIndex);
 
             return extractor.extractFeatures(session, result);
         } else {
