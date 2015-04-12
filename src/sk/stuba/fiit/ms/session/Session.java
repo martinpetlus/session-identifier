@@ -68,7 +68,7 @@ public final class Session {
         return results;
     }
 
-    public int getNumberOfSearchResults() {
+    public int getNumberOfSearches() {
         return searches.size();
     }
 
