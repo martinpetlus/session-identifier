@@ -81,7 +81,7 @@ public final class Session {
     }
 
     public boolean isEmpty() {
-        return searches.size() == 0;
+        return searches.isEmpty();
     }
 
     @Override

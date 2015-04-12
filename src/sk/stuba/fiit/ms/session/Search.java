@@ -1,9 +1,6 @@
 package sk.stuba.fiit.ms.session;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public final class Search {
 
@@ -13,7 +10,9 @@ public final class Search {
 
     private final String query;
 
-    private final List<Result> results;
+    private final Map<Integer, Result> results;
+
+    private final List<Integer> resultsViews;
 
     private final List<Click> clicks;
 
@@ -23,7 +22,15 @@ public final class Search {
         this.query = builder.query;
 
         this.clicks = new ArrayList<Click>(builder.clicks);
-        this.results = new ArrayList<Result>(builder.results);
+
+        this.results = new HashMap<Integer, Result>(builder.results.size());
+
+        this.resultsViews = new ArrayList<Integer>(builder.results.size());
+
+        for (Result result : builder.results) {
+            this.results.put(result.getRank(), result);
+            this.resultsViews.add(result.getRank());
+        }
 
         addClicksToResults(this.clicks);
     }
@@ -37,7 +44,7 @@ public final class Search {
     public List<String> getResultsUrls() {
         List<String> urls = new ArrayList<String>();
 
-        for (Result result : results) {
+        for (Result result : results.values()) {
             urls.add(result.getUrl());
         }
 
@@ -101,7 +108,13 @@ public final class Search {
     }
 
     public List<Result> getResults() {
-        return new ArrayList<Result>(results);
+        List<Result> results = new ArrayList<Result>();
+
+        for (Result result : this.results.values()) {
+            results.add(result);
+        }
+
+        return results;
     }
 
     public List<Click> getClicks() { return new ArrayList<Click>(clicks); }
@@ -127,14 +140,12 @@ public final class Search {
     }
 
     private Result getResultByRank(final int rank) {
-        return results.get(rank - 1);
+        return results.get(rank);
     }
 
     public static final class Builder {
 
         private String query;
-
-        private boolean parsed = true;
 
         private final List<Result> results = new ArrayList<Result>();
 
@@ -150,14 +161,6 @@ public final class Search {
 
         public void addClick(final Click click) {
             clicks.add(click);
-        }
-
-        public boolean isParsed() {
-            return parsed;
-        }
-
-        public void setParsed(final boolean parsed) {
-            this.parsed = parsed;
         }
 
         public Search build() {
