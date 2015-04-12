@@ -19,9 +19,8 @@ public final class SessionTrack2014 extends SessionTrackSkeleton {
     }
 
     @Override
-    public Search.Builder parseInteraction(final Node node, final Session session, Search.Builder builder) {
-        builder = builder == null ? super.parseInteraction(node, session, null) : builder;
-        return  builder;
+    public Search parseInteraction(final Node node, final Session session) {
+        return super.parseInteraction(node, session);
     }
 
     private static final class Topic2014 implements Topic {
