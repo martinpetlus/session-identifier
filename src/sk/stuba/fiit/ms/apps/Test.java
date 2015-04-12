@@ -52,11 +52,11 @@ public final class Test {
         PairFeature pairFeature = new CosineOfClickedResults(model);
 
         for (Session session : testSessions) {
-            if (session.results() > 1) {
+            if (session.getNumberOfSearches() > 1) {
                 Search sr1 = session.getSearch(0);
 
                 if (sr1.hasClickedResults()) {
-                    for (int i = 1; i < session.results(); i++) {
+                    for (int i = 1; i < session.getNumberOfSearches(); i++) {
                         Search sr2 = session.getSearch(i);
 
                         if (sr2.hasClickedResults()) {
