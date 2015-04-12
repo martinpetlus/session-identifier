@@ -33,7 +33,7 @@ public final class SessionDownloader {
         final List<Result> results = new ArrayList<Result>();
 
         for (Session session : this.sessions) {
-            for (Search search : session.getAllSearchResults()) {
+            for (Search search : session.getAllSearches()) {
                 results.addAll(search.getClickedResults());
             }
         }

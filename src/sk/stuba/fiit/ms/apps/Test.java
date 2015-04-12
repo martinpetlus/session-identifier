@@ -53,11 +53,11 @@ public final class Test {
 
         for (Session session : testSessions) {
             if (session.results() > 1) {
-                Search sr1 = session.getSearchResult(0);
+                Search sr1 = session.getSearch(0);
 
                 if (sr1.hasClickedResults()) {
                     for (int i = 1; i < session.results(); i++) {
-                        Search sr2 = session.getSearchResult(i);
+                        Search sr2 = session.getSearch(i);
 
                         if (sr2.hasClickedResults()) {
                             System.out.println(pairFeature.extract(sr1, sr2));

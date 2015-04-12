@@ -62,7 +62,7 @@ public final class SessionTrackParser {
         if (!session.isEmpty()) {
             for (Session s : this.sessions) {
                 if (s.getTopic().same(session.getTopic())) {
-                    for (Search sr : session.getAllSearchResults()) {
+                    for (Search sr : session.getAllSearches()) {
                         s.add(sr);
                     }
 

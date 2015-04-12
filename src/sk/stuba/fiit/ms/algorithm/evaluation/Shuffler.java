@@ -25,7 +25,7 @@ public final class Shuffler {
         List<List<Search>> sessionSearchResults = new ArrayList<List<Search>>();
 
         for (Session session : sessions) {
-            sessionSearchResults.add(new ArrayList<Search>(session.getAllSearchResults()));
+            sessionSearchResults.add(new ArrayList<Search>(session.getAllSearches()));
         }
 
         return sessionSearchResults;

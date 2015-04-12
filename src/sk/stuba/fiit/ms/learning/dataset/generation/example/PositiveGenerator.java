@@ -29,7 +29,7 @@ public final class PositiveGenerator extends Generator {
         int[] randomIndices = randomIndices(queries, session.results(), randomIndex);
 
         for (int i = 0; i < queries; i++) {
-            randomResults.add(session.getSearchResult(randomIndices[i]));
+            randomResults.add(session.getSearch(randomIndices[i]));
         }
     }
 
@@ -39,7 +39,7 @@ public final class PositiveGenerator extends Generator {
             prepare(queries);
 
             Session session = new Session(this.randomResults);
-            Search result = this.session.getSearchResult(this.randomIndex);
+            Search result = this.session.getSearch(this.randomIndex);
 
             return extractor.extractFeatures(session, result);
         } else {

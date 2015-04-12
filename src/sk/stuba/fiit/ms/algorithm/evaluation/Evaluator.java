@@ -16,7 +16,7 @@ public final class Evaluator {
 
     private static int findSessionId(final Search sr, final List<Session> sessions) {
         for (Session session : sessions) {
-            List<Search> searches = session.getAllSearchResults();
+            List<Search> searches = session.getAllSearches();
 
             if (searches.indexOf(sr) > -1) {
                 return session.getId();
@@ -76,7 +76,7 @@ public final class Evaluator {
         double recalls = 0.0;
 
         for (Session session : detected) {
-            List<Search> searches = session.getAllSearchResults();
+            List<Search> searches = session.getAllSearches();
 
             mapping[i] = new int[searches.size()];
 

@@ -56,7 +56,7 @@ public class Main {
         int testQueries = 0;
 
         for (Session testSession : testSessions) {
-            testQueries += testSession.getNumberOfSearchResults();
+            testQueries += testSession.getNumberOfSearches();
         }
 
         System.out.println("Number of test queries: " + testQueries);
@@ -65,7 +65,7 @@ public class Main {
         int trainQueries = 0;
 
         for (Session trainSession : trainSessions) {
-            trainQueries += trainSession.getNumberOfSearchResults();
+            trainQueries += trainSession.getNumberOfSearches();
         }
 
         System.out.println("Number of train queries: " + trainQueries);
@@ -113,7 +113,7 @@ public class Main {
 
         for (Session session : testSessions) {
             System.out.println(session.getTopic());
-            for (Search result : session.getAllSearchResults()) {
+            for (Search result : session.getAllSearches()) {
                 System.out.println(result.getQuery());
             }
             System.out.println("-----------------");
@@ -132,7 +132,7 @@ public class Main {
 
         // Print identified sessions from test sessions
         for (Session session : identifier.getSessions()) {
-            for (Search result : session.getAllSearchResults()) {
+            for (Search result : session.getAllSearches()) {
                 System.out.println(result.getQuery());
             }
             System.out.println("-----------------");

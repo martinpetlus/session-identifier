@@ -50,11 +50,11 @@ public final class Session {
         }
     }
 
-    public Search getSearchResult(int index) {
+    public Search getSearch(int index) {
         return searches.get(index);
     }
 
-    public List<Search> getAllSearchResults() {
+    public List<Search> getAllSearches() {
         return new ArrayList<Search>(searches);
     }
 
@@ -72,17 +72,13 @@ public final class Session {
         return searches.size();
     }
 
-    public int results() {
-        return searches.size();
-    }
-
     public boolean isEmpty() {
         return searches.size() == 0;
     }
 
     @Override
     public String toString() {
-        return "Session[id=" + id + " search_results=" + results() + "]";
+        return "Session[id=" + id + " searches=" + getNumberOfSearches() + "]";
     }
 
 }

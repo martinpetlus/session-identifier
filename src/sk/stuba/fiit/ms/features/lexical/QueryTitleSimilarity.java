@@ -44,7 +44,7 @@ public final class QueryTitleSimilarity implements PairFeature, SessionFeature {
 
     @Override
     public double extract(final Session session, final Search search) {
-        List<Search> searches = session.getAllSearchResults();
+        List<Search> searches = session.getAllSearches();
 
         String[][] titles = new String[searches.size()][];
 

@@ -32,8 +32,8 @@ public final class NegativeGenerator extends Generator {
                         random.nextInt(allSessions.size()));
 
                 if (!session.equals(randomSession)) {
-                    randomResult = randomSession.getSearchResult(
-                            random.nextInt(randomSession.results()));
+                    randomResult = randomSession.getSearch(
+                        random.nextInt(randomSession.results()));
                 }
             }
 
@@ -43,7 +43,7 @@ public final class NegativeGenerator extends Generator {
                     new ArrayList<Search>(queries);
 
             for (int i = 0; i < queries; i++) {
-                randomResults.add(session.getSearchResult(indices[i]));
+                randomResults.add(session.getSearch(indices[i]));
             }
 
             return extractor.extractFeatures(new Session(randomResults), randomResult);

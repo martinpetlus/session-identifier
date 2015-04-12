@@ -48,7 +48,7 @@ public final class FeaturesExtractor {
     }
 
     private double[] extractPairFeatures(final Session session, final Search search) {
-        List<Search> searches = session.getAllSearchResults();
+        List<Search> searches = session.getAllSearches();
 
         int i = 0;
 
