@@ -9,7 +9,7 @@ public interface SessionTrack {
 
     public Time parseTime(final String time);
 
-    public Search.Builder parseInteraction(final Node node, final Session session);
+    public Search.Builder parseInteraction(final Node node, final Session session, Search.Builder builder);
 
     public Session parseSession(final Node node);
 

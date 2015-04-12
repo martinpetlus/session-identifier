@@ -131,7 +131,10 @@ public final class Search {
     }
 
     public static final class Builder {
+
         private String query;
+
+        private boolean parsed = true;
 
         private final List<Result> results = new ArrayList<Result>();
 
@@ -149,9 +152,18 @@ public final class Search {
             clicks.add(click);
         }
 
+        public boolean isParsed() {
+            return parsed;
+        }
+
+        public void setParsed(final boolean parsed) {
+            this.parsed = parsed;
+        }
+
         public Search build() {
             return new Search(this);
         }
+
     }
 
 }

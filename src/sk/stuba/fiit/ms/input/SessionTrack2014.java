@@ -19,8 +19,8 @@ public final class SessionTrack2014 extends SessionTrackSkeleton {
     }
 
     @Override
-    public Search.Builder parseInteraction(final Node node, final Session session) {
-        Search.Builder builder = super.parseInteraction(node, session);
+    public Search.Builder parseInteraction(final Node node, final Session session, Search.Builder builder) {
+        builder = builder == null ? super.parseInteraction(node, session, null) : builder;
         return  builder;
     }
 
