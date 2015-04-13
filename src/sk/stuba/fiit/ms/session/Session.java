@@ -9,6 +9,8 @@ public final class Session {
 
     private static int numberOfSessions = 0;
 
+    private int userId;
+
     private final int id;
 
     private final List<Search> searches;
@@ -27,6 +29,16 @@ public final class Session {
         } else {
             this.searches = new ArrayList<Search>(searches);
         }
+
+        this.userId = -1;
+    }
+
+    public void setUserId(final int userId) {
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     public int getId() {
