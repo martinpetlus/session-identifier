@@ -22,7 +22,11 @@ public final class SessionTrack2014 extends SessionTrackSkeleton {
     public Session parseSession(final Node node) {
         Session session = super.parseSession(node);
 
-        session.setUserId(Integer.parseInt(Util.getAttrValue(node, "userid")));
+        String userId = Util.getAttrValue(node, "userid");
+
+        if (!userId.equals("NA")) {
+            session.setUserId(Integer.parseInt(userId));
+        }
 
         return session;
     }
