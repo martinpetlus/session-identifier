@@ -20,7 +20,7 @@ public abstract class SessionTrackSkeleton implements SessionTrack {
 
     @Override
     public Session parseSession(final Node node) {
-        Session s = new Session();
+        Session session = new Session();
 
         NodeList childNodes = node.getChildNodes();
 
@@ -28,13 +28,17 @@ public abstract class SessionTrackSkeleton implements SessionTrack {
             Node child = childNodes.item(i);
 
             if (Util.isNode(child, "topic")) {
-                s.setTopic(parseTopic(child));
+                session.setTopic(parseTopic(child));
             } else if (Util.isNode(child, "interaction")) {
-                s.add(parseInteraction(child, s));
+                Search search = parseInteraction(child, session);
+
+                if (search != null) {
+                    session.add(search);
+                }
             }
         }
 
-        return s;
+        return session;
     }
 
     @Override

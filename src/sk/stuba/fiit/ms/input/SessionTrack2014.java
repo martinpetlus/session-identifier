@@ -20,7 +20,14 @@ public final class SessionTrack2014 extends SessionTrackSkeleton {
 
     @Override
     public Search parseInteraction(final Node node, final Session session) {
-        return super.parseInteraction(node, session);
+        Search search = super.parseInteraction(node, session);
+
+        if (Util.getAttrValue(node, "type").equals("page")) {
+            session.getLastSearch().mergeIn(search);
+            return null;
+        } else {
+            return search;
+        }
     }
 
     private static final class Topic2014 implements Topic {
