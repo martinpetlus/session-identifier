@@ -18,7 +18,7 @@ final class Util {
     public static String getChildValue(final Node node, final String name) {
         final NodeList childNodes = node.getChildNodes();
 
-        String value = "";
+        String value = null;
 
         for (int i = 0; i < childNodes.getLength(); i++) {
             if (isNode(childNodes.item(i), name)) {
