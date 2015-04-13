@@ -4,7 +4,7 @@ import java.util.*;
 
 public final class Search {
 
-    private static int numberOfSearchResults = 0;
+    private static int numberOfSearches = 0;
 
     private final int id;
 
@@ -17,7 +17,7 @@ public final class Search {
     private final List<Click> clicks;
 
     private Search(final Builder builder) {
-        this.id = ++numberOfSearchResults;
+        this.id = ++numberOfSearches;
 
         this.query = builder.query;
 
@@ -125,6 +125,28 @@ public final class Search {
         } else {
             return null;
         }
+    }
+
+    public void mergeIn(final Search search) {
+        this.clicks.addAll(search.clicks);
+
+        for (Click click : search.clicks) {
+            Result result = getResultByRank(click.getRank());
+
+            if (result != null) {
+                result.addClick(click);
+            }
+        }
+
+        for (Result result : search.results.values()) {
+            int rank = result.getRank();
+
+            if (!this.results.containsKey(rank)) {
+                this.results.put(rank, result);
+            }
+        }
+
+        this.resultsViews.addAll(search.resultsViews);
     }
 
     public String getQuery() {
