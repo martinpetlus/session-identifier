@@ -19,6 +19,15 @@ public final class SessionTrack2014 extends SessionTrackSkeleton {
     }
 
     @Override
+    public Session parseSession(final Node node) {
+        Session session = super.parseSession(node);
+
+        session.setUserId(Integer.parseInt(Util.getAttrValue(node, "userid")));
+
+        return session;
+    }
+
+    @Override
     public Search parseInteraction(final Node node, final Session session) {
         Search search = super.parseInteraction(node, session);
 

@@ -37,6 +37,9 @@ public class Main {
         parser.setSessionTrack(new SessionTrack2011());
         parser.parse("data/sessiontrack2011.RL4.xml", sessions);
 
+//        parser.setSessionTrack(new SessionTrack2014());
+//        parser.parse("data/sessiontrack2014.xml", sessions);
+
         System.out.println("Number of loaded sessions from files: " + sessions.size());
 
         // Load and download results contents
