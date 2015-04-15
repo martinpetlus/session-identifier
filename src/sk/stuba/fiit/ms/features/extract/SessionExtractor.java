@@ -1,12 +1,9 @@
 package sk.stuba.fiit.ms.features.extract;
 
+import sk.stuba.fiit.ms.features.lexical.*;
 import sk.stuba.fiit.ms.features.number.NumberOfClicks;
-import sk.stuba.fiit.ms.features.lexical.Jaccard;
-import sk.stuba.fiit.ms.features.lexical.QueryCommonWords;
-import sk.stuba.fiit.ms.features.lexical.QuerySimilarity;
-import sk.stuba.fiit.ms.features.lexical.QueryTitleSimilarity;
 import sk.stuba.fiit.ms.features.number.NumberOfResults;
-import sk.stuba.fiit.ms.features.semantic.Cosine;
+import sk.stuba.fiit.ms.features.semantic.CosineOfSearches;
 import sk.stuba.fiit.ms.features.time.SpentTimeOnClicks;
 import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
 import sk.stuba.fiit.ms.features.url.CommonUrls;
@@ -26,9 +23,9 @@ public final class SessionExtractor {
         FeaturesExtractor.Builder builder = new FeaturesExtractor.Builder();
 
         // Lexical features
-        builder.addPairFeature(new QuerySimilarity(sk.stuba.fiit.ms.features.lexical.Cosine.getInstance()));
+        builder.addPairFeature(new QuerySimilarity(Cosine.getInstance()));
         builder.addPairFeature(new QuerySimilarity(Jaccard.getInstance()));
-        builder.addPairFeature(new QueryTitleSimilarity(sk.stuba.fiit.ms.features.lexical.Cosine.getInstance()));
+        builder.addPairFeature(new QueryTitleSimilarity(Cosine.getInstance()));
         builder.addPairFeature(new QueryTitleSimilarity(Jaccard.getInstance()));
         builder.addPairFeature(new QueryCommonWords(QueryCommonWords.Direction.NO));
 
@@ -39,11 +36,11 @@ public final class SessionExtractor {
         builder.addPairFeature(new SpentTimeOnClicks());
 
         // Semantic features
-        builder.addPairFeature(new Cosine(model));
+        builder.addPairFeature(new CosineOfSearches(model));
 
         // Session features
-        builder.addSessionFeature(new QuerySimilarity(sk.stuba.fiit.ms.features.lexical.Cosine.getInstance()));
-        builder.addSessionFeature(new QueryTitleSimilarity(sk.stuba.fiit.ms.features.lexical.Cosine.getInstance()));
+        builder.addSessionFeature(new QuerySimilarity(Cosine.getInstance()));
+        builder.addSessionFeature(new QueryTitleSimilarity(Cosine.getInstance()));
 
         builder.addSessionFeature(new CommonClickedUrls());
         builder.addSessionFeature(new CommonUrls());

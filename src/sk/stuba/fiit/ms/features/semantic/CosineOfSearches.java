@@ -5,9 +5,9 @@ import sk.stuba.fiit.ms.features.Statistic;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
 
-public final class Cosine extends Inferencer implements PairFeature {
+public final class CosineOfSearches extends Inferencer implements PairFeature {
 
-    public Cosine(final LDAModel model) {
+    public CosineOfSearches(final LDAModel model) {
         super(model);
     }
 
