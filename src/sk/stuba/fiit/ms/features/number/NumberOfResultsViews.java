@@ -7,7 +7,7 @@ public final class NumberOfResultsViews implements PairFeature {
 
     @Override
     public double extract(final Search search, final Search compareTo) {
-        return search.getNumerOfResultsViews() - compareTo.getNumerOfResultsViews();
+        return search.getNumberOfResultsViews() - compareTo.getNumberOfResultsViews();
     }
 
 }

@@ -4,36 +4,20 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import sk.stuba.fiit.ms.session.Result;
+import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class LDAFileFormatter implements ResultTextFormatter {
+public final class LDAFileFormatter implements SearchFormatter {
 
     public static final String FILE = "lda.dat";
-
-    private final boolean writeTitle;
-
-    private final boolean writeSnippet;
-
-    private final boolean writeContent;
-
-    public LDAFileFormatter() {
-        this(true, true, true);
-    }
-
-    public LDAFileFormatter(final boolean writeTitle,
-            final boolean writeSnippet, final boolean writeContent) {
-        this.writeTitle = writeTitle;
-        this.writeSnippet = writeSnippet;
-        this.writeContent = writeContent;
-    }
 
     public void write(final List<Session> sessions) {
         try {
             PrintWriter writer = new PrintWriter(FILE, "UTF-8");
 
             for (Session session : sessions) {
-                for (Result result : session.getAllResults()) {
-                    writer.println(result.getId() + " X " + formatText(result));
+                for (Search search : session.getAllSearches()) {
+                    writer.println(search.getId() + " X " + searchToText(search));
                 }
             }
 
@@ -43,34 +27,37 @@ public final class LDAFileFormatter implements ResultTextFormatter {
         }
     }
 
-    public String getFileName() {
-        return FILE;
-    }
+    private void appendText(final StringBuilder sb, final String text, final boolean appendSpace) {
+        if (!text.isEmpty()) {
+            sb.append(text);
+        }
 
-    private void appendText(final boolean append, final String text,
-            final StringBuilder sb, final boolean space) {
-        if (append) {
-            if (!text.isEmpty()) {
-                sb.append(text);
-
-                if (space) {
-                    sb.append(" ");
-                }
-            }
+        if (appendSpace) {
+            sb.append(' ');
         }
     }
 
     @Override
-    public String formatText(final Result result) {
+    public String searchToText(final Search search) {
         StringBuilder sb = new StringBuilder();
 
-        appendText(writeTitle, result.getTitle(), sb, true);
+        appendText(sb, search.getQuery(), true);
 
-        appendText(writeSnippet, result.getSnippet(), sb, true);
+        for (Result result : search.getResults()) {
+            appendText(sb, resultToText(result), false);
+        }
 
-        appendText(writeContent, result.getContent(), sb, false);
+        return sb.toString();
+    }
 
-        return sb.toString().trim();
+    private String resultToText(final Result result) {
+        StringBuilder sb = new StringBuilder();
+
+        appendText(sb, result.getTitle(), true);
+        appendText(sb, result.getSnippet(), true);
+        appendText(sb, result.getContent(), false);
+
+        return sb.toString();
     }
 
 }

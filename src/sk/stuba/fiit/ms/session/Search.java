@@ -89,7 +89,7 @@ public final class Search {
 
     public int getNumberOfResults() { return results.size(); }
 
-    public int getNumerOfResultsViews() {
+    public int getNumberOfResultsViews() {
         return resultsViews.size();
     }
 

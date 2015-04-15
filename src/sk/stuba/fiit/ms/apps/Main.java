@@ -28,17 +28,17 @@ public class Main {
 
         SessionTrackParser parser = new SessionTrackParser();
 
-//        parser.setSessionTrack(new SessionTrack2013());
-//        parser.parse("data/sessiontrack2013.xml", sessions);
-//
-//        parser.setSessionTrack(new SessionTrack2012());
-//        parser.parse("data/sessiontrack2012.xml", sessions);
-//
-//        parser.setSessionTrack(new SessionTrack2011());
-//        parser.parse("data/sessiontrack2011.RL4.xml", sessions);
+        parser.setSessionTrack(new SessionTrack2013());
+        parser.parse("data/sessiontrack2013.xml", sessions);
 
-        parser.setSessionTrack(new SessionTrack2014());
-        parser.parse("data/sessiontrack2014.xml", sessions);
+        parser.setSessionTrack(new SessionTrack2012());
+        parser.parse("data/sessiontrack2012.xml", sessions);
+
+        parser.setSessionTrack(new SessionTrack2011());
+        parser.parse("data/sessiontrack2011.RL4.xml", sessions);
+
+//        parser.setSessionTrack(new SessionTrack2014());
+//        parser.parse("data/sessiontrack2014.xml", sessions);
 
         System.out.println("Number of loaded sessions from files: " + sessions.size());
 
@@ -51,7 +51,7 @@ public class Main {
 //        sd.downloadClicked(true);
 
         // Separate train and test sessions
-        int index = 25;
+        int index = 15;
         List<Session> testSessions  = sessions.subList(0, index);
         List<Session> trainSessions = sessions.subList(index, sessions.size());
 
@@ -74,7 +74,7 @@ public class Main {
         System.out.println("Number of train queries: " + trainQueries);
 
         // Write train sessions to file for LDA
-        LDAFileFormatter formatter = new LDAFileFormatter(true, true, false);
+        LDAFileFormatter formatter = new LDAFileFormatter();
         formatter.write(trainSessions);
 
         // Train LDA model from train sessions
@@ -112,7 +112,7 @@ public class Main {
         svm.printModel();
 
         // Print original test sessions queries
-        System.out.println();
+        System.out.println("\nOriginal test sessions:\n");
 
         for (Session session : testSessions) {
             System.out.println(session.getTopic());
@@ -134,6 +134,10 @@ public class Main {
         identifier.addAll(searches);
 
         // Print identified sessions from test sessions
+        System.out.println("\n***************************************\n");
+        System.out.println("Identified sessions from test sessions:\n");
+        System.out.println("***************************************\n");
+
         for (Session session : identifier.getSessions()) {
             for (Search result : session.getAllSearches()) {
                 System.out.println(result.getQuery());

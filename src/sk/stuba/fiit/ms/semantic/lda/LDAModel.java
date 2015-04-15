@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import sk.stuba.fiit.ms.session.Result;
 import cc.mallet.pipe.CharSequence2TokenSequence;
 import cc.mallet.pipe.Pipe;
 import cc.mallet.pipe.SerialPipes;
@@ -19,6 +18,7 @@ import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.topics.TopicInferencer;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
+import sk.stuba.fiit.ms.session.Search;
 
 // http://mallet.cs.umass.edu/topics-devel.php
 public final class LDAModel {
@@ -27,11 +27,11 @@ public final class LDAModel {
 
     private final InstanceList instances;
 
-    private final ResultTextFormatter formatter;
+    private final SearchFormatter formatter;
 
     private final Map<Integer, double[]> topicPerDoc;
 
-    private LDAModel(final ResultTextFormatter formatter,
+    private LDAModel(final SearchFormatter formatter,
             final InstanceList instances, final ParallelTopicModel model) {
         this.formatter = formatter;
         this.instances = instances;
@@ -55,19 +55,11 @@ public final class LDAModel {
         }
     }
 
-    public boolean containsTopics(final int resultId) {
-        return topicPerDoc.containsKey(resultId);
-    }
-
-    public double[] getTopics(final int resultId) {
-        return topicPerDoc.get(resultId);
-    }
-
     public int getNumTopics() {
         return model.getNumTopics();
     }
 
-    public static LDAModel estimate(final String filename, final ResultTextFormatter formatter, final int topics) {
+    public static LDAModel estimate(final String filename, final SearchFormatter formatter, final int topics) {
         try {
             List<Pipe> pipeList = new ArrayList<Pipe>();
 
@@ -98,10 +90,10 @@ public final class LDAModel {
         }
     }
 
-    public double[] inference(final Result res) {
+    public double[] inference(final Search search) {
         InstanceList test = new InstanceList(instances.getPipe());
 
-        test.addThruPipe(new Instance(formatter.formatText(res), null, res.getId(), null));
+        test.addThruPipe(new Instance(formatter.searchToText(search), null, search.getId(), null));
 
         TopicInferencer inferencer = model.getInferencer();
 
