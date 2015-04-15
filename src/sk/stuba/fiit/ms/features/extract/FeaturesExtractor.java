@@ -126,7 +126,7 @@ public final class FeaturesExtractor {
             sb.append(')');
         }
 
-        sb.append(')');
+        sb.append(']');
 
         return sb.toString();
     }
