@@ -5,16 +5,18 @@ import sk.stuba.fiit.ms.features.Statistic;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
 
-public final class CosineOfSearches extends Inferencer implements PairFeature {
+public final class CosineOfSearches implements PairFeature {
+
+    private final LDAModel model;
 
     public CosineOfSearches(final LDAModel model) {
-        super(model);
+        this.model = model;
     }
 
     @Override
     public double extract(final Search search, final Search compareTo) {
-        double[] inferences1 = super.getInference(search);
-        double[] inferences2 = super.getInference(compareTo);
+        double[] inferences1 = model.inference(search);
+        double[] inferences2 = model.inference(compareTo);
 
         return Statistic.cosine(inferences1, inferences2);
     }
