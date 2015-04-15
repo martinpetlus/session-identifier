@@ -29,30 +29,10 @@ public final class LDAModel {
 
     private final SearchFormatter formatter;
 
-    private final Map<Integer, double[]> topicPerDoc;
-
-    private LDAModel(final SearchFormatter formatter,
-            final InstanceList instances, final ParallelTopicModel model) {
+    private LDAModel(final SearchFormatter formatter, final InstanceList instances, final ParallelTopicModel model) {
         this.formatter = formatter;
         this.instances = instances;
         this.model = model;
-        this.topicPerDoc = new HashMap<Integer, double[]>();
-
-        this.saveTopicPerDoc(instances, model);
-    }
-
-    private final void saveTopicPerDoc(final InstanceList instances, final ParallelTopicModel model) {
-        TopicInferencer inferencer = model.getInferencer();
-
-        for (int i = 0; i < instances.size(); i++) {
-            Instance inst = instances.get(i);
-
-            double[] probabilities = inferencer.getSampledDistribution(inst, 10, 1, 5);
-
-            Integer id = Integer.valueOf((String) inst.getName());
-
-            topicPerDoc.put(id, probabilities);
-        }
     }
 
     public int getNumTopics() {
