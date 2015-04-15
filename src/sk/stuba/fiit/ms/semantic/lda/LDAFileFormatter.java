@@ -44,10 +44,10 @@ public final class LDAFileFormatter implements SearchFormatter {
         appendText(sb, search.getQuery(), true);
 
         for (Result result : search.getResults()) {
-            appendText(sb, resultToText(result), false);
+            appendText(sb, resultToText(result), true);
         }
 
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     private String resultToText(final Result result) {
