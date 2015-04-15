@@ -28,8 +28,8 @@ public final class CommonUrls implements PairFeature, SessionFeature {
     public double extract(final Session session, final Search search) {
         int count = 0;
 
-        for (Search sr : session.getAllSearches()) {
-            count += (int) this.extract(sr, search);
+        for (Search s : session.getAllSearches()) {
+            count += (int) this.extract(s, search);
         }
 
         return count;
