@@ -53,6 +53,7 @@ public class Main {
 
         // Separate train and test sessions
         SessionsSeparator sessionsSeparator = new SessionsSeparator(sessions, 0.94);
+        sessionsSeparator.splitSessions();
         List<Session> testSessions = sessionsSeparator.getTestingSessions();
         List<Session> trainSessions = sessionsSeparator.getTrainingSessions();
 

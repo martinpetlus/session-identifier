@@ -8,6 +8,10 @@ public final class SessionsSeparator {
 
     private final List<Session> sessions;
 
+    private List<Session> trainingSessions;
+
+    private List<Session> testingSessions;
+
     private final double ratio;
 
     public SessionsSeparator(final List<Session> sessions, final double ratio) {
@@ -15,16 +19,19 @@ public final class SessionsSeparator {
         this.ratio = ratio;
     }
 
+    public void splitSessions() {
+        int numberOfTrainingSessions = (int) (sessions.size() * ratio);
+
+        trainingSessions = sessions.subList(0, numberOfTrainingSessions);
+        testingSessions = sessions.subList(numberOfTrainingSessions, sessions.size());
+    }
+
     public List<Session> getTrainingSessions() {
-        return sessions.subList(0, getNumberOfTrainingSessions());
+        return trainingSessions;
     }
 
     public List<Session> getTestingSessions() {
-        return sessions.subList(getNumberOfTrainingSessions(), sessions.size());
-    }
-
-    private int getNumberOfTrainingSessions() {
-        return (int) (sessions.size() * ratio);
+        return testingSessions;
     }
 
 }
