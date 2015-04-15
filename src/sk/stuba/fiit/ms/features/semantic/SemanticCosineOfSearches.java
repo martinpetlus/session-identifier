@@ -7,11 +7,11 @@ import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class CosineOfSearches implements PairFeature, SessionFeature {
+public final class SemanticCosineOfSearches implements PairFeature, SessionFeature {
 
     private final LDAModel model;
 
-    public CosineOfSearches(final LDAModel model) {
+    public SemanticCosineOfSearches(final LDAModel model) {
         this.model = model;
     }
 

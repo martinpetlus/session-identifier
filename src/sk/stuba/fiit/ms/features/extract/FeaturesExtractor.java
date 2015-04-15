@@ -54,20 +54,20 @@ public final class FeaturesExtractor {
 
         double[][] features = new double[searches.size()][];
 
-        for (Search sr : searches) {
-            features[i++] = this.extractPairFeatures(search, sr);
+        for (Search s : searches) {
+            features[i++] = this.extractPairFeatures(search, s);
         }
 
         return Features.transform(features);
     }
 
-    private double[] extractPairFeatures(final Search sr1, final Search sr2) {
+    private double[] extractPairFeatures(final Search s1, final Search s2) {
         int size = pairFeatures.size();
 
         double[] values = new double[size];
 
         for (int i = 0; i < size; i++) {
-            values[i] = pairFeatures.get(i).extract(sr1, sr2);
+            values[i] = pairFeatures.get(i).extract(s1, s2);
         }
 
         return values;
@@ -89,6 +89,27 @@ public final class FeaturesExtractor {
             return new FeaturesExtractor(this);
         }
 
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("FeaturesExtractor[");
+
+        for (SessionFeature feature : sessionFeatures) {
+            sb.append(feature.getClass().getSimpleName());
+            sb.append(',');
+        }
+
+        for (PairFeature feature : pairFeatures) {
+            sb.append(feature.getClass().getSimpleName());
+            sb.append(',');
+        }
+
+        sb.setCharAt(sb.length() - 1, ']');
+
+        return sb.toString();
     }
 
 }

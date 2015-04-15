@@ -4,7 +4,7 @@ import sk.stuba.fiit.ms.features.lexical.*;
 import sk.stuba.fiit.ms.features.number.NumberOfClicks;
 import sk.stuba.fiit.ms.features.number.NumberOfResults;
 import sk.stuba.fiit.ms.features.number.NumberOfResultsViews;
-import sk.stuba.fiit.ms.features.semantic.CosineOfSearches;
+import sk.stuba.fiit.ms.features.semantic.SemanticCosineOfSearches;
 import sk.stuba.fiit.ms.features.time.SpentTimeOnClicks;
 import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
 import sk.stuba.fiit.ms.features.url.CommonUrls;
@@ -38,10 +38,10 @@ public final class SessionExtractor {
         builder.addPairFeature(new NumberOfResultsViews());
 
         // Semantic features
-        builder.addPairFeature(new CosineOfSearches(model));
-        builder.addSessionFeature(new CosineOfSearches(model));
+        builder.addPairFeature(new SemanticCosineOfSearches(model));
 
         // Session features
+        builder.addSessionFeature(new SemanticCosineOfSearches(model));
         builder.addSessionFeature(new QuerySimilarity(Cosine.getInstance()));
         builder.addSessionFeature(new QueryTitleSimilarity(Cosine.getInstance()));
 
@@ -49,6 +49,10 @@ public final class SessionExtractor {
         builder.addSessionFeature(new CommonUrls());
 
         return builder.build();
+    }
+
+    public FeaturesExtractor getFeaturesExtractor() {
+        return featuresExtractor;
     }
 
     public double[] extractFeatures(final Session session, final Search search) {

@@ -88,6 +88,8 @@ public class Main {
         // Create session extractor with trained LDA
         SessionExtractor extractor = new SessionExtractor(lda);
 
+        System.out.println(extractor.getFeaturesExtractor());
+
         // Generate training examples
         System.out.println("Generating training examples...");
 
