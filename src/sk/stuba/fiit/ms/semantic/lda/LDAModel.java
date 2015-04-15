@@ -20,6 +20,7 @@ import cc.mallet.topics.TopicInferencer;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
 
+// http://mallet.cs.umass.edu/topics-devel.php
 public final class LDAModel {
 
     private final ParallelTopicModel model;
