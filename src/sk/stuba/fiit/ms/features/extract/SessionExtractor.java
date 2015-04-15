@@ -39,6 +39,7 @@ public final class SessionExtractor {
 
         // Semantic features
         builder.addPairFeature(new CosineOfSearches(model));
+        builder.addSessionFeature(new CosineOfSearches(model));
 
         // Session features
         builder.addSessionFeature(new QuerySimilarity(Cosine.getInstance()));

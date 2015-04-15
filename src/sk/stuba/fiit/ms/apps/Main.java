@@ -28,17 +28,17 @@ public class Main {
 
         SessionTrackParser parser = new SessionTrackParser();
 
-        parser.setSessionTrack(new SessionTrack2013());
-        parser.parse("data/sessiontrack2013.xml", sessions);
+//        parser.setSessionTrack(new SessionTrack2013());
+//        parser.parse("data/sessiontrack2013.xml", sessions);
+//
+//        parser.setSessionTrack(new SessionTrack2012());
+//        parser.parse("data/sessiontrack2012.xml", sessions);
+//
+//        parser.setSessionTrack(new SessionTrack2011());
+//        parser.parse("data/sessiontrack2011.RL4.xml", sessions);
 
-        parser.setSessionTrack(new SessionTrack2012());
-        parser.parse("data/sessiontrack2012.xml", sessions);
-
-        parser.setSessionTrack(new SessionTrack2011());
-        parser.parse("data/sessiontrack2011.RL4.xml", sessions);
-
-//        parser.setSessionTrack(new SessionTrack2014());
-//        parser.parse("data/sessiontrack2014.xml", sessions);
+        parser.setSessionTrack(new SessionTrack2014());
+        parser.parse("data/sessiontrack2014.xml", sessions);
 
         System.out.println("Number of loaded sessions from files: " + sessions.size());
 
@@ -51,7 +51,7 @@ public class Main {
 //        sd.downloadClicked(true);
 
         // Separate train and test sessions
-        int index = 15;
+        int index = 7;
         List<Session> testSessions  = sessions.subList(0, index);
         List<Session> trainSessions = sessions.subList(index, sessions.size());
 
@@ -122,8 +122,6 @@ public class Main {
             System.out.println("-----------------");
         }
 
-        System.out.println("\n***********************\n");
-
         // Shuffle test sessions search results for session identification
         Shuffler shuffler = new Shuffler();
         List<Search> searches = shuffler.shuffle(testSessions);
@@ -134,7 +132,7 @@ public class Main {
         identifier.addAll(searches);
 
         // Print identified sessions from test sessions
-        System.out.println("\n***************************************\n");
+        System.out.println("\n***************************************");
         System.out.println("Identified sessions from test sessions:\n");
         System.out.println("***************************************\n");
 
