@@ -89,6 +89,10 @@ public final class Search {
 
     public int getNumberOfResults() { return results.size(); }
 
+    public int getNumerOfResultsViews() {
+        return resultsViews.size();
+    }
+
     public double getSpentTimeOnClicks() {
         double sum = 0.0;
 
