@@ -14,6 +14,7 @@ import sk.stuba.fiit.ms.input.*;
 import sk.stuba.fiit.ms.learning.SVM;
 import sk.stuba.fiit.ms.learning.DataSet;
 import sk.stuba.fiit.ms.learning.dataset.generation.SetGenerator;
+import sk.stuba.fiit.ms.learning.test.SessionsSeparator;
 import sk.stuba.fiit.ms.semantic.lda.LDAFileFormatter;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
@@ -51,9 +52,9 @@ public class Main {
 //        sd.downloadClicked(true);
 
         // Separate train and test sessions
-        int index = 7;
-        List<Session> testSessions  = sessions.subList(0, index);
-        List<Session> trainSessions = sessions.subList(index, sessions.size());
+        SessionsSeparator sessionsSeparator = new SessionsSeparator(sessions, 0.94);
+        List<Session> testSessions = sessionsSeparator.getTestingSessions();
+        List<Session> trainSessions = sessionsSeparator.getTrainingSessions();
 
         // Print number of test queries
         int testQueries = 0;

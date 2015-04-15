@@ -8,14 +8,10 @@ public final class SessionsSeparator {
 
     private final List<Session> sessions;
 
-    private double ratio;
+    private final double ratio;
 
-    public SessionsSeparator(final List<Session> sessions) {
+    public SessionsSeparator(final List<Session> sessions, final double ratio) {
         this.sessions = sessions;
-        this.ratio = 0.8;
-    }
-
-    public void setRatio(final double ratio) {
         this.ratio = ratio;
     }
 
