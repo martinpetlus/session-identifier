@@ -95,19 +95,38 @@ public final class FeaturesExtractor {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("FeaturesExtractor[");
+        sb.append(this.getClass().getSimpleName());
+        sb.append('[');
 
-        for (SessionFeature feature : sessionFeatures) {
-            sb.append(feature.getClass().getSimpleName());
-            sb.append(',');
+        if (!sessionFeatures.isEmpty()) {
+            sb.append("SessionFeatures:(");
+
+            for (int i = 0; i < sessionFeatures.size(); i++) {
+                sb.append(sessionFeatures.get(i).getClass().getSimpleName());
+
+                if (i + 1 < sessionFeatures.size()) {
+                    sb.append(',');
+                }
+            }
+
+            sb.append(')');
         }
 
-        for (PairFeature feature : pairFeatures) {
-            sb.append(feature.getClass().getSimpleName());
-            sb.append(',');
+        if (!pairFeatures.isEmpty()) {
+            sb.append(";PairFeatures:(");
+
+            for (int i = 0; i < pairFeatures.size(); i++) {
+                sb.append(pairFeatures.get(i).getClass().getSimpleName());
+
+                if (i + 1 < pairFeatures.size()) {
+                    sb.append(',');
+                }
+            }
+
+            sb.append(')');
         }
 
-        sb.setCharAt(sb.length() - 1, ']');
+        sb.append(')');
 
         return sb.toString();
     }

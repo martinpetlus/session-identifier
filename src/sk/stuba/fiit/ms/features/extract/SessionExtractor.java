@@ -24,21 +24,21 @@ public final class SessionExtractor {
         FeaturesExtractor.Builder builder = new FeaturesExtractor.Builder();
 
         // Lexical features
-        builder.addPairFeature(new QuerySimilarity(Cosine.getInstance()));
-        builder.addPairFeature(new QuerySimilarity(Jaccard.getInstance()));
-        builder.addPairFeature(new QueryTitleSimilarity(Cosine.getInstance()));
-        builder.addPairFeature(new QueryTitleSimilarity(Jaccard.getInstance()));
-        builder.addPairFeature(new QueryCommonWords(QueryCommonWords.Direction.NO));
-
-        builder.addPairFeature(new CommonUrls());
-        builder.addPairFeature(new CommonClickedUrls());
-        builder.addPairFeature(new NumberOfClicks());
-        builder.addPairFeature(new NumberOfResults());
-        builder.addPairFeature(new SpentTimeOnClicks());
-        builder.addPairFeature(new NumberOfResultsViews());
-
-        // Semantic features
-        builder.addPairFeature(new SemanticCosineOfSearches(model));
+//        builder.addPairFeature(new QuerySimilarity(Cosine.getInstance()));
+//        builder.addPairFeature(new QuerySimilarity(Jaccard.getInstance()));
+//        builder.addPairFeature(new QueryTitleSimilarity(Cosine.getInstance()));
+//        builder.addPairFeature(new QueryTitleSimilarity(Jaccard.getInstance()));
+//        builder.addPairFeature(new QueryCommonWords(QueryCommonWords.Direction.NO));
+//
+//        builder.addPairFeature(new CommonUrls());
+//        builder.addPairFeature(new CommonClickedUrls());
+//        builder.addPairFeature(new NumberOfClicks());
+//        builder.addPairFeature(new NumberOfResults());
+//        builder.addPairFeature(new SpentTimeOnClicks());
+//        builder.addPairFeature(new NumberOfResultsViews());
+//
+//        // Semantic features
+//        builder.addPairFeature(new SemanticCosineOfSearches(model));
 
         // Session features
         builder.addSessionFeature(new SemanticCosineOfSearches(model));

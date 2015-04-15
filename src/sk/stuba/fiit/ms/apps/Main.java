@@ -135,7 +135,7 @@ public class Main {
 
         // Print identified sessions from test sessions
         System.out.println("\n***************************************");
-        System.out.println("Identified sessions from test sessions:\n");
+        System.out.println("Identified sessions from test sessions:");
         System.out.println("***************************************\n");
 
         for (Session session : identifier.getSessions()) {
