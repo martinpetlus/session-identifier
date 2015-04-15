@@ -3,6 +3,7 @@ package sk.stuba.fiit.ms.features.extract;
 import sk.stuba.fiit.ms.features.lexical.*;
 import sk.stuba.fiit.ms.features.number.NumberOfClicks;
 import sk.stuba.fiit.ms.features.number.NumberOfResults;
+import sk.stuba.fiit.ms.features.number.NumberOfResultsViews;
 import sk.stuba.fiit.ms.features.semantic.CosineOfSearches;
 import sk.stuba.fiit.ms.features.time.SpentTimeOnClicks;
 import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
@@ -34,6 +35,7 @@ public final class SessionExtractor {
         builder.addPairFeature(new NumberOfClicks());
         builder.addPairFeature(new NumberOfResults());
         builder.addPairFeature(new SpentTimeOnClicks());
+        builder.addPairFeature(new NumberOfResultsViews());
 
         // Semantic features
         builder.addPairFeature(new CosineOfSearches(model));
