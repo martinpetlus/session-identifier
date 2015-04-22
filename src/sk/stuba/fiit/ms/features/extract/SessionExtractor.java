@@ -1,11 +1,7 @@
 package sk.stuba.fiit.ms.features.extract;
 
 import sk.stuba.fiit.ms.features.lexical.*;
-import sk.stuba.fiit.ms.features.number.NumberOfClicks;
-import sk.stuba.fiit.ms.features.number.NumberOfResults;
-import sk.stuba.fiit.ms.features.number.NumberOfResultsViews;
 import sk.stuba.fiit.ms.features.semantic.SemanticCosineOfSearches;
-import sk.stuba.fiit.ms.features.time.SpentTimeOnClicks;
 import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
 import sk.stuba.fiit.ms.features.url.CommonUrls;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
@@ -14,14 +10,14 @@ import sk.stuba.fiit.ms.session.Session;
 
 public final class SessionExtractor {
 
-    private final FeaturesExtractor featuresExtractor;
+    private final Extractor featuresExtractor;
 
     public SessionExtractor(final LDAModel model) {
         this.featuresExtractor = addFeatures(model);
     }
 
-    private FeaturesExtractor addFeatures(final LDAModel model) {
-        FeaturesExtractor.Builder builder = new FeaturesExtractor.Builder();
+    private Extractor addFeatures(final LDAModel model) {
+        Extractor.Builder builder = new Extractor.Builder();
 
         // Lexical features
 //        builder.addPairFeature(new QuerySimilarity(Cosine.getInstance()));
@@ -51,7 +47,7 @@ public final class SessionExtractor {
         return builder.build();
     }
 
-    public FeaturesExtractor getFeaturesExtractor() {
+    public Extractor getFeaturesExtractor() {
         return featuresExtractor;
     }
 
