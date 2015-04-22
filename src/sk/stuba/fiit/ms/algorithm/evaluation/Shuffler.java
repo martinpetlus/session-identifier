@@ -11,7 +11,7 @@ public final class Shuffler {
 
     private final Random random = new Random();
 
-    private static int countSearchResults(final List<Session> sessions) {
+    private static int countSearches(final List<Session> sessions) {
         int count = 0;
 
         for (Session session : sessions) {
@@ -21,14 +21,14 @@ public final class Shuffler {
         return count;
     }
 
-    private static List<List<Search>> copySessionSearchResults(final List<Session> sessions) {
-        List<List<Search>> sessionSearchResults = new ArrayList<List<Search>>();
+    private static List<List<Search>> copySessionSearches(final List<Session> sessions) {
+        List<List<Search>> sessionSearches = new ArrayList<List<Search>>();
 
         for (Session session : sessions) {
-            sessionSearchResults.add(new ArrayList<Search>(session.getAllSearches()));
+            sessionSearches.add(new ArrayList<Search>(session.getAllSearches()));
         }
 
-        return sessionSearchResults;
+        return sessionSearches;
     }
 
     public List<Search> shuffle(final List<Session> sessions) {
@@ -36,11 +36,11 @@ public final class Shuffler {
 
         final int numberOfSessions = sessions.size();
 
-        final int numberOfSearchResults = countSearchResults(sessions);
+        final int numberOfSearches= countSearches(sessions);
 
-        final List<List<Search>> copy = copySessionSearchResults(sessions);
+        final List<List<Search>> copy = copySessionSearches(sessions);
 
-        for (int i = 0; i < numberOfSearchResults; i++) {
+        for (int i = 0; i < numberOfSearches; i++) {
             List<Search> searches = null;
 
             while (searches == null) {
