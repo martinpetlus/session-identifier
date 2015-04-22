@@ -7,15 +7,13 @@ import sk.stuba.fiit.ms.features.extract.SessionExtractor;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-
 public final class NegativeGenerator extends Generator {
 
     private final SessionExtractor extractor;
 
     private final List<Session> allSessions;
 
-    public NegativeGenerator(final SessionExtractor extractor,
-            final Session session, final List<Session> allSessions) {
+    public NegativeGenerator(final SessionExtractor extractor, final Session session, final List<Session> allSessions) {
         super(session);
 
         this.extractor = extractor;
@@ -24,32 +22,31 @@ public final class NegativeGenerator extends Generator {
 
     @Override
     public double[] generate(final int queries) {
-        if (generatable(queries)) {
-            Search randomResult = null;
-
-            while (randomResult == null) {
-                Session randomSession = allSessions.get(
-                        random.nextInt(allSessions.size()));
-
-                if (!session.equals(randomSession)) {
-                    randomResult = randomSession.getSearch(
-                        random.nextInt(randomSession.getNumberOfSearches()));
-                }
-            }
-
-            int[] indices = randomIndices(queries, session.getNumberOfSearches());
-
-            List<Search> randomResults =
-                    new ArrayList<Search>(queries);
-
-            for (int i = 0; i < queries; i++) {
-                randomResults.add(session.getSearch(indices[i]));
-            }
-
-            return extractor.extractFeatures(new Session(randomResults), randomResult);
-        } else {
-            return EMPTY_FEATURES;
+        if (!generatable(queries)) {
+            throw new IllegalArgumentException("Illegal number of queries: " + queries);
         }
+
+        Search randomResult = null;
+
+        while (randomResult == null) {
+            Session randomSession = allSessions.get(random.nextInt(allSessions.size()));
+
+            if (!session.equals(randomSession)) {
+                randomResult = randomSession.getSearch(
+                    random.nextInt(randomSession.getNumberOfSearches()));
+            }
+        }
+
+        int[] indices = randomIndices(queries, session.getNumberOfSearches());
+
+        List<Search> randomResults =
+                new ArrayList<Search>(queries);
+
+        for (int i = 0; i < queries; i++) {
+            randomResults.add(session.getSearch(indices[i]));
+        }
+
+        return extractor.extractFeatures(new Session(randomResults), randomResult);
     }
 
     @Override

@@ -10,8 +10,6 @@ public abstract class Generator {
 
     protected final Session session;
 
-    protected final double[] EMPTY_FEATURES = new double[0];
-
     public Generator(final Session session) {
         this.session = session;
         this.random = new Random();

@@ -35,25 +35,21 @@ public final class PositiveGenerator extends Generator {
 
     @Override
     public double[] generate(final int queries) {
-        if (generatable(queries)) {
-            prepare(queries);
-
-            Session session = new Session(this.randomResults);
-            Search result = this.session.getSearch(this.randomIndex);
-
-            return extractor.extractFeatures(session, result);
-        } else {
-            return EMPTY_FEATURES;
+        if (!generatable(queries)) {
+            throw new IllegalArgumentException("Illegal number of queries: " + queries);
         }
+
+        prepare(queries);
+
+        Session session = new Session(this.randomResults);
+        Search result = this.session.getSearch(this.randomIndex);
+
+        return extractor.extractFeatures(session, result);
     }
 
     @Override
     public boolean generatable(final int queries) {
-        if (session.getNumberOfSearches() > queries) {
-            return true;
-        } else {
-            return false;
-        }
+        return session.getNumberOfSearches() > queries;
     }
 
 }
