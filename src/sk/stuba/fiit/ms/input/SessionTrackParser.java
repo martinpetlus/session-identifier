@@ -19,15 +19,13 @@ public final class SessionTrackParser {
 
     private SessionTrack sessionTrack;
 
-    public SessionTrackParser() {
-        this(null);
-    }
+    public void parse(final SessionTrack sessionTrack, final String file, final List<Session> sessions) {
+        if (sessionTrack == null) {
+            throw new IllegalArgumentException("Illegal session track");
+        }
 
-    public SessionTrackParser(final SessionTrack sessionTrack) {
         this.sessionTrack = sessionTrack;
-    }
 
-    public void parse(final String file, final List<Session> sessions) {
         try {
             File xmlFile = new File(file);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -40,10 +38,6 @@ public final class SessionTrackParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void setSessionTrack(final SessionTrack sessionTrack) {
-        this.sessionTrack = sessionTrack;
     }
 
     private void process(final Document doc, final List<Session> sessions) {
