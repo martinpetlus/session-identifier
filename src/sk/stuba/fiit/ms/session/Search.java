@@ -45,6 +45,10 @@ public final class Search {
         }
     }
 
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
     public List<String> getResultsUrls() {
         List<String> urls = new ArrayList<String>();
 

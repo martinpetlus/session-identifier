@@ -24,10 +24,12 @@ public final class Session {
     public Session(final List<Search> searches) {
         this.id = ++numberOfSessions;
 
-        if (searches == null) {
-            this.searches = new ArrayList<Search>();
-        } else {
-            this.searches = new ArrayList<Search>(searches);
+        this.searches = new ArrayList<Search>();
+
+        if (searches != null) {
+            for (Search search : searches) {
+                this.add(search);
+            }
         }
 
         this.userId = -1;
@@ -54,12 +56,21 @@ public final class Session {
     }
 
     public boolean add(final Search search) {
-        if (search.getResults().size() > 0) {
-            searches.add(search);
-            return true;
-        } else {
+        if (search.getResults().isEmpty()) {
             return false;
         }
+
+        int i = 0;
+
+        for (; i < searches.size(); i++) {
+            if (searches.get(i).getTimeStamp() > search.getTimeStamp()) {
+                break;
+            }
+        }
+
+        searches.add(i, search);
+
+        return true;
     }
 
     public Search getLastSearch() {
