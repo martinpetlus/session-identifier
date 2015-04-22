@@ -20,7 +20,7 @@ import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public class Main {
+public final class Main {
 
     public static void main(String[] args) {
         System.out.println("Loading sessions from files...");
