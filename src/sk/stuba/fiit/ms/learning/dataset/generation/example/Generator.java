@@ -21,11 +21,11 @@ public abstract class Generator {
         arr[b] = tmp;
     }
 
-    protected int[] randomIndices(final int length, final int maxExclusive) {
+    public static int[] randomIndices(final int length, final int maxExclusive) {
         return randomIndices(length, maxExclusive, -1);
     }
 
-    protected int[] randomIndices(final int length, final int maxExclusive, final int exclude) {
+    public static int[] randomIndices(final int length, final int maxExclusive, final int exclude) {
         if (length > (maxExclusive - (exclude >= 0  && exclude < maxExclusive ? 1 : 0))) {
             throw new IllegalArgumentException("Low indices range for given length");
         }
