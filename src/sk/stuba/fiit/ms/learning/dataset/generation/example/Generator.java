@@ -15,6 +15,12 @@ public abstract class Generator {
         this.random = new Random();
     }
 
+    private static void swap(final int arr[], final int a, final int b) {
+        int tmp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = tmp;
+    }
+
     protected int[] randomIndices(final int length, final int maxExclusive) {
         return randomIndices(length, maxExclusive, -1);
     }
@@ -24,35 +30,30 @@ public abstract class Generator {
             throw new IllegalArgumentException("Low indices range for given length");
         }
 
-        int[] randomIndices = new int[length];
+        int[] indices = new int[maxExclusive];
 
-        int count = 0;
+        for (int i = 0; i < indices.length; i++) {
+            indices[i] = i;
+        }
 
         Random random = new Random();
 
-        while (count < length) {
-            int randomIndex = random.nextInt(maxExclusive);
+        for (int i = 0; i < indices.length; i++) {
+            swap(indices, i, random.nextInt(indices.length));
+        }
 
-            if (randomIndex == exclude) {
-                continue;
+        int[] randomIndices = new int[length];
+
+        for (int i = 0, j = 0; i < length; i++, j++) {
+            if (indices[j] == exclude) {
+                j++;
             }
 
-            int i = 0;
-
-            for (; i < count; i++) {
-                if (randomIndices[i] == randomIndex) {
-                    break;
-                }
-            }
-
-            if (i == count) {
-                randomIndices[count++] = randomIndex;
-            }
+            randomIndices[i] = indices[j];
         }
 
         return randomIndices;
     }
-
 
     public abstract boolean generatable(int queries);
 
