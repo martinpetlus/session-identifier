@@ -2,18 +2,31 @@ package sk.stuba.fiit.ms.learning.dataset.generation.example;
 
 import java.util.Random;
 
+import sk.stuba.fiit.ms.features.extract.SessionExtractor;
 import sk.stuba.fiit.ms.session.Session;
 
 public abstract class Generator {
 
-    protected final Random random;
+    private final Session session;
 
-    protected final Session session;
+    private final SessionExtractor extractor;
 
-    public Generator(final Session session) {
+    public Generator(final SessionExtractor extractor, final Session session) {
+        this.extractor = extractor;
         this.session = session;
-        this.random = new Random();
     }
+
+    public SessionExtractor getSessionExtractor() {
+        return extractor;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public abstract boolean canGenerate(int queries);
+
+    public abstract double[][] generate(int queries);
 
     private static void swap(final int arr[], final int a, final int b) {
         int tmp = arr[a];
@@ -54,9 +67,5 @@ public abstract class Generator {
 
         return randomIndices;
     }
-
-    public abstract boolean generatable(int queries);
-
-    public abstract double[] generate(int queries);
 
 }

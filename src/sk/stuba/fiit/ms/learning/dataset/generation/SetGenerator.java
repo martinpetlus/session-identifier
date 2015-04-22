@@ -23,27 +23,21 @@ public final class SetGenerator {
         this.extractor = extractor;
     }
 
-    public SetGenerator(final SessionExtractor extractor) {
-        this(extractor, 2, 7);
-    }
-
     public DataSet generateSet(final List<Session> sessions) {
         final DataSet set = new DataSet();
 
         for (Session session : sessions) {
             for (int queries = minQueries; queries <= maxQueries; queries++) {
-                Generator generator;
+                Generator generator = new PositiveGenerator(extractor, session);
 
-                generator = new PositiveGenerator(extractor, session);
-
-                if (generator.generatable(queries)) {
-                    set.addExample(generator.generate(queries), 1.0);
+                if (generator.canGenerate(queries)) {
+                    set.addPositiveExamples(generator.generate(queries));
                 }
 
                 generator = new NegativeGenerator(extractor, session, sessions);
 
-                if (generator.generatable(queries)) {
-                    set.addExample(generator.generate(queries), 0.0);
+                if (generator.canGenerate(queries)) {
+                    set.addNegativeExamples(generator.generate(queries));
                 }
             }
         }

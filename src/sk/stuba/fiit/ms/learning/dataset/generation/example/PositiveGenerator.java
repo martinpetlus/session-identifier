@@ -2,6 +2,7 @@ package sk.stuba.fiit.ms.learning.dataset.generation.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import sk.stuba.fiit.ms.features.extract.SessionExtractor;
 import sk.stuba.fiit.ms.session.Search;
@@ -9,47 +10,59 @@ import sk.stuba.fiit.ms.session.Session;
 
 public final class PositiveGenerator extends Generator {
 
-    private final SessionExtractor extractor;
-
-    private List<Search> randomResults;
-
-    private int randomIndex;
-
     public PositiveGenerator(final SessionExtractor extractor, final Session session) {
-        super(session);
-
-        this.extractor = extractor;
+        super(extractor, session);
     }
 
-    private void prepare(final int queries) {
-        randomResults = new ArrayList<Search>(queries);
+    private Session getSessionWithRandomSearches(final int excludeIndex, final int numberOfSearches) {
+        List<Search> randomSearches = new ArrayList<Search>();
 
-        randomIndex = random.nextInt(session.getNumberOfSearches());
+        Session session = this.getSession();
 
-        int[] randomIndices = randomIndices(queries, session.getNumberOfSearches(), randomIndex);
+        int[] randomIndices = Generator.randomIndices(numberOfSearches, session.getNumberOfSearches(), excludeIndex);
 
-        for (int i = 0; i < queries; i++) {
-            randomResults.add(session.getSearch(randomIndices[i]));
+        for (int i = 0; i < numberOfSearches; i++) {
+            randomSearches.add(session.getSearch(randomIndices[i]));
         }
+
+        return new Session(randomSearches);
     }
 
     @Override
-    public double[] generate(final int queries) {
-        if (!generatable(queries)) {
-            throw new IllegalArgumentException("Illegal number of queries: " + queries);
+    public double[][] generate(final int queries) {
+        if (!canGenerate(queries)) {
+            throw new IllegalArgumentException("Illegal number of queries");
         }
 
-        prepare(queries);
+        List<Search> searches = this.getSession().getAllSearches();
 
-        Session session = new Session(this.randomResults);
-        Search result = this.session.getSearch(this.randomIndex);
+//        double[][] features = new double[searches.size()][];
+        double[][] features = new double[1][];
 
-        return extractor.extractFeatures(session, result);
+        Random random = new Random();
+
+        int randomIndex = random.nextInt(searches.size());
+
+        Search search = searches.get(randomIndex);
+
+        Session session = getSessionWithRandomSearches(randomIndex, queries);
+
+        features[0] = this.getSessionExtractor().extractFeatures(session, search);
+
+//        for (int i = 0; i < searches.size(); i++) {
+//            Search search = searches.get(i);
+//
+//            Session session = getSessionWithRandomSearches(i, queries);
+//
+//            features[i] = this.getSessionExtractor().extractFeatures(session, search);
+//        }
+
+        return features;
     }
 
     @Override
-    public boolean generatable(final int queries) {
-        return session.getNumberOfSearches() > queries;
+    public boolean canGenerate(final int queries) {
+        return this.getSession().getNumberOfSearches() > queries;
     }
 
 }

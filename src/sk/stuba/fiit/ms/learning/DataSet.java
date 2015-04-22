@@ -14,9 +14,19 @@ public final class DataSet {
         this.labels = new ArrayList<Double>();
     }
 
-    public void addExample(final double[] example, final double label) {
-        examples.add(example);
-        labels.add(label);
+    public void addPositiveExamples(final double[][] examples) {
+        addExamples(examples, 1.0);
+    }
+
+    public void addNegativeExamples(final double[][] examples) {
+        addExamples(examples, 0.0);
+    }
+
+    private void addExamples(final double[][] examples, final double label) {
+        for (int i = 0; i < examples.length; i++) {
+            this.examples.add(examples[i]);
+            this.labels.add(label);
+        }
     }
 
     public double[][] getExamples() {
