@@ -49,10 +49,10 @@ public final class SessionTrackParser {
     private void process(final Document doc, final List<Session> sessions) {
         this.sessions = new ArrayList<Session>();
 
-        NodeList childs = doc.getElementsByTagName("session");
+        NodeList childNodes = doc.getElementsByTagName("session");
 
-        for (int i = 0; i < childs.getLength(); i++) {
-            addSession(sessionTrack.parseSession(childs.item(i)));
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            addSession(sessionTrack.parseSession(childNodes.item(i)));
         }
 
         sessions.addAll(this.sessions);
