@@ -15,37 +15,44 @@ public abstract class Generator {
         this.random = new Random();
     }
 
-    protected int[] randomIndices(final int length, final int max) {
-        return randomIndices(length, max, -1);
+    protected int[] randomIndices(final int length, final int maxExclusive) {
+        return randomIndices(length, maxExclusive, -1);
     }
 
-    protected int[] randomIndices(final int length, final int max, final int exclude) {
-        int[] randomNumbers = new int[length];
+    protected int[] randomIndices(final int length, final int maxExclusive, final int exclude) {
+        if (length > (maxExclusive - (exclude >= 0  && exclude < maxExclusive ? 1 : 0))) {
+            throw new IllegalArgumentException("Low indices range for given length");
+        }
+
+        int[] randomIndices = new int[length];
 
         int count = 0;
 
-        while (count < length) {
-            int randomNumber = random.nextInt(max);
+        Random random = new Random();
 
-            if (exclude != -1 && randomNumber == exclude) {
+        while (count < length) {
+            int randomIndex = random.nextInt(maxExclusive);
+
+            if (randomIndex == exclude) {
                 continue;
             }
 
-            int j = 0;
+            int i = 0;
 
-            for (; j < count; j++) {
-                if (randomNumbers[j] == randomNumber) {
+            for (; i < count; i++) {
+                if (randomIndices[i] == randomIndex) {
                     break;
                 }
             }
 
-            if (j == count) {
-                randomNumbers[count++] = randomNumber;
+            if (i == count) {
+                randomIndices[count++] = randomIndex;
             }
         }
 
-        return randomNumbers;
+        return randomIndices;
     }
+
 
     public abstract boolean generatable(int queries);
 
