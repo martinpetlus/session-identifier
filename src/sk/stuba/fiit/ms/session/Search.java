@@ -10,6 +10,8 @@ public final class Search {
 
     private final String query;
 
+    private final long timeStamp;
+
     private final Map<Integer, Result> results;
 
     private final List<Integer> resultsViews;
@@ -20,6 +22,8 @@ public final class Search {
         this.id = ++numberOfSearches;
 
         this.query = builder.query;
+
+        this.timeStamp = builder.timeStamp;
 
         this.clicks = new ArrayList<Click>(builder.clicks);
 
@@ -173,6 +177,8 @@ public final class Search {
 
         private String query;
 
+        private long timeStamp = 0;
+
         private final List<Result> results = new ArrayList<Result>();
 
         private final List<Click> clicks = new ArrayList<Click>();
@@ -187,6 +193,10 @@ public final class Search {
 
         public void addClick(final Click click) {
             clicks.add(click);
+        }
+
+        public void setTimeStamp(final long timeStamp) {
+            this.timeStamp = timeStamp;
         }
 
         public Search build() {
