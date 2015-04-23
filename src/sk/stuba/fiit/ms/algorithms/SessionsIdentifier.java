@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.algorithm;
+package sk.stuba.fiit.ms.algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
