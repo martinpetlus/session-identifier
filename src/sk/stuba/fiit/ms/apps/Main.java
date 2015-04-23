@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sk.stuba.fiit.ms.algorithm.SessionsIdentifier;
-import sk.stuba.fiit.ms.algorithm.evaluation.Evaluator;
-import sk.stuba.fiit.ms.algorithm.evaluation.Shuffler;
+import sk.stuba.fiit.ms.evaluation.Evaluator;
+import sk.stuba.fiit.ms.evaluation.Shuffler;
 import sk.stuba.fiit.ms.database.Database;
 import sk.stuba.fiit.ms.database.FileDatabase;
 import sk.stuba.fiit.ms.features.FeatureNormalizer;
