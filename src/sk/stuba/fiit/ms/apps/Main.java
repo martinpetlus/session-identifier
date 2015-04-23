@@ -3,7 +3,7 @@ package sk.stuba.fiit.ms.apps;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.stuba.fiit.ms.algorithms.SessionsIdentifier;
+import sk.stuba.fiit.ms.algorithms.StackSessionIdentifier;
 import sk.stuba.fiit.ms.evaluation.Evaluator;
 import sk.stuba.fiit.ms.evaluation.Shuffler;
 import sk.stuba.fiit.ms.database.Database;
@@ -128,7 +128,7 @@ public final class Main {
         List<Search> searches = shuffler.shuffle(testSessions);
 
         // Identify session from test shuffled search results
-        SessionsIdentifier identifier = new SessionsIdentifier(extractor, svm, normalizer);
+        StackSessionIdentifier identifier = new StackSessionIdentifier(extractor, svm, normalizer);
 
         identifier.addAll(searches);
 

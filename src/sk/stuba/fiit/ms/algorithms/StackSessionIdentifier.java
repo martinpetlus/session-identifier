@@ -9,7 +9,7 @@ import sk.stuba.fiit.ms.learning.SVM;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class SessionsIdentifier {
+public final class StackSessionIdentifier {
 
     private final SVM model;
 
@@ -19,11 +19,11 @@ public final class SessionsIdentifier {
 
     private final FeatureNormalizer normalizer;
 
-    public SessionsIdentifier(final SessionExtractor extractor, final SVM model) {
+    public StackSessionIdentifier(final SessionExtractor extractor, final SVM model) {
         this(extractor, model, null);
     }
 
-    public SessionsIdentifier(final SessionExtractor extractor, final SVM model, final FeatureNormalizer normalizer) {
+    public StackSessionIdentifier(final SessionExtractor extractor, final SVM model, final FeatureNormalizer normalizer) {
         this.model = model;
 
         this.extractor = extractor;
