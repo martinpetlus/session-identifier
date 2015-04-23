@@ -1,6 +1,6 @@
 package sk.stuba.fiit.ms.similarities.lexical;
 
-import sk.stuba.fiit.ms.features.Util;
+import sk.stuba.fiit.ms.utils.SetUtils;
 
 public final class CosineLexicalSimilarity extends LexicalSimilarity {
 
@@ -56,7 +56,7 @@ public final class CosineLexicalSimilarity extends LexicalSimilarity {
             return 0.0;
         }
 
-        String[] union = Util.union(one, two);
+        String[] union = SetUtils.union(one, two);
 
         int[] vecOneOcc = occurrenceWithFrequency(one, union);
         int[] vecTwoOcc = occurrenceWithFrequency(two, union);

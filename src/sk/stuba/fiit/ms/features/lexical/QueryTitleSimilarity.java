@@ -5,7 +5,7 @@ import java.util.List;
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
 import sk.stuba.fiit.ms.features.Statistic;
-import sk.stuba.fiit.ms.features.Util;
+import sk.stuba.fiit.ms.utils.SetUtils;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.session.Result;
@@ -54,7 +54,7 @@ public final class QueryTitleSimilarity implements PairFeature, SessionFeature {
             titles[i] = getTitles(searches.get(i));
         }
 
-        String[] union = Util.union(titles);
+        String[] union = SetUtils.union(titles);
 
         return lexicalSimilarity.calculate(union, TextNormalizer.split(search.getQuery()));
     }
@@ -68,7 +68,7 @@ public final class QueryTitleSimilarity implements PairFeature, SessionFeature {
             titles[i++] = TextNormalizer.split(result.getTitle());
         }
 
-        return Util.union(titles);
+        return SetUtils.union(titles);
     }
 
 }

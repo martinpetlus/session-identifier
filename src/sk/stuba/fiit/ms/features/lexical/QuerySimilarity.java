@@ -2,7 +2,7 @@ package sk.stuba.fiit.ms.features.lexical;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
-import sk.stuba.fiit.ms.features.Util;
+import sk.stuba.fiit.ms.utils.SetUtils;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.similarities.lexical.LexicalSimilarity;
@@ -36,7 +36,7 @@ public final class QuerySimilarity implements PairFeature, SessionFeature {
             sentences[i] = TextNormalizer.split(searches.get(i).getQuery());
         }
 
-        String[] union = Util.union(sentences);
+        String[] union = SetUtils.union(sentences);
 
         return lexicalSimilarity.calculate(union, TextNormalizer.split(search.getQuery()));
     }

@@ -1,11 +1,11 @@
-package sk.stuba.fiit.ms.features;
+package sk.stuba.fiit.ms.utils;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public final class Util {
+public final class SetUtils {
 
-    private Util() {}
+    private SetUtils() {}
 
     public static String[] union(final String[][] sentences) {
         Set<String> set = new HashSet<String>();

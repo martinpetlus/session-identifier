@@ -1,7 +1,7 @@
 package sk.stuba.fiit.ms.features.lexical;
 
 import sk.stuba.fiit.ms.features.PairFeature;
-import sk.stuba.fiit.ms.features.Util;
+import sk.stuba.fiit.ms.utils.SetUtils;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.utils.TextNormalizer;
 
@@ -57,7 +57,7 @@ public final class QueryCommonWords implements PairFeature {
 
             @Override
             int compute(final String[] one, final String[] two) {
-                return Util.intersection(one, two).length;
+                return SetUtils.intersection(one, two).length;
             }
 
         };

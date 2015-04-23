@@ -1,6 +1,6 @@
 package sk.stuba.fiit.ms.similarities.lexical;
 
-import sk.stuba.fiit.ms.features.Util;
+import sk.stuba.fiit.ms.utils.SetUtils;
 
 public final class JaccardLexicalSimilarity extends LexicalSimilarity {
 
@@ -8,7 +8,7 @@ public final class JaccardLexicalSimilarity extends LexicalSimilarity {
 
     @Override
     public double calculate(final String[] one, final String[] two) {
-        return (double) Util.intersection(one, two).length / Util.union(one, two).length;
+        return (double) SetUtils.intersection(one, two).length / SetUtils.union(one, two).length;
     }
 
     public static JaccardLexicalSimilarity newInstance() {
