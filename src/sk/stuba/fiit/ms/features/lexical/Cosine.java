@@ -71,12 +71,8 @@ public final class Cosine implements Similarity {
         return dotProd / (vecOneMag * vecTwoMag);
     }
 
-    public static synchronized Cosine getInstance() {
-        if (instance == null) {
-            instance = new Cosine();
-        }
-
-        return instance;
+    public static Cosine newInstance() {
+        return new Cosine();
     }
 
 }

@@ -21,10 +21,10 @@ public final class SessionExtractor {
         Extractor.Builder builder = new Extractor.Builder();
 
         // Lexical features
-//        builder.addPairFeature(new QuerySimilarity(Cosine.getInstance()));
-//        builder.addPairFeature(new QuerySimilarity(Jaccard.getInstance()));
-//        builder.addPairFeature(new QueryTitleSimilarity(Cosine.getInstance()));
-//        builder.addPairFeature(new QueryTitleSimilarity(Jaccard.getInstance()));
+//        builder.addPairFeature(new QuerySimilarity(Cosine.newInstance()));
+//        builder.addPairFeature(new QuerySimilarity(Jaccard.newInstance()));
+//        builder.addPairFeature(new QueryTitleSimilarity(Cosine.newInstance()));
+//        builder.addPairFeature(new QueryTitleSimilarity(Jaccard.newInstance()));
 //        builder.addPairFeature(new QueryCommonWords(QueryCommonWords.Direction.NO));
 //
 //        builder.addPairFeature(new CommonUrls());
@@ -39,8 +39,8 @@ public final class SessionExtractor {
 
         // Session features
         builder.addSessionFeature(new SemanticCosineOfSearches(model));
-        builder.addSessionFeature(new QuerySimilarity(Cosine.getInstance()));
-        builder.addSessionFeature(new QueryTitleSimilarity(Cosine.getInstance()));
+        builder.addSessionFeature(new QuerySimilarity(Cosine.newInstance()));
+        builder.addSessionFeature(new QueryTitleSimilarity(Cosine.newInstance()));
 
         builder.addSessionFeature(new CommonClickedUrls());
         builder.addSessionFeature(new CommonUrls());
