@@ -9,19 +9,20 @@ import sk.stuba.fiit.ms.features.Util;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.session.Result;
+import sk.stuba.fiit.ms.similarities.lexical.LexicalSimilarity;
 
 public final class QueryTitleSimilarity implements PairFeature, SessionFeature {
 
-    private final Similarity similarity;
+    private final LexicalSimilarity lexicalSimilarity;
 
-    public QueryTitleSimilarity(final Similarity similarity) {
-        this.similarity = similarity;
+    public QueryTitleSimilarity(final LexicalSimilarity lexicalSimilarity) {
+        this.lexicalSimilarity = lexicalSimilarity;
     }
 
     private double titleSimilarity(final String[] query, final Result result) {
         String[] title = TextNormalizer.split(result.getTitle());
 
-        return similarity.calculate(query, title);
+        return lexicalSimilarity.calculate(query, title);
     }
 
     @Override
@@ -54,7 +55,7 @@ public final class QueryTitleSimilarity implements PairFeature, SessionFeature {
 
         String[] union = Util.union(titles);
 
-        return similarity.calculate(union, TextNormalizer.split(search.getQuery()));
+        return lexicalSimilarity.calculate(union, TextNormalizer.split(search.getQuery()));
     }
 
     private String[] getTitles(final Search search) {

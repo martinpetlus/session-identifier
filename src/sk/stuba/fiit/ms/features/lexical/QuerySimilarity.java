@@ -5,15 +5,16 @@ import sk.stuba.fiit.ms.features.SessionFeature;
 import sk.stuba.fiit.ms.features.Util;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
+import sk.stuba.fiit.ms.similarities.lexical.LexicalSimilarity;
 
 import java.util.List;
 
 public final class QuerySimilarity implements PairFeature, SessionFeature {
 
-    private final Similarity similarity;
+    private final LexicalSimilarity lexicalSimilarity;
 
-    public QuerySimilarity(final Similarity similarity) {
-        this.similarity = similarity;
+    public QuerySimilarity(final LexicalSimilarity lexicalSimilarity) {
+        this.lexicalSimilarity = lexicalSimilarity;
     }
 
     @Override
@@ -21,7 +22,7 @@ public final class QuerySimilarity implements PairFeature, SessionFeature {
         String query1 = sr1.getQuery();
         String query2 = sr2.getQuery();
 
-        return similarity.calculate(TextNormalizer.split(query1), TextNormalizer.split(query2));
+        return lexicalSimilarity.calculate(TextNormalizer.split(query1), TextNormalizer.split(query2));
     }
 
     @Override
@@ -36,7 +37,7 @@ public final class QuerySimilarity implements PairFeature, SessionFeature {
 
         String[] union = Util.union(sentences);
 
-        return similarity.calculate(union, TextNormalizer.split(search.getQuery()));
+        return lexicalSimilarity.calculate(union, TextNormalizer.split(search.getQuery()));
     }
 
 }

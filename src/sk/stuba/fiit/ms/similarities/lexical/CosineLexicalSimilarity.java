@@ -1,12 +1,10 @@
-package sk.stuba.fiit.ms.features.lexical;
+package sk.stuba.fiit.ms.similarities.lexical;
 
 import sk.stuba.fiit.ms.features.Util;
 
-public final class Cosine implements Similarity {
+public final class CosineLexicalSimilarity implements LexicalSimilarity {
 
-    private static Cosine instance;
-
-    private Cosine() {}
+    private CosineLexicalSimilarity() {}
 
     private static int[] occurenceWithFrequency(final String[] a, final String[] union) {
         int[] vec = new int[union.length];
@@ -71,8 +69,8 @@ public final class Cosine implements Similarity {
         return dotProd / (vecOneMag * vecTwoMag);
     }
 
-    public static Cosine newInstance() {
-        return new Cosine();
+    public static CosineLexicalSimilarity newInstance() {
+        return new CosineLexicalSimilarity();
     }
 
 }
