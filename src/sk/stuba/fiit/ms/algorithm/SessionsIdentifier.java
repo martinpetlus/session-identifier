@@ -15,7 +15,7 @@ public final class SessionsIdentifier {
 
     private final SessionExtractor extractor;
 
-    private final List<Session> sessions;
+    private final List<Session> stack;
 
     private final FeatureNormalizer normalizer;
 
@@ -28,7 +28,7 @@ public final class SessionsIdentifier {
 
         this.extractor = extractor;
 
-        this.sessions = new ArrayList<Session>();
+        this.stack = new ArrayList<Session>();
 
         this.normalizer = normalizer;
     }
@@ -38,17 +38,17 @@ public final class SessionsIdentifier {
 
         session.add(search);
 
-        sessions.add(session);
+        stack.add(session);
     }
 
     public void add(final Search search) {
-        if (sessions.isEmpty()) {
+        if (stack.isEmpty()) {
             addSession(search);
         } else {
             int i;
 
-            for (i = sessions.size() - 1; i >= 0; i--) {
-                Session session = sessions.get(i);
+            for (i = stack.size() - 1; i >= 0; i--) {
+                Session session = stack.get(i);
 
                 double[] features = extractor.extractFeatures(session, search);
 
@@ -59,8 +59,8 @@ public final class SessionsIdentifier {
                 if (model.predict(features)) {
                     session.add(search);
 
-                    sessions.remove(i);
-                    sessions.add(session);
+                    stack.remove(i);
+                    stack.add(session);
 
                     break;
                 }
@@ -79,7 +79,7 @@ public final class SessionsIdentifier {
     }
 
     public List<Session> getSessions() {
-        return new ArrayList<Session>(sessions);
+        return new ArrayList<Session>(stack);
     }
 
 }
