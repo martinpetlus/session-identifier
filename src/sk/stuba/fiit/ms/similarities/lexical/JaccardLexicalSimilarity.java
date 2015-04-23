@@ -2,7 +2,7 @@ package sk.stuba.fiit.ms.similarities.lexical;
 
 import sk.stuba.fiit.ms.features.Util;
 
-public final class JaccardLexicalSimilarity implements LexicalSimilarity {
+public final class JaccardLexicalSimilarity extends LexicalSimilarity {
 
     private JaccardLexicalSimilarity() {}
 
