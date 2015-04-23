@@ -9,7 +9,7 @@ import sk.stuba.fiit.ms.learning.SVM;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class StackSessionIdentifier extends Identifier {
+public final class StackSessionIdentifier extends SessionIdentifier {
 
     private final SVM model;
 

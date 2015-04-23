@@ -5,7 +5,7 @@ import sk.stuba.fiit.ms.session.Session;
 
 import java.util.List;
 
-public abstract class Identifier {
+public abstract class SessionIdentifier {
 
     public abstract void identify(final Search search);
 
