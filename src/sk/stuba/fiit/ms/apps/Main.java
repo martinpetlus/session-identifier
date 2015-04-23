@@ -137,7 +137,7 @@ public final class Main {
         System.out.println("Identified sessions from test sessions:");
         System.out.println("***************************************\n");
 
-        for (Session session : identifier.getSessions()) {
+        for (Session session : identifier.getIdentifiedSessions()) {
             for (Search result : session.getAllSearches()) {
                 System.out.println(result.getQuery());
             }
@@ -145,7 +145,7 @@ public final class Main {
         }
 
         // Evaluate results
-        Evaluator.Results evalResults = Evaluator.evaluate(testSessions, identifier.getSessions());
+        Evaluator.Results evalResults = Evaluator.evaluate(testSessions, identifier.getIdentifiedSessions());
         System.out.println(evalResults);
     }
 
