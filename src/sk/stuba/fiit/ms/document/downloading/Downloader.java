@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 
 import sk.stuba.fiit.ms.database.Database;
 import sk.stuba.fiit.ms.document.DocumentContent;
-import sk.stuba.fiit.ms.features.lexical.TextNormalizer;
+import sk.stuba.fiit.ms.utils.TextNormalizer;
 import sk.stuba.fiit.ms.session.Result;
 
 public final class Downloader {

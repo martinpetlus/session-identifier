@@ -6,6 +6,7 @@ import sk.stuba.fiit.ms.features.Util;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.similarities.lexical.LexicalSimilarity;
+import sk.stuba.fiit.ms.utils.TextNormalizer;
 
 import java.util.List;
 

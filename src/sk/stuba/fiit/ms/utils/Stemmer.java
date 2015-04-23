@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.features.lexical;
+package sk.stuba.fiit.ms.utils;
 
 /*
 
@@ -44,7 +44,7 @@ import java.io.*;
   * by calling one of the various stem(something) methods.
   */
 
-class Stemmer
+public final class Stemmer
 {  private char[] b;
    private int i,     /* offset into b */
                i_end, /* offset to end of stemmed word */

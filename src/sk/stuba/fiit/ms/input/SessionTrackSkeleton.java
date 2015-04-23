@@ -3,7 +3,7 @@ package sk.stuba.fiit.ms.input;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import sk.stuba.fiit.ms.features.lexical.TextNormalizer;
+import sk.stuba.fiit.ms.utils.TextNormalizer;
 import sk.stuba.fiit.ms.session.*;
 import sk.stuba.fiit.ms.session.Search;
 

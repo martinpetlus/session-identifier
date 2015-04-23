@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.features.lexical;
+package sk.stuba.fiit.ms.utils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -33,7 +33,9 @@ public final class TextNormalizer {
         }
     }
 
-    private synchronized static String stemWord(final String word) {
+    private TextNormalizer() {}
+
+    private static String stemWord(final String word) {
         for (int i = 0; i < word.length(); i++) {
             stemmer.add(word.charAt(i));
         }
@@ -43,7 +45,7 @@ public final class TextNormalizer {
         return stemmer.toString();
     }
 
-    private synchronized static String stemWords(final String words) {
+    private static String stemWords(final String words) {
         StringBuilder sb = new StringBuilder();
 
         String[] parts = words.split("\\s+");
