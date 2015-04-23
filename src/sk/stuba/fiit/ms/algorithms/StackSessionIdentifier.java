@@ -9,7 +9,7 @@ import sk.stuba.fiit.ms.learning.SVM;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class StackSessionIdentifier {
+public final class StackSessionIdentifier extends Identifier {
 
     private final SVM model;
 
@@ -41,6 +41,7 @@ public final class StackSessionIdentifier {
         stack.add(session);
     }
 
+    @Override
     public void identify(final Search search) {
         if (stack.isEmpty()) {
             addSession(search);
@@ -72,13 +73,8 @@ public final class StackSessionIdentifier {
         }
     }
 
-    public void identifyAll(final List<Search> searches) {
-        for (Search search : searches) {
-            identify(search);
-        }
-    }
-
-    public List<Session> getSessions() {
+    @Override
+    public List<Session> getIdentifiedSessions() {
         return new ArrayList<Session>(stack);
     }
 
