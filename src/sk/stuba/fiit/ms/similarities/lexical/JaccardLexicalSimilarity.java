@@ -4,6 +4,8 @@ import sk.stuba.fiit.ms.features.Util;
 
 public final class JaccardLexicalSimilarity implements LexicalSimilarity {
 
+    private JaccardLexicalSimilarity() {}
+
     @Override
     public double calculate(final String[] one, final String[] two) {
         return (double) Util.intersection(one, two).length / Util.union(one, two).length;
