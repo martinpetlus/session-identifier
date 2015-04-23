@@ -18,7 +18,7 @@ public final class CosineLexicalSimilarity extends LexicalSimilarity {
         return vec;
     }
 
-    private static int countOccurrence(String s, final String[] a) {
+    private static int countOccurrence(final String s, final String[] a) {
         int count = 0;
 
         for (String el : a) {
