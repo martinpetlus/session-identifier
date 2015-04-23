@@ -117,9 +117,11 @@ public final class Main {
 
         for (Session session : testSessions) {
             System.out.println(session.getTopic());
-            for (Search result : session.getAllSearches()) {
-                System.out.println(result.getQuery());
+
+            for (Search search : session.getAllSearches()) {
+                System.out.println(search.getQuery());
             }
+
             System.out.println("-----------------");
         }
 
@@ -138,9 +140,10 @@ public final class Main {
         System.out.println("***************************************\n");
 
         for (Session session : identifier.getIdentifiedSessions()) {
-            for (Search result : session.getAllSearches()) {
-                System.out.println(result.getQuery());
+            for (Search search : session.getAllSearches()) {
+                System.out.println(search.getQuery());
             }
+
             System.out.println("-----------------");
         }
 
