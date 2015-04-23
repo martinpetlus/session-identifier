@@ -6,19 +6,19 @@ public final class CosineLexicalSimilarity extends LexicalSimilarity {
 
     private CosineLexicalSimilarity() {}
 
-    private static int[] occurenceWithFrequency(final String[] a, final String[] union) {
+    private static int[] occurrenceWithFrequency(final String[] a, final String[] union) {
         int[] vec = new int[union.length];
 
         int i = 0;
 
         for (String s : union) {
-            vec[i++] = countOccurence(s, a);
+            vec[i++] = countOccurrence(s, a);
         }
 
         return vec;
     }
 
-    private static int countOccurence(String s, final String[] a) {
+    private static int countOccurrence(String s, final String[] a) {
         int count = 0;
 
         for (String el : a) {
@@ -58,8 +58,8 @@ public final class CosineLexicalSimilarity extends LexicalSimilarity {
 
         String[] union = Util.union(one, two);
 
-        int[] vecOneOcc = occurenceWithFrequency(one, union);
-        int[] vecTwoOcc = occurenceWithFrequency(two, union);
+        int[] vecOneOcc = occurrenceWithFrequency(one, union);
+        int[] vecTwoOcc = occurrenceWithFrequency(two, union);
 
         double vecOneMag = magnitude(vecOneOcc);
         double vecTwoMag = magnitude(vecTwoOcc);
