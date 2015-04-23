@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.algorithms;
+package sk.stuba.fiit.ms.session.identifiers;
 
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
@@ -11,7 +11,7 @@ public abstract class SessionIdentifier {
 
     public abstract List<Session> getIdentifiedSessions();
 
-    public void identifyAll(final List<Search> searches) {
+    public final void identifyAll(final List<Search> searches) {
         for (Search search : searches) {
             identify(search);
         }

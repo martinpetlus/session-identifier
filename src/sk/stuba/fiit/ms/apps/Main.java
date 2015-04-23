@@ -3,7 +3,7 @@ package sk.stuba.fiit.ms.apps;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.stuba.fiit.ms.algorithms.StackSessionIdentifier;
+import sk.stuba.fiit.ms.session.identifiers.stack.StackSessionIdentifier;
 import sk.stuba.fiit.ms.evaluation.Evaluator;
 import sk.stuba.fiit.ms.evaluation.Shuffler;
 import sk.stuba.fiit.ms.database.Database;

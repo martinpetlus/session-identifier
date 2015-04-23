@@ -1,8 +1,9 @@
-package sk.stuba.fiit.ms.algorithms;
+package sk.stuba.fiit.ms.session.identifiers.stack;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import sk.stuba.fiit.ms.session.identifiers.SessionIdentifier;
 import sk.stuba.fiit.ms.features.FeatureNormalizer;
 import sk.stuba.fiit.ms.features.extract.SessionExtractor;
 import sk.stuba.fiit.ms.learning.SVM;
