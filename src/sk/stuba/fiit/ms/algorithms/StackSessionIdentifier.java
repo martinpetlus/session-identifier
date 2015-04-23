@@ -41,7 +41,7 @@ public final class StackSessionIdentifier {
         stack.add(session);
     }
 
-    public void add(final Search search) {
+    public void identify(final Search search) {
         if (stack.isEmpty()) {
             addSession(search);
         } else {
@@ -72,9 +72,9 @@ public final class StackSessionIdentifier {
         }
     }
 
-    public void addAll(final List<Search> searches) {
+    public void identifyAll(final List<Search> searches) {
         for (Search search : searches) {
-            add(search);
+            identify(search);
         }
     }
 
