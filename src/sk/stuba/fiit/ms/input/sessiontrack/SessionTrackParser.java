@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import sk.stuba.fiit.ms.input.Parser;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
@@ -17,15 +18,13 @@ public final class SessionTrackParser {
 
     private List<Session> sessions;
 
-    private SessionTrack sessionTrack;
+    private final SessionTrack sessionTrack;
 
-    public void parse(final SessionTrack sessionTrack, final String file, final List<Session> sessions) {
-        if (sessionTrack == null) {
-            throw new IllegalArgumentException("Illegal session track");
-        }
-
+    public SessionTrackParser(final SessionTrack sessionTrack) {
         this.sessionTrack = sessionTrack;
+    }
 
+    public void parse(final String file, final List<Session> sessions) {
         try {
             File xmlFile = new File(file);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

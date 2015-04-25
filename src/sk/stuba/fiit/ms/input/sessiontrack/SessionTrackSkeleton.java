@@ -7,7 +7,7 @@ import sk.stuba.fiit.ms.utils.TextNormalizer;
 import sk.stuba.fiit.ms.session.*;
 import sk.stuba.fiit.ms.session.Search;
 
-public abstract class SessionTrackSkeleton implements SessionTrack {
+abstract class SessionTrackSkeleton implements SessionTrack {
 
     @Override
     public Time parseTime(final String time) {

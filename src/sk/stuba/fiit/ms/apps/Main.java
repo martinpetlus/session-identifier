@@ -3,8 +3,7 @@ package sk.stuba.fiit.ms.apps;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.stuba.fiit.ms.input.sessiontrack.SessionTrack2014;
-import sk.stuba.fiit.ms.input.sessiontrack.SessionTrackParser;
+import sk.stuba.fiit.ms.input.sessiontrack.*;
 import sk.stuba.fiit.ms.session.identifiers.stack.StackSessionIdentifier;
 import sk.stuba.fiit.ms.evaluation.Evaluator;
 import sk.stuba.fiit.ms.evaluation.Shuffler;
@@ -28,15 +27,13 @@ public final class Main {
 
         List<Session> sessions = new ArrayList<Session>();
 
-        SessionTrackParser parser = new SessionTrackParser();
-
-//        parser.parse(new SessionTrack2013(), "data/sessiontrack2013.xml", sessions);
+//        new SessionTrackParser(new SessionTrack2013()).parse("data/sessiontrack2013.xml", sessions);
 //
-//        parser.parse(new SessionTrack2012(), "data/sessiontrack2012.xml", sessions);
+//        new SessionTrackParser(new SessionTrack2012()).parse("data/sessiontrack2012.xml", sessions);
 //
-//        parser.parse(new SessionTrack2011(), "data/sessiontrack2011.RL4.xml", sessions);
+//        new SessionTrackParser(new SessionTrack2011()).parse("data/sessiontrack2011.RL4.xml", sessions);
 
-        parser.parse(new SessionTrack2014(), "data/sessiontrack2014.xml", sessions);
+        new SessionTrackParser(new SessionTrack2014()).parse("data/sessiontrack2014.xml", sessions);
 
         System.out.println("Number of loaded sessions from files: " + sessions.size());
 
