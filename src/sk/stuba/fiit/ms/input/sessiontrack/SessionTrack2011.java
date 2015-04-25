@@ -1,7 +1,6 @@
 package sk.stuba.fiit.ms.input.sessiontrack;
 
 import org.w3c.dom.Node;
-import sk.stuba.fiit.ms.input.sessiontrack.Util;
 
 public class SessionTrack2011 extends SessionTrackSkeleton {
 

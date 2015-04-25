@@ -3,8 +3,6 @@ package sk.stuba.fiit.ms.input.sessiontrack;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import sk.stuba.fiit.ms.input.sessiontrack.SessionTrack;
-import sk.stuba.fiit.ms.input.sessiontrack.Util;
 import sk.stuba.fiit.ms.utils.TextNormalizer;
 import sk.stuba.fiit.ms.session.*;
 import sk.stuba.fiit.ms.session.Search;
