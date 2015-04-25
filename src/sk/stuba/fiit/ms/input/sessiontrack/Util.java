@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.input;
+package sk.stuba.fiit.ms.input.sessiontrack;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

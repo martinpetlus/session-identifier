@@ -3,6 +3,8 @@ package sk.stuba.fiit.ms.apps;
 import java.util.ArrayList;
 import java.util.List;
 
+import sk.stuba.fiit.ms.input.sessiontrack.SessionTrack2014;
+import sk.stuba.fiit.ms.input.sessiontrack.SessionTrackParser;
 import sk.stuba.fiit.ms.session.identifiers.stack.StackSessionIdentifier;
 import sk.stuba.fiit.ms.evaluation.Evaluator;
 import sk.stuba.fiit.ms.evaluation.Shuffler;
@@ -10,7 +12,6 @@ import sk.stuba.fiit.ms.database.Database;
 import sk.stuba.fiit.ms.database.FileDatabase;
 import sk.stuba.fiit.ms.features.FeatureNormalizer;
 import sk.stuba.fiit.ms.features.extract.SessionExtractor;
-import sk.stuba.fiit.ms.input.*;
 import sk.stuba.fiit.ms.learning.SVM;
 import sk.stuba.fiit.ms.learning.DataSet;
 import sk.stuba.fiit.ms.learning.dataset.generation.SetGenerator;

@@ -3,7 +3,7 @@ package sk.stuba.fiit.ms.session;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.stuba.fiit.ms.input.Topic;
+import sk.stuba.fiit.ms.input.sessiontrack.Topic;
 
 public final class Session {
 
