@@ -30,8 +30,12 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
 
     @Override
     public void identify(Search search) {
-        Session lastSession = sessions.isEmpty() ?
-            addNewSession(search) : sessions.get(sessions.size() - 1);
+        if (sessions.isEmpty()) {
+            addNewSession(search);
+            return;
+        }
+
+        Session lastSession = sessions.get(sessions.size() - 1);
 
         Search lastSearch = lastSession.getLastSearch();
 
