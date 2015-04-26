@@ -6,15 +6,12 @@ public final class Click {
 
     private final int rank;
 
-    private final Time startTime;
-
-    private final Time endTime;
+    private final double spentTime;
 
     public Click(final int num, final int rank, final Time startTime, final Time endTime) {
         this.num = num;
         this.rank = rank;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.spentTime = endTime.getDifference(startTime);
     }
 
     public int getNum() {
@@ -25,16 +22,8 @@ public final class Click {
         return rank;
     }
 
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    public Time getEndTime() {
-        return endTime;
-    }
-
     public double getSpentTime() {
-        return startTime.getDifference(endTime);
+        return spentTime;
     }
 
 }
