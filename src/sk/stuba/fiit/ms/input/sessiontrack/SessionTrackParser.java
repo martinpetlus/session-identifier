@@ -14,7 +14,7 @@ import sk.stuba.fiit.ms.input.Parser;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class SessionTrackParser {
+public final class SessionTrackParser implements Parser {
 
     private List<Session> sessions;
 
@@ -24,6 +24,7 @@ public final class SessionTrackParser {
         this.sessionTrack = sessionTrack;
     }
 
+    @Override
     public void parse(final String file, final List<Session> sessions) {
         try {
             File xmlFile = new File(file);
