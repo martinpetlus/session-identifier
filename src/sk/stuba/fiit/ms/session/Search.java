@@ -6,7 +6,7 @@ import java.util.*;
 
 public final class Search {
 
-    private static int numberOfSearches = 0;
+    private static int numberOfInstances = 0;
 
     private final int id;
 
@@ -21,7 +21,7 @@ public final class Search {
     private final List<Click> clicks;
 
     private Search(final Builder builder) {
-        this.id = ++numberOfSearches;
+        this.id = ++numberOfInstances;
 
         this.query = builder.query;
 
@@ -169,10 +169,19 @@ public final class Search {
 
     @Override
     public String toString() {
-        return "Search[id= " + id +
-                "query=" + query +
-                " results=" + results.size() +
-                " clicks=" + clicks.size() + "]";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getClass().getSimpleName()).append('[');
+
+        sb.append("id=").append(id);
+
+        sb.append(" query=").append(query);
+
+        sb.append(" results=").append(results.size());
+
+        sb.append(" clicks=").append(clicks.size());
+
+        return sb.append(']').toString();
     }
 
     private Result getResultByRank(final int rank) {

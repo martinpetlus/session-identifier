@@ -30,4 +30,19 @@ public final class Click {
         return spentTime;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getClass().getSimpleName()).append('[');
+
+        sb.append("num=").append(num);
+
+        sb.append(" rank=").append(rank);
+
+        sb.append(" spentTime=").append(spentTime);
+
+        return sb.append(']').toString();
+    }
+
 }
