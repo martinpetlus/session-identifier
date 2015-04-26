@@ -55,7 +55,7 @@ public final class SessionTrackParser implements Parser {
     private void addSession(final Session session) {
         if (!session.isEmpty()) {
             for (Session s : this.sessions) {
-                if (s.getTopic().same(session.getTopic())) {
+                if (s.getIntent().same(session.getIntent())) {
                     for (Search search : session.getAllSearches()) {
                         s.add(search);
                     }

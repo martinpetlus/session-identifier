@@ -1,15 +1,16 @@
 package sk.stuba.fiit.ms.input.sessiontrack;
 
 import org.w3c.dom.Node;
+import sk.stuba.fiit.ms.session.Intent;
 
 public class SessionTrack2011 extends SessionTrackSkeleton {
 
     @Override
-    public Topic parseTopic(final Node node) {
+    public Intent parseTopic(final Node node) {
         return new Topic2011(Util.getChildValue(node, "title"));
     }
 
-    private static final class Topic2011 implements Topic {
+    private static final class Topic2011 implements Intent {
 
         private final String topicName;
 
@@ -18,9 +19,9 @@ public class SessionTrack2011 extends SessionTrackSkeleton {
         }
 
         @Override
-        public boolean same(final Topic t) {
-            if (t instanceof Topic2011) {
-                return ((Topic2011) t).topicName.equals(this.topicName);
+        public boolean same(final Intent intent) {
+            if (intent instanceof Topic2011) {
+                return ((Topic2011) intent).topicName.equals(this.topicName);
             } else {
                 return false;
             }
@@ -28,7 +29,7 @@ public class SessionTrack2011 extends SessionTrackSkeleton {
 
         @Override
         public String toString() {
-            return "Topic2011[" + topicName + "]";
+            return getClass().getSimpleName() + "[" + topicName + "]";
         }
 
     }

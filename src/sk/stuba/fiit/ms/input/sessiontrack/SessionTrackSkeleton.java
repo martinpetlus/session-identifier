@@ -27,7 +27,7 @@ abstract class SessionTrackSkeleton implements SessionTrack {
             Node child = childNodes.item(i);
 
             if (Util.isNode(child, "topic")) {
-                session.setTopic(parseTopic(child));
+                session.setIntent(parseTopic(child));
             } else if (Util.isNode(child, "interaction")) {
                 Search search = parseInteraction(child, session);
 

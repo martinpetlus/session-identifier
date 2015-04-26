@@ -3,8 +3,6 @@ package sk.stuba.fiit.ms.session;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.stuba.fiit.ms.input.sessiontrack.Topic;
-
 public final class Session {
 
     private static int numberOfInstances = 0;
@@ -15,7 +13,7 @@ public final class Session {
 
     private final List<Search> searches;
 
-    private Topic topic;
+    private Intent intent;
 
     public Session() {
         this(null);
@@ -47,12 +45,12 @@ public final class Session {
         return id;
     }
 
-    public Topic getTopic() {
-        return topic;
+    public Intent getIntent() {
+        return intent;
     }
 
-    public void setTopic(final Topic t) {
-        this.topic = t;
+    public void setIntent(final Intent intent) {
+        this.intent = intent;
     }
 
     public boolean add(final Search search) {

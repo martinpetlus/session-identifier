@@ -114,7 +114,7 @@ public final class Main {
         System.out.println("\nOriginal test sessions:\n");
 
         for (Session session : testSessions) {
-            System.out.println(session.getTopic());
+            System.out.println(session.getIntent());
 
             for (Search search : session.getAllSearches()) {
                 System.out.println(search.getQuery());

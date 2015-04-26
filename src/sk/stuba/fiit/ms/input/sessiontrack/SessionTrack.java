@@ -3,8 +3,9 @@ package sk.stuba.fiit.ms.input.sessiontrack;
 import org.w3c.dom.Node;
 
 import sk.stuba.fiit.ms.session.*;
+import sk.stuba.fiit.ms.session.Intent;
 
-public interface SessionTrack {
+interface SessionTrack {
 
     Time parseTime(final String time);
 
@@ -16,6 +17,6 @@ public interface SessionTrack {
 
     Click parseClick(final Node node);
 
-    Topic parseTopic(final Node node);
+    Intent parseTopic(final Node node);
 
 }

@@ -64,7 +64,7 @@ public final class SessionsSeparator {
     private Session copySession(final Session session) {
         Session copy = new Session();
 
-        copy.setTopic(session.getTopic());
+        copy.setIntent(session.getIntent());
         copy.setUserId(session.getUserId());
 
         return copy;
