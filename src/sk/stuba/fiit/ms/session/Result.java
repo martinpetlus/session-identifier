@@ -1,13 +1,11 @@
 package sk.stuba.fiit.ms.session;
 
+import sk.stuba.fiit.ms.utils.TextNormalizer;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public final class Result {
-
-    private static int numberOfResults = 0;
-
-    private final int id;
 
     private final int rank;
 
@@ -21,12 +19,12 @@ public final class Result {
 
     private String content;
 
-    public Result(int rank, final String url, final String title, final String snippet) {
-        this.id = ++numberOfResults;
-        this.rank = rank;
-        this.url = url;
-        this.title = title;
-        this.snippet = snippet;
+    private Result(final Builder builder) {
+        this.rank = builder.rank;
+        this.url = builder.url;
+        this.title = builder.title;
+        this.snippet = builder.snippet;
+
         this.clicks = null;
         this.content = "";
     }
@@ -45,10 +43,6 @@ public final class Result {
 
     public String getSnippet() {
         return snippet;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public List<Click> getClicks() {
@@ -101,11 +95,62 @@ public final class Result {
 
     @Override
     public String toString() {
-        return "Result[id=" + id +
-                " rank=" + rank + " url=" + url +
-                " title=" + title + " snippet=" +
-                snippet +  " clicks=" + getNumberOfClicks() +
-                "]\n";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getClass().getSimpleName());
+        sb.append('[');
+
+        sb.append("rank=");
+        sb.append(rank);
+
+        sb.append(" url=");
+        sb.append(url);
+
+        sb.append(" title=");
+        sb.append(title);
+
+        sb.append(" snippet=");
+        sb.append(snippet);
+
+        sb.append(" clicks=");
+        sb.append(getNumberOfClicks());
+
+        sb.append(" content=");
+        sb.append(content.length());
+
+        return sb.append(']').toString();
+    }
+
+    public static final class Builder {
+
+        private String url;
+
+        private String title = "";
+
+        private String snippet = "";
+
+        private int rank;
+
+        public void setUrl(final String url) {
+            this.url = url;
+        }
+
+        public void setTitle(final String title) {
+            this.title = TextNormalizer.normalize(title);
+        }
+
+        public void setSnippet(final String snippet) {
+            this.snippet = TextNormalizer.normalize(snippet);
+        }
+
+        public void setRank(final int rank) {
+            this.rank = rank;
+        }
+
+        public Result build() {
+            return new Result(this);
+        }
+
     }
 
 }

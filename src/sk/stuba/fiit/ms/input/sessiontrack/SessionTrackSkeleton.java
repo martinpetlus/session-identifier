@@ -3,7 +3,6 @@ package sk.stuba.fiit.ms.input.sessiontrack;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import sk.stuba.fiit.ms.utils.TextNormalizer;
 import sk.stuba.fiit.ms.session.*;
 import sk.stuba.fiit.ms.session.Search;
 
@@ -43,11 +42,11 @@ abstract class SessionTrackSkeleton implements SessionTrack {
 
     @Override
     public Result parseResult(final Node node) {
-        String url = "";
-        String title = "";
-        String snippet = "";
+        Result.Builder builder = new Result.Builder();
 
         int rank = Integer.parseInt(Util.getAttrValue(node, "rank"));
+
+        builder.setRank(rank);
 
         NodeList childNodes = node.getChildNodes();
 
@@ -55,15 +54,15 @@ abstract class SessionTrackSkeleton implements SessionTrack {
             Node child = childNodes.item(i);
 
             if (Util.isNode(child, "url")) {
-                url = child.getTextContent();
+                builder.setUrl(child.getTextContent());
             } else if (Util.isNode(child, "title")) {
-                title = TextNormalizer.normalize(child.getTextContent());
+                builder.setTitle(child.getTextContent());
             } else if (Util.isNode(child, "snippet")) {
-                snippet = TextNormalizer.normalize(child.getTextContent());
+                builder.setSnippet(child.getTextContent());
             }
         }
 
-        return new Result(rank, url, title, snippet);
+        return builder.build();
     }
 
     @Override
@@ -76,7 +75,7 @@ abstract class SessionTrackSkeleton implements SessionTrack {
             Node child = childNodes.item(i);
 
             if (Util.isNode(child, "query")) {
-                builder.setQuery(TextNormalizer.normalize(child.getTextContent()));
+                builder.setQuery(child.getTextContent());
             } else if (Util.isNode(child, "results")) {
                 parseResults(child, builder);
             } else if (Util.isNode(child, "clicked")) {

@@ -1,5 +1,7 @@
 package sk.stuba.fiit.ms.session;
 
+import sk.stuba.fiit.ms.utils.TextNormalizer;
+
 import java.util.*;
 
 public final class Search {
@@ -188,7 +190,7 @@ public final class Search {
         private final List<Click> clicks = new ArrayList<Click>();
 
         public void setQuery(final String query) {
-            this.query = query;
+            this.query = TextNormalizer.normalize(query);
         }
 
         public void addResult(final Result result) {
