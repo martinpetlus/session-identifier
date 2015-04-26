@@ -5,7 +5,7 @@ import java.util.List;
 
 import sk.stuba.fiit.ms.session.identifiers.SessionIdentifier;
 import sk.stuba.fiit.ms.features.FeatureNormalizer;
-import sk.stuba.fiit.ms.features.extract.SessionExtractor;
+import sk.stuba.fiit.ms.features.extraction.SessionExtractor;
 import sk.stuba.fiit.ms.learning.SVM;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;

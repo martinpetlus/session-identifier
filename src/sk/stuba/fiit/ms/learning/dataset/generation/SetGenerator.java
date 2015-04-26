@@ -2,7 +2,7 @@ package sk.stuba.fiit.ms.learning.dataset.generation;
 
 import java.util.List;
 
-import sk.stuba.fiit.ms.features.extract.SessionExtractor;
+import sk.stuba.fiit.ms.features.extraction.SessionExtractor;
 import sk.stuba.fiit.ms.learning.DataSet;
 import sk.stuba.fiit.ms.learning.dataset.generation.example.Generator;
 import sk.stuba.fiit.ms.learning.dataset.generation.example.NegativeGenerator;

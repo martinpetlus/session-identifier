@@ -2,7 +2,7 @@ package sk.stuba.fiit.ms.learning.dataset.generation.example;
 
 import java.util.Random;
 
-import sk.stuba.fiit.ms.features.extract.SessionExtractor;
+import sk.stuba.fiit.ms.features.extraction.SessionExtractor;
 import sk.stuba.fiit.ms.session.Session;
 
 public abstract class Generator {

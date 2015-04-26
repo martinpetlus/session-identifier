@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.features.extract;
+package sk.stuba.fiit.ms.features.extraction;
 
 import java.util.ArrayList;
 import java.util.List;

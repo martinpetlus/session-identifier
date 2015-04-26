@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.features.extract;
+package sk.stuba.fiit.ms.features.extraction;
 
 import sk.stuba.fiit.ms.features.lexical.*;
 import sk.stuba.fiit.ms.features.semantic.SemanticCosineOfSearches;

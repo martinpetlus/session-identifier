@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import sk.stuba.fiit.ms.features.extract.SessionExtractor;
+import sk.stuba.fiit.ms.features.extraction.SessionExtractor;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 

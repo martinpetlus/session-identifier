@@ -10,7 +10,7 @@ import sk.stuba.fiit.ms.evaluation.Shuffler;
 import sk.stuba.fiit.ms.database.Database;
 import sk.stuba.fiit.ms.database.FileDatabase;
 import sk.stuba.fiit.ms.features.FeatureNormalizer;
-import sk.stuba.fiit.ms.features.extract.SessionExtractor;
+import sk.stuba.fiit.ms.features.extraction.SessionExtractor;
 import sk.stuba.fiit.ms.learning.SVM;
 import sk.stuba.fiit.ms.learning.DataSet;
 import sk.stuba.fiit.ms.learning.dataset.generation.SetGenerator;
