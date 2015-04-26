@@ -7,7 +7,7 @@ import sk.stuba.fiit.ms.input.sessiontrack.Topic;
 
 public final class Session {
 
-    private static int numberOfSessions = 0;
+    private static int numberOfInstances = 0;
 
     private int userId;
 
@@ -22,7 +22,7 @@ public final class Session {
     }
 
     public Session(final List<Search> searches) {
-        this.id = ++numberOfSessions;
+        this.id = ++numberOfInstances;
 
         this.searches = new ArrayList<Search>();
 
@@ -109,7 +109,15 @@ public final class Session {
 
     @Override
     public String toString() {
-        return "Session[id=" + id + " searches=" + getNumberOfSearches() + "]";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getClass().getSimpleName()).append('[');
+
+        sb.append("id=").append(id);
+
+        sb.append( "searches=").append(searches.size());
+
+        return sb.append(']').toString();
     }
 
 }
