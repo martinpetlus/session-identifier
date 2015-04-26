@@ -9,9 +9,13 @@ public final class Click {
     private final double spentTime;
 
     public Click(final int num, final int rank, final Time startTime, final Time endTime) {
+        this(num, rank, endTime.getDifference(startTime));
+    }
+
+    public Click(final int num, final int rank, double spentTime) {
         this.num = num;
         this.rank = rank;
-        this.spentTime = endTime.getDifference(startTime);
+        this.spentTime = spentTime;
     }
 
     public int getNum() {
