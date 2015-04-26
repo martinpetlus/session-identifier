@@ -20,6 +20,21 @@ public final class Search {
 
     private final List<Click> clicks;
 
+    public static final Comparator<Search> OLDEST = new Comparator<Search>() {
+
+        @Override
+        public int compare(final Search search1, final Search search2) {
+            if (search1.getTimeStamp() > search2.getTimeStamp()) {
+                return 1;
+            } else if (search1.getTimeStamp() < search2.getTimeStamp()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+
+    };
+
     private Search(final Builder builder) {
         this.id = ++numberOfInstances;
 

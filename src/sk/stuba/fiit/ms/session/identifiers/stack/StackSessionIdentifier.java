@@ -43,7 +43,7 @@ public final class StackSessionIdentifier extends SessionIdentifier {
     }
 
     @Override
-    public void identify(final Search search) {
+    protected  void identify(final Search search) {
         if (stack.isEmpty()) {
             addSession(search);
         } else {
@@ -72,6 +72,11 @@ public final class StackSessionIdentifier extends SessionIdentifier {
                 addSession(search);
             }
         }
+    }
+
+    @Override
+    protected void clear() {
+        stack.clear();
     }
 
     @Override

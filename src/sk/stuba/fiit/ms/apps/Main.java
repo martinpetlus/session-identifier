@@ -130,7 +130,7 @@ public final class Main {
         // Identify session from test shuffled search results
         StackSessionIdentifier identifier = new StackSessionIdentifier(extractor, svm, normalizer);
 
-        identifier.identifyAll(searches);
+        identifier.identify(searches);
 
         // Print identified sessions from test sessions
         System.out.println("\n***************************************");

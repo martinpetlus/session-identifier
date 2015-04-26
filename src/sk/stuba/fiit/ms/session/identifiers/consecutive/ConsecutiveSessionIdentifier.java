@@ -9,9 +9,9 @@ import java.util.List;
 
 public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
 
-    private final List<Session> sessions;
-
     private final ConsecutiveApproach consecutiveApproach;
+
+    private final List<Session> sessions;
 
     public ConsecutiveSessionIdentifier(final ConsecutiveApproach consecutiveApproach) {
         this.consecutiveApproach = consecutiveApproach;
@@ -29,7 +29,7 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
     }
 
     @Override
-    public void identify(Search search) {
+    protected void identify(final Search search) {
         if (sessions.isEmpty()) {
             addNewSession(search);
             return;
@@ -44,6 +44,11 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
         } else {
             addNewSession(search);
         }
+    }
+
+    @Override
+    protected void clear() {
+        sessions.clear();
     }
 
     @Override
