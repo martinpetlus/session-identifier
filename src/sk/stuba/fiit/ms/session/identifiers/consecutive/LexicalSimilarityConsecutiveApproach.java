@@ -13,7 +13,7 @@ class LexicalSimilarityConsecutiveApproach implements ConsecutiveApproach {
 
     @Override
     public final boolean isSameSession(final Search previous, final Search current) {
-        return lexicalSimilarity.calculate(previous.getQuery(), current.getQuery()) > 0.5;
+        return Double.compare(lexicalSimilarity.calculate(previous.getQuery(), current.getQuery()), 0.5) > 0;
     }
 
 }
