@@ -146,22 +146,24 @@ abstract class SessionTrackSkeleton implements SessionTrack {
 
             DayTime dayTime = (DayTime) time;
 
-            double hours = Math.abs(this.hour - dayTime.hour);
-            double minutes = Math.abs(this.minute - dayTime.minute);
-            double seconds = Math.abs(this.second - dayTime.second);
+            double hours = this.hour - dayTime.hour;
+            double minutes = this.minute - dayTime.minute;
+            double seconds = this.second - dayTime.second;
 
             return hours * SECONDS_PER_HOUR + minutes * SECONDS_PER_MINUTE + seconds;
         }
 
         public static DayTime valueOf(final String time) {
-            String[] t = time.split("[:]");
+            String[] tokens = time.split("[:]");
 
-            return new DayTime(Double.parseDouble(t[0]), Double.parseDouble(t[1]), Double.parseDouble(t[2]));
+            return new DayTime(Double.parseDouble(tokens[0]),
+                Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
         }
 
         @Override
         public String toString() {
-            return "DayTime[hour=" + hour +
+            return getClass().getSimpleName() +
+                    "[hour=" + hour +
                     " minute=" + minute +
                     " second=" + second + "]";
         }

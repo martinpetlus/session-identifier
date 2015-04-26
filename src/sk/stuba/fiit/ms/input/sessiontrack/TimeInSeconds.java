@@ -17,13 +17,13 @@ final class TimeInSeconds implements Time {
         if (this == ZERO || time == ZERO) {
             return 0.0;
         } else {
-            return Math.abs(this.value - ((TimeInSeconds) time).value);
+            return this.value - ((TimeInSeconds) time).value;
         }
     }
 
     @Override
     public String toString() {
-        return "TimeInSeconds[" + value + "]";
+        return getClass().getSimpleName() + "[" + value + "]";
     }
 
 }
