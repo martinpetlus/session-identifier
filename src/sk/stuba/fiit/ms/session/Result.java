@@ -97,26 +97,19 @@ public final class Result {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(this.getClass().getSimpleName());
-        sb.append('[');
+        sb.append(this.getClass().getSimpleName()).append('[');
 
-        sb.append("rank=");
-        sb.append(rank);
+        sb.append("rank=").append(rank);
 
-        sb.append(" url=");
-        sb.append(url);
+        sb.append(" url=").append(url);
 
-        sb.append(" title=");
-        sb.append(title);
+        sb.append(" title=").append(title);
 
-        sb.append(" snippet=");
-        sb.append(snippet);
+        sb.append(" snippet=").append(snippet);
 
-        sb.append(" clicks=");
-        sb.append(getNumberOfClicks());
+        sb.append(" clicks=").append(getNumberOfClicks());
 
-        sb.append(" content=");
-        sb.append(content.length());
+        sb.append(" content=").append(content.length());
 
         return sb.append(']').toString();
     }
