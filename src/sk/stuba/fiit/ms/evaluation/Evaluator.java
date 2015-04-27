@@ -164,7 +164,7 @@ public final class Evaluator {
 
         @Override
         public String toString() {
-            return getClass().getName() +
+            return getClass().getSimpleName() +
                     "[precision=" + precision +
                     " recall=" + recall +
                     " f1_score=" + getF1Score() + "]";
