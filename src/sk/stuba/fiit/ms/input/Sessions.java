@@ -1,6 +1,7 @@
 package sk.stuba.fiit.ms.input;
 
 import sk.stuba.fiit.ms.session.Session;
+import sk.stuba.fiit.ms.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,20 +22,36 @@ public final class Sessions {
     }
 
     public boolean add(final Session session) {
-        if (validate(session)) {
+        boolean valid = validate(session);
+
+        if (valid) {
             sessions.add(session);
-            return true;
+        } else {
+            Logger.warn("Invalid session: " + session);
         }
 
-        return false;
+        return valid;
     }
 
     public boolean validate(final Session session) {
-        if (session.getNumberOfSearches() >= minNumberOfSearches) {
+        if (session.getNumberOfSearches() <= minNumberOfSearches) {
             return false;
         }
 
         return true;
+    }
+
+    public int size() {
+        return sessions.size();
+    }
+
+    public List<Session> getSessions() {
+        return new ArrayList<Session>(sessions);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "[" + sessions.size() + "]";
     }
 
 }

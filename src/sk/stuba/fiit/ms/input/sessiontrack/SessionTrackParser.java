@@ -11,6 +11,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 import sk.stuba.fiit.ms.input.Parser;
+import sk.stuba.fiit.ms.input.Sessions;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
@@ -25,7 +26,7 @@ public final class SessionTrackParser implements Parser {
     }
 
     @Override
-    public void parse(final String file, final List<Session> sessions) {
+    public void parse(final String file, final Sessions sessions) {
         try {
             File xmlFile = new File(file);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -40,7 +41,7 @@ public final class SessionTrackParser implements Parser {
         }
     }
 
-    private void process(final Document doc, final List<Session> sessions) {
+    private void process(final Document doc, final Sessions sessions) {
         this.sessions = new ArrayList<Session>();
 
         NodeList childNodes = doc.getElementsByTagName("session");
@@ -49,7 +50,9 @@ public final class SessionTrackParser implements Parser {
             addSession(sessionTrack.parseSession(childNodes.item(i)));
         }
 
-        sessions.addAll(this.sessions);
+        for (Session session : this.sessions) {
+            sessions.add(session);
+        }
     }
 
     private void addSession(final Session session) {

@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import sk.stuba.fiit.ms.input.Parser;
+import sk.stuba.fiit.ms.input.Sessions;
 import sk.stuba.fiit.ms.session.Intent;
 import sk.stuba.fiit.ms.session.*;
 
@@ -11,12 +12,11 @@ import java.io.FileReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 public final class SokeParser implements Parser {
 
     @Override
-    public void parse(final String file, final List<Session> sessions) {
+    public void parse(final String file, final Sessions sessions) {
         JSONParser parser = new JSONParser();
 
         try {
