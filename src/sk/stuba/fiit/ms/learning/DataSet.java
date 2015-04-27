@@ -9,16 +9,24 @@ public final class DataSet {
 
     private final List<Double> labels;
 
+    private int positiveExamples = 0;
+
+    private int negativeExamples = 0;
+
     public DataSet() {
         this.examples = new ArrayList<double []>();
         this.labels = new ArrayList<Double>();
     }
 
     public void addPositiveExamples(final double[][] examples) {
+        positiveExamples += examples.length;
+
         addExamples(examples, 1.0);
     }
 
     public void addNegativeExamples(final double[][] examples) {
+        negativeExamples += examples.length;
+
         addExamples(examples, 0.0);
     }
 
@@ -47,6 +55,14 @@ public final class DataSet {
         }
 
         return primitives;
+    }
+
+    public int getPositiveExamples() {
+        return positiveExamples;
+    }
+
+    public int getNegativeExamples() {
+        return negativeExamples;
     }
 
 }
