@@ -113,6 +113,10 @@ public final class Session {
 
         sb.append("id=").append(id);
 
+        sb.append(" intent=").append(intent);
+
+        sb.append(" user_id=").append(userId);
+
         sb.append( "searches=").append(searches.size());
 
         return sb.append(']').toString();
