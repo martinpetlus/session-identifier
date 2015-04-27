@@ -12,14 +12,14 @@ import sk.stuba.fiit.ms.similarities.lexical.CosineLexicalSimilarity;
 
 public final class SessionExtractor {
 
-    private final Extractor featuresExtractor;
+    private final FeatureExtractor featureExtractor;
 
     public SessionExtractor(final LDAModel model) {
-        this.featuresExtractor = addFeatures(model);
+        this.featureExtractor = addFeatures(model);
     }
 
-    private Extractor addFeatures(final LDAModel model) {
-        Extractor.Builder builder = new Extractor.Builder();
+    private FeatureExtractor addFeatures(final LDAModel model) {
+        FeatureExtractor.Builder builder = new FeatureExtractor.Builder();
 
         // Lexical features
 //        builder.addPairFeature(new QuerySimilarity(CosineLexicalSimilarity.newInstance()));
@@ -51,12 +51,12 @@ public final class SessionExtractor {
         return builder.build();
     }
 
-    public Extractor getFeaturesExtractor() {
-        return featuresExtractor;
+    public FeatureExtractor getFeatureExtractor() {
+        return featureExtractor;
     }
 
     public double[] extractFeatures(final Session session, final Search search) {
-        return featuresExtractor.extractFeatures(session, search);
+        return featureExtractor.extractFeatures(session, search);
     }
 
 }

@@ -9,13 +9,13 @@ import sk.stuba.fiit.ms.learning.train.Features;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class Extractor {
+public final class FeatureExtractor {
 
     private final List<PairFeature> pairFeatures;
 
     private final List<SessionFeature> sessionFeatures;
 
-    private Extractor(final Builder builder) {
+    private FeatureExtractor(final Builder builder) {
         pairFeatures = new ArrayList<PairFeature>(builder.pairFeatures);
         sessionFeatures = new ArrayList<SessionFeature>(builder.sessionFeatures);
     }
@@ -85,8 +85,8 @@ public final class Extractor {
 
         public void addSessionFeature(final SessionFeature feature) { sessionFeatures.add(feature); }
 
-        public Extractor build() {
-            return new Extractor(this);
+        public FeatureExtractor build() {
+            return new FeatureExtractor(this);
         }
 
     }
