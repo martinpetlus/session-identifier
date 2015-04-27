@@ -11,7 +11,7 @@ public final class TemporalDistance implements SessionFeature {
         Search lastSearch = session.getLastSearch();
 
         if (lastSearch != null) {
-            return search.getTimeStamp() - lastSearch.getTimeStamp();
+            return Math.abs(search.getTimeStamp() - lastSearch.getTimeStamp());
         } else {
             return 0.0;
         }
