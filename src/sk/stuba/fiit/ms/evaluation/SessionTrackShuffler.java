@@ -7,7 +7,7 @@ import java.util.Random;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class Shuffler {
+public final class SessionTrackShuffler {
 
     private final Random random = new Random();
 
@@ -32,31 +32,31 @@ public final class Shuffler {
     }
 
     public List<Search> shuffle(final List<Session> sessions) {
-        final List<Search> shuffled = new ArrayList<Search>();
+        List<Search> shuffledSearches = new ArrayList<Search>();
 
-        final int numberOfSessions = sessions.size();
+        int numberOfSessions = sessions.size();
 
-        final int numberOfSearches= countSearches(sessions);
+        int numberOfSearches = countSearches(sessions);
 
-        final List<List<Search>> copy = copySessionSearches(sessions);
+        List<List<Search>> copy = copySessionSearches(sessions);
 
         for (int i = 0; i < numberOfSearches; i++) {
             List<Search> searches = null;
 
             while (searches == null) {
-                int randomIndex = random.nextInt(numberOfSessions);
+                int randomSessionIndex = random.nextInt(numberOfSessions);
 
-                if (copy.get(randomIndex).size() > 0) {
-                    searches = copy.get(randomIndex);
+                if (copy.get(randomSessionIndex).size() > 0) {
+                    searches = copy.get(randomSessionIndex);
                 }
             }
 
-            shuffled.add(searches.get(0));
+            shuffledSearches.add(searches.get(0));
 
             searches.remove(0);
         }
 
-        return shuffled;
+        return shuffledSearches;
     }
 
 }
