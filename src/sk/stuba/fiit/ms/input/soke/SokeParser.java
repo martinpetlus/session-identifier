@@ -122,13 +122,7 @@ public final class SokeParser implements Parser {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-
-            sb.append(getClass().getSimpleName()).append('[');
-
-            sb.append("sessionId=").append(sessionId);
-
-            return sb.append(']').toString();
+            return getClass().getSimpleName() + "[sessionId=" + sessionId + "]";
         }
 
     }
@@ -156,13 +150,7 @@ public final class SokeParser implements Parser {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-
-            sb.append(getClass().getSimpleName()).append('[');
-
-            sb.append(timeStamp);
-
-            return sb.append(']').toString();
+            return getClass().getSimpleName() + "[" + timeStamp + "]";
         }
     }
 
