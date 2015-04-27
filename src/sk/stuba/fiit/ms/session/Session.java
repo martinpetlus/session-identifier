@@ -117,7 +117,7 @@ public final class Session {
 
         sb.append(" user_id=").append(userId);
 
-        sb.append( "searches=").append(searches.size());
+        sb.append(" searches=").append(searches.size());
 
         return sb.append(']').toString();
     }
