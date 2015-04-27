@@ -15,18 +15,18 @@ public abstract class SessionIdentifier {
 
     public abstract List<Session> getIdentifiedSessions();
 
-    public final void identify(final List<Search> searches) {
+    public final void identify(List<Search> searches) {
         // Create copy of list for sorting purpose
-        List<Search> sortedSearches = new ArrayList<Search>(searches);
+        searches = new ArrayList<Search>(searches);
 
         // Sort queries from oldest to newest issued
-        Collections.sort(sortedSearches, Search.OLDEST);
+        Collections.sort(searches, Search.OLDEST);
 
         // Clear previous identified sessions
         clear();
 
         // Identify sessions
-        for (Search search : sortedSearches) {
+        for (Search search : searches) {
             identify(search);
         }
     }
