@@ -26,31 +26,29 @@ public final class NegativeGenerator extends Generator {
 
         Session session = this.getSession();
 
-        Search randomResult = null;
+        Search randomSearch = null;
 
         Random random = new Random();
 
-        while (randomResult == null) {
+        while (randomSearch == null) {
             Session randomSession = sessions.get(random.nextInt(sessions.size()));
 
             if (!session.equals(randomSession)) {
-                randomResult = randomSession.getSearch(
-                    random.nextInt(randomSession.getNumberOfSearches()));
+                randomSearch = randomSession.getSearch(random.nextInt(randomSession.getNumberOfSearches()));
             }
         }
 
         int[] indices = Generator.randomIndices(queries, session.getNumberOfSearches());
 
-        List<Search> randomResults =
-                new ArrayList<Search>(queries);
+        List<Search> randomSearches = new ArrayList<Search>(queries);
 
         for (int i = 0; i < queries; i++) {
-            randomResults.add(session.getSearch(indices[i]));
+            randomSearches.add(session.getSearch(indices[i]));
         }
 
         double features[][] = new double[1][];
 
-        features[0] = this.getSessionExtractor().extractFeatures(new Session(randomResults), randomResult);
+        features[0] = this.getSessionExtractor().extractFeatures(new Session(randomSearches), randomSearch);
 
         return features;
     }
