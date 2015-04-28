@@ -4,7 +4,7 @@ import sk.stuba.fiit.ms.session.Search;
 
 public final class TemporalDistanceConsecutiveApproach implements ConsecutiveApproach {
 
-    // 25.5 minutes in milliseconds
+    // 25.5 minutes in milliseconds (25.5 minutes * 60 seconds * 1000 milliseconds)
     public static final long MAX_GAP = 1530_000L;
 
     @Override
