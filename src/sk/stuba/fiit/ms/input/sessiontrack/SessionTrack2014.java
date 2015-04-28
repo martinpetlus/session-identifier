@@ -37,7 +37,7 @@ public final class SessionTrack2014 extends SessionTrackSkeleton {
         Search search = super.parseInteraction(node, session);
 
         if (Util.getAttrValue(node, "type").equals("page")) {
-            session.getLastSearch().mergeIn(search);
+            session.getNewestSearch().mergeIn(search);
             return null;
         } else {
             return search;

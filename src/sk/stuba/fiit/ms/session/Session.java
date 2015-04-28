@@ -71,7 +71,7 @@ public final class Session {
         return true;
     }
 
-    public Search getLastSearch() {
+    public Search getNewestSearch() {
         if (searches.isEmpty()) {
             return null;
         } else {
@@ -79,7 +79,7 @@ public final class Session {
         }
     }
 
-    public Search getFirstSearch() {
+    public Search getOldestSearch() {
         if (searches.isEmpty()) {
             return null;
         } else {
