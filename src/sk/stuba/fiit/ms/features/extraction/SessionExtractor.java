@@ -5,6 +5,7 @@ import sk.stuba.fiit.ms.features.semantic.SemanticCosineOfSearches;
 import sk.stuba.fiit.ms.features.temporal.TemporalDistance;
 import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
 import sk.stuba.fiit.ms.features.url.CommonUrls;
+import sk.stuba.fiit.ms.measures.lexical.LevenshteinDistance;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
@@ -42,6 +43,7 @@ public final class SessionExtractor {
         builder.addSessionFeature(new SemanticCosineOfSearches(model));
         builder.addSessionFeature(new QuerySimilarity(CosineLexicalSimilarity.newInstance()));
         builder.addSessionFeature(new QueryTitleSimilarity(CosineLexicalSimilarity.newInstance()));
+        builder.addSessionFeature(new QueryDistance(LevenshteinDistance.newInstance()));
 
         builder.addSessionFeature(new CommonClickedUrls());
         builder.addSessionFeature(new CommonUrls());
