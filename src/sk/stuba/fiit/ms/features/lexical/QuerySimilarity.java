@@ -5,7 +5,7 @@ import sk.stuba.fiit.ms.features.SessionFeature;
 import sk.stuba.fiit.ms.utils.SetUtils;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
-import sk.stuba.fiit.ms.similarities.lexical.LexicalSimilarity;
+import sk.stuba.fiit.ms.measure.lexical.LexicalSimilarity;
 import sk.stuba.fiit.ms.utils.TextNormalizer;
 
 import java.util.List;

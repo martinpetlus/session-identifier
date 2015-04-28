@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.similarities.lexical;
+package sk.stuba.fiit.ms.measure.lexical;
 
 // Implementation from http://en.wikipedia.org/wiki/Levenshtein_distance
 public final class LevenshteinDistance extends LexicalDistance {

@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.similarities.lexical;
+package sk.stuba.fiit.ms.measure.lexical;
 
 public abstract class LexicalDistance implements  LexicalMeasure {
 }

@@ -1,7 +1,7 @@
 package sk.stuba.fiit.ms.session.identifiers.consecutive;
 
 import sk.stuba.fiit.ms.session.Search;
-import sk.stuba.fiit.ms.similarities.lexical.LexicalSimilarity;
+import sk.stuba.fiit.ms.measure.lexical.LexicalSimilarity;
 
 class LexicalSimilarityConsecutiveApproach implements ConsecutiveApproach {
 
