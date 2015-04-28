@@ -2,7 +2,7 @@ package sk.stuba.fiit.ms.features.extraction;
 
 import sk.stuba.fiit.ms.features.lexical.*;
 import sk.stuba.fiit.ms.features.semantic.SemanticCosineOfSearches;
-import sk.stuba.fiit.ms.features.time.TemporalDistance;
+import sk.stuba.fiit.ms.features.temporal.TemporalDistance;
 import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
 import sk.stuba.fiit.ms.features.url.CommonUrls;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;

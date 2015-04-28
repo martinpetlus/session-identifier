@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.features.time;
+package sk.stuba.fiit.ms.features.temporal;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.session.Search;
