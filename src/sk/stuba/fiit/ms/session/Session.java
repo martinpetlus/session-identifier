@@ -130,4 +130,14 @@ public final class Session {
         return sb.append(']').toString();
     }
 
+    public static Session newInstance(final Search ... searches) {
+        Session session = new Session();
+
+        for (Search search : searches) {
+            session.add(search);
+        }
+
+        return session;
+    }
+
 }

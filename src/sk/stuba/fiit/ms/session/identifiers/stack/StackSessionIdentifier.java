@@ -34,43 +34,36 @@ public final class StackSessionIdentifier extends SessionIdentifier {
         this.normalizer = normalizer;
     }
 
-    private void addSession(final Search search) {
-        Session session = new Session();
-
-        session.add(search);
-
-        stack.add(session);
-    }
-
     @Override
     protected  void identify(final Search search) {
         if (stack.isEmpty()) {
-            addSession(search);
-        } else {
-            int i;
+            stack.add(Session.newInstance(search));
+            return;
+        }
 
-            for (i = stack.size() - 1; i >= 0; i--) {
-                Session session = stack.get(i);
+        int i;
 
-                double[] features = extractor.extractFeatures(session, search);
+        for (i = stack.size() - 1; i >= 0; i--) {
+            Session session = stack.get(i);
 
-                if (normalizer != null) {
-                    normalizer.normalizeInPlace(features);
-                }
+            double[] features = extractor.extractFeatures(session, search);
 
-                if (model.predict(features)) {
-                    session.add(search);
-
-                    stack.remove(i);
-                    stack.add(session);
-
-                    break;
-                }
+            if (normalizer != null) {
+                normalizer.normalizeInPlace(features);
             }
 
-            if (i < 0) {
-                addSession(search);
+            if (model.predict(features)) {
+                session.add(search);
+
+                stack.remove(i);
+                stack.add(session);
+
+                break;
             }
+        }
+
+        if (i < 0) {
+            stack.add(Session.newInstance(search));
         }
     }
 

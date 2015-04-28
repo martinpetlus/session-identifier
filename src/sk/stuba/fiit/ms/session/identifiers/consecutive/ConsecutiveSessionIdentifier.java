@@ -18,20 +18,10 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
         this.sessions = new ArrayList<Session>();
     }
 
-    private Session addNewSession(final Search search) {
-        Session session = new Session();
-
-        session.add(search);
-
-        sessions.add(session);
-
-        return session;
-    }
-
     @Override
     protected void identify(final Search search) {
         if (sessions.isEmpty()) {
-            addNewSession(search);
+            sessions.add(Session.newInstance(search));
             return;
         }
 
@@ -42,7 +32,7 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
         if (consecutiveApproach.isSameSession(newestSearch, search)) {
             lastSession.add(search);
         } else {
-            addNewSession(search);
+            sessions.add(Session.newInstance(search));
         }
     }
 
