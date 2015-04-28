@@ -8,7 +8,7 @@ import sk.stuba.fiit.ms.features.url.CommonUrls;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
-import sk.stuba.fiit.ms.measure.lexical.CosineLexicalSimilarity;
+import sk.stuba.fiit.ms.measures.lexical.CosineLexicalSimilarity;
 
 public final class SessionExtractor {
 

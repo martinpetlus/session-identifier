@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.measure.lexical;
+package sk.stuba.fiit.ms.measures.lexical;
 
 public interface LexicalMeasure {
 

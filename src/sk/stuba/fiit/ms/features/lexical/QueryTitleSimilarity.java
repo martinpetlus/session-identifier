@@ -9,7 +9,7 @@ import sk.stuba.fiit.ms.utils.SetUtils;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.session.Result;
-import sk.stuba.fiit.ms.measure.lexical.LexicalSimilarity;
+import sk.stuba.fiit.ms.measures.lexical.LexicalSimilarity;
 import sk.stuba.fiit.ms.utils.TextNormalizer;
 
 public final class QueryTitleSimilarity implements PairFeature, SessionFeature {
