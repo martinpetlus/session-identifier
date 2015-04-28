@@ -1,10 +1,10 @@
-package sk.stuba.fiit.ms.input.soke;
+package sk.stuba.fiit.ms.parsers.soke;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import sk.stuba.fiit.ms.input.Parser;
-import sk.stuba.fiit.ms.input.Sessions;
+import sk.stuba.fiit.ms.parsers.Parser;
+import sk.stuba.fiit.ms.parsers.Sessions;
 import sk.stuba.fiit.ms.session.Intent;
 import sk.stuba.fiit.ms.session.*;
 

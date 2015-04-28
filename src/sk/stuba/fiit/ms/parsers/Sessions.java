@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.input;
+package sk.stuba.fiit.ms.parsers;
 
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.utils.Logger;

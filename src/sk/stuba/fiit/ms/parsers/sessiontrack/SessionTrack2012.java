@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.input.sessiontrack;
+package sk.stuba.fiit.ms.parsers.sessiontrack;
 
 import org.w3c.dom.Node;
 import sk.stuba.fiit.ms.session.Intent;

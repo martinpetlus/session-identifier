@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.input.sessiontrack;
+package sk.stuba.fiit.ms.parsers.sessiontrack;
 
 import sk.stuba.fiit.ms.session.Time;
 

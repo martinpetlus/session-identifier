@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.input.sessiontrack;
+package sk.stuba.fiit.ms.parsers.sessiontrack;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import sk.stuba.fiit.ms.input.Parser;
-import sk.stuba.fiit.ms.input.Sessions;
+import sk.stuba.fiit.ms.parsers.Parser;
+import sk.stuba.fiit.ms.parsers.Sessions;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 

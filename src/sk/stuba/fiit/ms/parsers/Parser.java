@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.input;
+package sk.stuba.fiit.ms.parsers;
 
 public interface Parser {
 
