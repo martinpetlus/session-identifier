@@ -12,6 +12,9 @@ import sk.stuba.fiit.ms.session.Session;
 
 public final class StackSessionIdentifier extends SessionIdentifier {
 
+    // 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+    public static final long MILLIS_PER_DAY = 86_400_000L;
+
     private final SVM model;
 
     private final SessionExtractor extractor;
@@ -36,15 +39,20 @@ public final class StackSessionIdentifier extends SessionIdentifier {
 
     @Override
     protected  void identify(final Search search) {
+        // If the stack has no sessions yet
         if (stack.isEmpty()) {
             stack.add(Session.newInstance(search));
             return;
         }
 
-        int i;
-
-        for (i = stack.size() - 1; i >= 0; i--) {
+        // Traverse stack from the top to the bottom
+        for (int i = stack.size() - 1; i >= 0; i--) {
             Session session = stack.get(i);
+
+            // Check if the session isn't too old for our query
+            if ((search.getTimeStamp() - session.getOldestSearch().getTimeStamp()) > MILLIS_PER_DAY) {
+                break;
+            }
 
             double[] features = extractor.extractFeatures(session, search);
 
@@ -58,13 +66,11 @@ public final class StackSessionIdentifier extends SessionIdentifier {
                 stack.remove(i);
                 stack.add(session);
 
-                break;
+                return;
             }
         }
 
-        if (i < 0) {
-            stack.add(Session.newInstance(search));
-        }
+        stack.add(Session.newInstance(search));
     }
 
     @Override
