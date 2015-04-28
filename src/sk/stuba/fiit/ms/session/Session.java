@@ -140,4 +140,8 @@ public final class Session {
         return session;
     }
 
+    public static Session newInstance(final List<Search> searches) {
+        return new Session(searches);
+    }
+
 }
