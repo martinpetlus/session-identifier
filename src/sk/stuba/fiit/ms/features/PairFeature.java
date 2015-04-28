@@ -4,6 +4,6 @@ import sk.stuba.fiit.ms.session.Search;
 
 public interface PairFeature {
 
-    public double extract(final Search search, final Search compareTo);
+    double extract(final Search search, final Search compareTo);
 
 }

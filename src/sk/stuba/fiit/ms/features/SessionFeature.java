@@ -5,6 +5,6 @@ import sk.stuba.fiit.ms.session.Session;
 
 public interface SessionFeature {
 
-    public double extract(final Session session, final Search search);
+    double extract(final Session session, final Search search);
 
 }
