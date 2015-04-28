@@ -37,9 +37,9 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
 
         Session lastSession = sessions.get(sessions.size() - 1);
 
-        Search lastSearch = lastSession.getNewestSearch();
+        Search newestSearch = lastSession.getNewestSearch();
 
-        if (consecutiveApproach.isSameSession(lastSearch, search)) {
+        if (consecutiveApproach.isSameSession(newestSearch, search)) {
             lastSession.add(search);
         } else {
             addNewSession(search);

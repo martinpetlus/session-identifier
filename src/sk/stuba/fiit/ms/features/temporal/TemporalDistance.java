@@ -8,10 +8,10 @@ public final class TemporalDistance implements SessionFeature {
 
     @Override
     public double extract(final Session session, final Search search) {
-        Search lastSearch = session.getNewestSearch();
+        Search newestSearch = session.getNewestSearch();
 
-        if (lastSearch != null) {
-            return Math.abs(search.getTimeStamp() - lastSearch.getTimeStamp());
+        if (newestSearch != null) {
+            return Math.abs(search.getTimeStamp() - newestSearch.getTimeStamp());
         } else {
             return 0.0;
         }
