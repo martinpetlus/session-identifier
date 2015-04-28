@@ -20,7 +20,7 @@ public final class QueryDistance implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(Session session, Search search) {
+    public double extract(final Session session, final Search search) {
         double sum = 0.0;
 
         for (Search search1 : session.getAllSearches()) {
