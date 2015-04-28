@@ -79,6 +79,14 @@ public final class Session {
         }
     }
 
+    public Search getFirstSearch() {
+        if (searches.isEmpty()) {
+            return null;
+        } else {
+            return searches.get(0);
+        }
+    }
+
     public Search getSearch(int index) {
         return searches.get(index);
     }
