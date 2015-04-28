@@ -29,7 +29,7 @@ public final class StackSessionIdentifier extends SessionIdentifier {
             return;
         }
 
-        // Traverse stack from the top to its bottom
+        // Traverse stack from the top to its bottom (from the most recent session)
         for (int i = stack.size() - 1; i >= 0; i--) {
             Session session = stack.get(i);
 

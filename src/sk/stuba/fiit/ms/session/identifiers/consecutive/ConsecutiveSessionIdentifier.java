@@ -20,15 +20,19 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
 
     @Override
     protected void identify(final Search search) {
+        // If there are no identified sessions yet
         if (sessions.isEmpty()) {
             sessions.add(Session.newInstance(search));
             return;
         }
 
+        // Get the most recent session
         Session lastSession = sessions.get(sessions.size() - 1);
 
+        // Get the newest query from the most recent session
         Search newestSearch = lastSession.getNewestSearch();
 
+        // Is our query part of the most recent session?
         if (consecutiveApproach.isSameSession(newestSearch, search)) {
             lastSession.add(search);
         } else {
