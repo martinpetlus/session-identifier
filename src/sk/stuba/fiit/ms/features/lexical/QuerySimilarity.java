@@ -19,11 +19,8 @@ public final class QuerySimilarity implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(final Search sr1, final Search sr2) {
-        String query1 = sr1.getQuery();
-        String query2 = sr2.getQuery();
-
-        return lexicalSimilarity.calculate(TextNormalizer.split(query1), TextNormalizer.split(query2));
+    public double extract(final Search search1, final Search search2) {
+        return lexicalSimilarity.calculate(search1.getQuery(), search2.getQuery());
     }
 
     @Override
