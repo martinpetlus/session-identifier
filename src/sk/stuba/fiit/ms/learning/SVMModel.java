@@ -45,7 +45,7 @@ public final class SVMModel {
         // - http://www.csie.ntu.edu.tw/~cjlin/libsvm/
         // - https://github.com/cjlin1/libsvm/blob/master/java/svm_train.java
         param.svm_type = svm_parameter.C_SVC;
-        param.kernel_type = svm_parameter.RBF;
+        param.kernel_type = svm_parameter.LINEAR;
         param.degree = 3;
         param.gamma = 1.0 / trainingSet[0].length;
         param.coef0 = 0;
