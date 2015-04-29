@@ -1,9 +1,9 @@
-package sk.stuba.fiit.ms.learning;
+package sk.stuba.fiit.ms.learning.traning.traning_set;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DataSet {
+public final class TrainingSet {
 
     private final List<double []> examples;
 
@@ -13,8 +13,8 @@ public final class DataSet {
 
     private int negativeExamples = 0;
 
-    public DataSet() {
-        this.examples = new ArrayList<double []>();
+    public TrainingSet() {
+        this.examples = new ArrayList<double[]>();
         this.labels = new ArrayList<Double>();
     }
 
