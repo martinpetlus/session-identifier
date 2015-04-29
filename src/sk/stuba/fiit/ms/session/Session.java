@@ -1,6 +1,7 @@
 package sk.stuba.fiit.ms.session;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public final class Session {
@@ -14,6 +15,15 @@ public final class Session {
     private final List<Search> searches;
 
     private Intent intent;
+
+    public static final Comparator<Session> OLDEST = new Comparator<Session>() {
+
+        @Override
+        public final int compare(Session session1, final Session session2) {
+            return Search.OLDEST.compare(session1.getOldestSearch(), session2.getOldestSearch());
+        }
+
+    };
 
     public Session() {
         this(null);
