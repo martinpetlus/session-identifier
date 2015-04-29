@@ -58,6 +58,7 @@ public final class SVMModel {
         param.probability = 0;
         param.nr_weight = 0;
         param.weight_label = new int[0];
+        param.weight = new double[0];
 
         return new SVMModel(svm.svm_train(prob, param));
     }
