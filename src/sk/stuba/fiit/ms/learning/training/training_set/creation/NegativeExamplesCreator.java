@@ -61,7 +61,8 @@ public final class NegativeExamplesCreator implements ExamplesCreator {
         Session filteredSession = new Session();
 
         for (Search s : session.getAllSearches()) {
-            // Weird (negated) condition because of Session Track queries with zero time stamp
+            // Weird (negated) condition because of Session Track,
+            // where every no time stamp is present and every query has time stamp zero
             if (!(s.getTimeStamp() > search.getTimeStamp())) {
                 filteredSession.add(s);
             }
