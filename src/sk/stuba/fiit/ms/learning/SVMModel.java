@@ -6,25 +6,26 @@ import libsvm.svm_node;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
 
-public final class SVM {
+// Implementation inspired by http://stackoverflow.com/questions/10792576/libsvm-java-implementation
+public final class SVMModel {
 
     private final svm_model model;
 
-    private SVM(final svm_model model) {
+    private SVMModel(final svm_model model) {
         this.model = model;
     }
 
-    public static SVM train(final double[][] trainSet, final double[] trainLabels) {
+    public static SVMModel train(final double[][] trainingSet, final double[] trainingLabels) {
         final svm_problem prob = new svm_problem();
 
-        int dataLength = trainSet.length;
+        int trainingExamples = trainingSet.length;
 
-        prob.y = trainLabels;
-        prob.l = dataLength;
-        prob.x = new svm_node[dataLength][];
+        prob.y = trainingLabels;
+        prob.l = trainingExamples;
+        prob.x = new svm_node[trainingExamples][];
 
-        for (int i = 0; i < dataLength; i++) {
-            double[] features = trainSet[i];
+        for (int i = 0; i < trainingExamples; i++) {
+            double[] features = trainingSet[i];
 
             prob.x[i] = new svm_node[features.length];
 
@@ -49,7 +50,7 @@ public final class SVM {
         param.cache_size = 20000;
         param.eps = 0.001;
 
-        return new SVM(svm.svm_train(prob, param));
+        return new SVMModel(svm.svm_train(prob, param));
     }
 
     public boolean predict(final double[] features) {
@@ -74,16 +75,10 @@ public final class SVM {
 
         double v = svm.svm_predict_probability(this.model, nodes, prob_estimates);
 
-        /*for (int i = 0; i < totalClasses; i++) {
-            System.out.print("(" + labels[i] + ":" + prob_estimates[i] + ")");
-        }
-
-        System.out.println(" Prediction:" + v + ")");*/
-
-        return Double.compare(v, 1.0) == 0 ? true : false;
+        return Double.compare(v, 1.0) == 0;
     }
 
-    public void printModel() {
+    public void print() {
         System.out.println("Support vectors:");
 
         System.out.print("[");
@@ -123,72 +118,6 @@ public final class SVM {
         }
 
         System.out.println("]");
-    }
-
-    /*public Model getModel() {
-        final double[][] coef = model.sv_coef;
-
-        final svm_node[][] tSVs = transposeSVs(model.SV);
-
-        final double[] result = new double[tSVs.length];
-
-        for (int row = 0; row < tSVs.length; row++) {
-            double res = 0.0;
-
-            for (int col = 0; col < tSVs[row].length; col++) {
-                res += tSVs[row][col].value * coef[coef.length - col - 1][row];
-            }
-
-            result[row] = res;
-        }
-
-        return new Model(result, -model.rho[0]);
-    }
-
-    private svm_node[][] transposeSVs(final svm_node[][] SVs) {
-        final int tCols = SVs.length;
-
-        final int tRows = SVs[0].length;
-
-        final svm_node[][] tSVs = new svm_node[tRows][];
-
-        for (int i = 0; i < tRows; i++) {
-            tSVs[i] = new svm_node[tCols];
-        }
-
-        for (int row = 0; row < SVs.length; row++) {
-            for (int col = 0; col < SVs[row].length; col++) {
-                tSVs[col][row] = SVs[row][col];
-            }
-        }
-
-        return tSVs;
-    }*/
-
-    public static final class Model {
-
-        private final double[] w;
-
-        private final double b;
-
-        private Model(final double[] w, final double b) {
-            this.w = w;
-            this.b = b;
-        }
-
-        public double getB() {
-            return b;
-        }
-
-        public double[] getW() {
-            return w;
-        }
-
-        @Override
-        public String toString() {
-            return "Model[b=" + b + " w=" + java.util.Arrays.toString(w) + "]";
-        }
-
     }
 
 }
