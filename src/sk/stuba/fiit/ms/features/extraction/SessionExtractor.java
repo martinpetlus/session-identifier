@@ -2,7 +2,8 @@ package sk.stuba.fiit.ms.features.extraction;
 
 import sk.stuba.fiit.ms.features.lexical.*;
 import sk.stuba.fiit.ms.features.semantic.SemanticCosineOfSearches;
-import sk.stuba.fiit.ms.features.temporal.TemporalDistance;
+import sk.stuba.fiit.ms.features.temporal.TemporalDistanceNewest;
+import sk.stuba.fiit.ms.features.temporal.TemporalDistanceOldest;
 import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
 import sk.stuba.fiit.ms.features.url.CommonUrls;
 import sk.stuba.fiit.ms.measures.lexical.LevenshteinDistance;
@@ -48,7 +49,8 @@ public final class SessionExtractor {
         builder.addSessionFeature(new CommonClickedUrls());
         builder.addSessionFeature(new CommonUrls());
 
-        builder.addSessionFeature(new TemporalDistance());
+        builder.addSessionFeature(new TemporalDistanceNewest());
+        builder.addSessionFeature(new TemporalDistanceOldest());
 
         return builder.build();
     }
