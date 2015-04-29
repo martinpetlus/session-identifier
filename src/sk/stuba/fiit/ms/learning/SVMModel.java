@@ -16,7 +16,7 @@ public final class SVMModel {
     }
 
     public static SVMModel train(final double[][] trainingSet, final double[] trainingLabels) {
-        final svm_problem prob = new svm_problem();
+        svm_problem prob = new svm_problem();
 
         int trainingExamples = trainingSet.length;
 
@@ -41,14 +41,23 @@ public final class SVMModel {
 
         svm_parameter param = new svm_parameter();
 
-        param.probability = 1;
-        param.gamma = 0.5;
-        param.nu = 0.5;
-        param.C = 1;
+        // Default values from:
+        // - http://www.csie.ntu.edu.tw/~cjlin/libsvm/
+        // - https://github.com/cjlin1/libsvm/blob/master/java/svm_train.java
         param.svm_type = svm_parameter.C_SVC;
-        param.kernel_type = svm_parameter.LINEAR;
-        param.cache_size = 20000;
-        param.eps = 0.001;
+        param.kernel_type = svm_parameter.RBF;
+        param.degree = 3;
+        param.gamma = 1.0 / trainingSet[0].length;
+        param.coef0 = 0;
+        param.nu = 0.5;
+        param.cache_size = 100;
+        param.C = 1;
+        param.eps = 0.01;
+        param.p = 0.1;
+        param.shrinking = 1;
+        param.probability = 0;
+        param.nr_weight = 0;
+        param.weight_label = new int[0];
 
         return new SVMModel(svm.svm_train(prob, param));
     }
