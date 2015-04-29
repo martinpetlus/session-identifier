@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.learning.traning.traning_set.creation;
+package sk.stuba.fiit.ms.learning.training.training_set.creation;
 
 import java.util.List;
 
