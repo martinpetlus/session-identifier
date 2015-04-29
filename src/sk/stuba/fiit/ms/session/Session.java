@@ -19,7 +19,7 @@ public final class Session {
     public static final Comparator<Session> OLDEST = new Comparator<Session>() {
 
         @Override
-        public final int compare(Session session1, final Session session2) {
+        public final int compare(final Session session1, final Session session2) {
             return Search.OLDEST.compare(session1.getOldestSearch(), session2.getOldestSearch());
         }
 
