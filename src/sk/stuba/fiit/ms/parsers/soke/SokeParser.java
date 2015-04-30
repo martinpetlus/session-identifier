@@ -152,6 +152,7 @@ public final class SokeParser implements Parser {
         public String toString() {
             return getClass().getSimpleName() + "[" + timeStamp + "]";
         }
+
     }
 
 }
