@@ -43,7 +43,7 @@ public final class SessionExtractor {
         // Session features
         builder.addSessionFeature(new SemanticCosineOfSearches(model));
         builder.addSessionFeature(new QuerySimilarity(CosineLexicalSimilarity.newInstance()));
-        builder.addSessionFeature(new QueryTitleSimilarity(CosineLexicalSimilarity.newInstance()));
+        builder.addSessionFeature(new QueryClickedTitlesSimilarity(CosineLexicalSimilarity.newInstance()));
         builder.addSessionFeature(new QueryDistance(LevenshteinDistance.newInstance()));
 
         builder.addSessionFeature(new CommonClickedUrls());
