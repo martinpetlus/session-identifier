@@ -2,13 +2,9 @@ package sk.stuba.fiit.ms.features.lexical;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
-import sk.stuba.fiit.ms.utils.SetUtils;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.measures.lexical.LexicalSimilarity;
-import sk.stuba.fiit.ms.utils.TextNormalizer;
-
-import java.util.List;
 
 public final class QuerySimilarity implements PairFeature, SessionFeature {
 
@@ -25,17 +21,13 @@ public final class QuerySimilarity implements PairFeature, SessionFeature {
 
     @Override
     public double extract(final Session session, final Search search) {
-        List<Search> searches = session.getAllSearches();
+        double sum = 0.0;
 
-        String[][] sentences = new String[searches.size()][];
-
-        for (int i = 0; i < searches.size(); i++) {
-            sentences[i] = TextNormalizer.split(searches.get(i).getQuery());
+        for (Search s : session.getAllSearches()) {
+            sum += this.extract(search, s);
         }
 
-        String[] union = SetUtils.union(sentences);
-
-        return lexicalSimilarity.calculate(union, TextNormalizer.split(search.getQuery()));
+        return sum / session.getNumberOfSearches();
     }
 
 }
