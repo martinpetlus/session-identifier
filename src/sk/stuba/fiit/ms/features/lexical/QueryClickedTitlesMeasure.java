@@ -10,7 +10,7 @@ public final class QueryClickedTitlesMeasure extends QueryClickedMeasure {
     }
 
     @Override
-    public String getResultText(final Result clickedResult) {
+    protected String getResultText(final Result clickedResult) {
         return clickedResult.getTitle();
     }
 

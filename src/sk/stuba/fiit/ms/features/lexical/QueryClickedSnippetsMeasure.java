@@ -10,7 +10,7 @@ public class QueryClickedSnippetsMeasure extends QueryClickedMeasure {
     }
 
     @Override
-    public String getResultText(final Result clickedResult) {
+    protected String getResultText(final Result clickedResult) {
         return clickedResult.getSnippet();
     }
 

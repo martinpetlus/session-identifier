@@ -13,14 +13,14 @@ abstract class QueryClickedMeasure implements PairFeature, SessionFeature {
 
     private final LexicalMeasure lexicalMeasure;
 
-    public abstract String getResultText(final Result clickedResult);
+    protected abstract String getResultText(final Result clickedResult);
 
     public QueryClickedMeasure(final LexicalMeasure lexicalMeasure) {
         this.lexicalMeasure = lexicalMeasure;
     }
 
     @Override
-    public double extract(final Search search, final Search compareTo) {
+    public final double extract(final Search search, final Search compareTo) {
         if (!compareTo.hasClickedResults()) {
             return 0.0;
         }
@@ -39,7 +39,7 @@ abstract class QueryClickedMeasure implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(final Session session, final Search search) {
+    public final double extract(final Session session, final Search search) {
         double sum = 0.0;
 
         for (Search s : session.getAllSearches()) {
