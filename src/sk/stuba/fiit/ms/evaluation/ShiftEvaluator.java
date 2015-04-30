@@ -126,6 +126,7 @@ public class ShiftEvaluator implements Evaluator {
 
         private final double computed;
 
+        // Emphasized recall over precision by setting bet to 1.5
         public FBetaMeasure(final Measure precision, final Measure recall) {
             this(1.5, precision, recall);
         }
