@@ -2,19 +2,21 @@ package sk.stuba.fiit.ms.features.lexical;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
+import sk.stuba.fiit.ms.measures.lexical.LexicalMeasure;
+import sk.stuba.fiit.ms.session.Result;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
-import sk.stuba.fiit.ms.session.Result;
-import sk.stuba.fiit.ms.measures.lexical.LexicalSimilarity;
 
 import java.util.List;
 
-public final class QueryClickedTitlesSimilarity implements PairFeature, SessionFeature {
+abstract class QueryClickedMeasure implements PairFeature, SessionFeature {
 
-    private final LexicalSimilarity lexicalSimilarity;
+    private final LexicalMeasure lexicalMeasure;
 
-    public QueryClickedTitlesSimilarity(final LexicalSimilarity lexicalSimilarity) {
-        this.lexicalSimilarity = lexicalSimilarity;
+    public abstract String getResultText(final Result clickedResult);
+
+    public QueryClickedMeasure(final LexicalMeasure lexicalMeasure) {
+        this.lexicalMeasure = lexicalMeasure;
     }
 
     @Override
@@ -30,7 +32,7 @@ public final class QueryClickedTitlesSimilarity implements PairFeature, SessionF
         List<Result> clickedResults = compareTo.getClickedResults();
 
         for (Result clickedResult : clickedResults) {
-            sum += lexicalSimilarity.calculate(query, clickedResult.getTitle());
+            sum += lexicalMeasure.calculate(query, getResultText(clickedResult));
         }
 
         return sum / clickedResults.size();
