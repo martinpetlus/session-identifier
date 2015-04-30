@@ -1,6 +1,7 @@
 package sk.stuba.fiit.ms.session;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -152,6 +153,20 @@ public final class Session {
 
     public static Session newInstance(final List<Search> searches) {
         return new Session(searches);
+    }
+
+    public static List<Search> collectSearches(final List<Session> sessions, final boolean sort) {
+        List<Search> searches = new ArrayList<Search>();
+
+        for (Session session : sessions) {
+            searches.addAll(session.getAllSearches());
+        }
+
+        if (sort) {
+            Collections.sort(searches, Search.OLDEST);
+        }
+
+        return searches;
     }
 
 }
