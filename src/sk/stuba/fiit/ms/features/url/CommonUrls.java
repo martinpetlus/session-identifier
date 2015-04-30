@@ -1,21 +1,23 @@
 package sk.stuba.fiit.ms.features.url;
 
-import java.util.List;
-
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class CommonUrls implements PairFeature, SessionFeature {
+import java.util.List;
+
+abstract class CommonUrls implements PairFeature, SessionFeature {
+
+    protected abstract List<String> getUrls(final Search search);
 
     @Override
-    public double extract(final Search search, final Search compareTo) {
-        List<String> urls = compareTo.getResultsUrls();
+    public final double extract(final Search search1, final Search search2) {
+        List<String> urls = getUrls(search1);
 
         int count = 0;
 
-        for (String url : search.getResultsUrls()) {
+        for (String url : getUrls(search2)) {
             if (urls.contains(url)) {
                 count++;
             }
@@ -25,7 +27,7 @@ public final class CommonUrls implements PairFeature, SessionFeature {
     }
 
     @Override
-    public double extract(final Session session, final Search search) {
+    public final double extract(final Session session, final Search search) {
         int count = 0;
 
         for (Search s : session.getAllSearches()) {
