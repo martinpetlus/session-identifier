@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.learning.train;
+package sk.stuba.fiit.ms.learning;
 
 import sk.stuba.fiit.ms.features.Statistic;
 

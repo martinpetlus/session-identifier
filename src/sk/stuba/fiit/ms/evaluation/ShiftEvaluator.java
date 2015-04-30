@@ -49,7 +49,7 @@ public class ShiftEvaluator implements Evaluator {
         // Number of shifts detected by our method
         int shifts = 0;
 
-        // Number of correct shifts detected by out method
+        // Number of correct shifts detected by our method
         int correctShifts = 0;
 
         // Number of true shifts in original sessions

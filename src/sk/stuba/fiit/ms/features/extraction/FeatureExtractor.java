@@ -5,7 +5,7 @@ import java.util.List;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
-import sk.stuba.fiit.ms.learning.train.Features;
+import sk.stuba.fiit.ms.learning.Features;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
