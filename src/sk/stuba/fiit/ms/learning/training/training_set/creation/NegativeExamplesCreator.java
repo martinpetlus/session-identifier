@@ -28,7 +28,7 @@ public final class NegativeExamplesCreator implements ExamplesCreator {
 
         List<Search> searches = session.getAllSearches();
 
-        // Sessions older that the current session
+        // Sessions older than the current session
         List<Session> previousSessions = sessions.subList(0, indexOfSession);
 
         List<double[]> features = new ArrayList<double[]>();
@@ -63,7 +63,7 @@ public final class NegativeExamplesCreator implements ExamplesCreator {
         for (Search s : session.getAllSearches()) {
             // Weird (negated) condition because of Session Track data set, where queries
             // doesn't contain time stamp, thus time stamp is by default zero and we want
-            // to work with this data set too
+            // to work with this data set too (i.e. do not filter out any query)
             if (!(s.getTimeStamp() > search.getTimeStamp())) {
                 filteredSession.add(s);
             }

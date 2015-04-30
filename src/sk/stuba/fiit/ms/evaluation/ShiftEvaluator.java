@@ -64,7 +64,7 @@ public class ShiftEvaluator implements Evaluator {
             if (!detectedSessionBySearch.get(previousSearch).equals(detectedSessionBySearch.get(currentSearch))) {
                 shifts++;
 
-                // Is this a correct shift
+                // Is this a correct shift?
                 if (!originalSessionBySearch.get(previousSearch).equals(originalSessionBySearch.get(currentSearch))) {
                     correctShifts++;
                 }
