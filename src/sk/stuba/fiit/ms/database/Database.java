@@ -7,18 +7,18 @@ import sk.stuba.fiit.ms.session.Session;
 
 public interface Database {
 
-    public boolean containsContent(final String url);
+    boolean containsContent(final String url);
 
-    public DocumentContent getContent(final String url);
+    DocumentContent getContent(final String url);
 
-    public void save(final DocumentContent doc);
+    void save(final DocumentContent doc);
 
-    public void close();
+    void close();
 
-    public int size();
+    int size();
 
-    public List<DocumentContent> getAllContents();
+    List<DocumentContent> getAllContents();
 
-    public void setResultsContent(final List<Session> sessions);
+    void setResultsContent(final List<Session> sessions);
 
 }
