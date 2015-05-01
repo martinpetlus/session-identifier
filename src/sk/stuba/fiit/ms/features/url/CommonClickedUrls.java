@@ -4,10 +4,10 @@ import java.util.List;
 
 import sk.stuba.fiit.ms.session.Search;
 
-public final class ClickedResultsCommonUrls extends CommonUrls {
+public final class CommonClickedUrls extends Common {
 
     @Override
-    protected List<String> getUrls(final Search search) {
+    protected List<String> map(final Search search) {
         return search.getClickedUrls();
     }
 

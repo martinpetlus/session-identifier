@@ -4,8 +4,10 @@ import sk.stuba.fiit.ms.features.lexical.*;
 import sk.stuba.fiit.ms.features.semantic.SemanticCosineOfSearches;
 import sk.stuba.fiit.ms.features.temporal.TemporalDistanceNewest;
 import sk.stuba.fiit.ms.features.temporal.TemporalDistanceOldest;
-import sk.stuba.fiit.ms.features.url.ClickedResultsCommonUrls;
-import sk.stuba.fiit.ms.features.url.ResultsCommonUrls;
+import sk.stuba.fiit.ms.features.url.CommonClickedHosts;
+import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
+import sk.stuba.fiit.ms.features.url.CommonHosts;
+import sk.stuba.fiit.ms.features.url.CommonUrls;
 import sk.stuba.fiit.ms.measures.lexical.LevenshteinDistance;
 import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
@@ -47,8 +49,11 @@ public final class SessionExtractor {
         builder.addSessionFeature(new QueryClickedSnippetsMeasure(CosineLexicalSimilarity.newInstance()));
         builder.addSessionFeature(new QueryMeasure(LevenshteinDistance.newInstance()));
 
-        builder.addSessionFeature(new ClickedResultsCommonUrls());
-        builder.addSessionFeature(new ResultsCommonUrls());
+        builder.addSessionFeature(new CommonHosts());
+        builder.addSessionFeature(new CommonClickedHosts());
+
+        builder.addSessionFeature(new CommonClickedUrls());
+        builder.addSessionFeature(new CommonUrls());
 
         builder.addSessionFeature(new TemporalDistanceNewest());
         builder.addSessionFeature(new TemporalDistanceOldest());
