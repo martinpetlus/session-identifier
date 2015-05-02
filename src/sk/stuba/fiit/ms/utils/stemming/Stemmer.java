@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.utils;
+package sk.stuba.fiit.ms.utils.stemming;
 
 /*
 

@@ -1,5 +1,7 @@
 package sk.stuba.fiit.ms.utils;
 
+import sk.stuba.fiit.ms.utils.stemming.PorterStemmer;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
