@@ -12,4 +12,8 @@ public final class Logger {
         System.out.println(o);
     }
 
+    public static void err(final Object o) {
+        System.err.println(o);
+    }
+
 }
