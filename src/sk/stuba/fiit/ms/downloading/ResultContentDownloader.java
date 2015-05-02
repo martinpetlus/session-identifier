@@ -7,7 +7,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import sk.stuba.fiit.ms.database.Database;
-import sk.stuba.fiit.ms.ResultContent;
 import sk.stuba.fiit.ms.utils.Logger;
 import sk.stuba.fiit.ms.utils.TextNormalizer;
 import sk.stuba.fiit.ms.session.Result;

@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms;
+package sk.stuba.fiit.ms.downloading;
 
 import java.io.Serializable;
 

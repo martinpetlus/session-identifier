@@ -2,7 +2,7 @@ package sk.stuba.fiit.ms.database;
 
 import java.util.List;
 
-import sk.stuba.fiit.ms.ResultContent;
+import sk.stuba.fiit.ms.downloading.ResultContent;
 import sk.stuba.fiit.ms.session.Session;
 
 public interface Database {

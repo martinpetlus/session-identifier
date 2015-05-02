@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import sk.stuba.fiit.ms.ResultContent;
+import sk.stuba.fiit.ms.downloading.ResultContent;
 import sk.stuba.fiit.ms.session.Result;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.utils.Logger;
