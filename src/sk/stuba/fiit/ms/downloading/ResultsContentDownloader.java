@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.document.downloading;
+package sk.stuba.fiit.ms.downloading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +8,15 @@ import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Result;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class SessionDownloader {
+public final class ResultsContentDownloader {
 
     private final List<Session> sessions;
 
     private final Database db;
 
-    private DownloadManager dw;
+    private ResultsContentDownloadManager dm;
 
-    public SessionDownloader(final Database db) {
+    public ResultsContentDownloader(final Database db) {
         this.db = db;
         this.sessions = new ArrayList<Session>();
     }
@@ -30,7 +30,7 @@ public final class SessionDownloader {
     }
 
     public void downloadClicked (final boolean wait) {
-        final List<Result> results = new ArrayList<Result>();
+        List<Result> results = new ArrayList<Result>();
 
         for (Session session : this.sessions) {
             for (Search search : session.getAllSearches()) {
@@ -38,8 +38,8 @@ public final class SessionDownloader {
             }
         }
 
-        this.dw = new DownloadManager(results, db);
-        this.dw.start();
+        this.dm = new ResultsContentDownloadManager(results, db);
+        this.dm.start();
 
         if (wait) {
             while (!this.isDone()) {
@@ -55,7 +55,7 @@ public final class SessionDownloader {
     }
 
     public boolean isDone() {
-        return this.dw.isDone();
+        return this.dm.isDone();
     }
 
 }

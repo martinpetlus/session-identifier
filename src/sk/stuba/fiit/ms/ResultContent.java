@@ -1,8 +1,8 @@
-package sk.stuba.fiit.ms.document;
+package sk.stuba.fiit.ms;
 
 import java.io.Serializable;
 
-public final class DocumentContent implements Serializable {
+public final class ResultContent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -10,7 +10,7 @@ public final class DocumentContent implements Serializable {
 
     private final String content;
 
-    public DocumentContent(final String url, final String content) {
+    public ResultContent(final String url, final String content) {
         this.url = url;
         this.content = content;
     }

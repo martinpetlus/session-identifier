@@ -1,4 +1,4 @@
-package sk.stuba.fiit.ms.document.downloading;
+package sk.stuba.fiit.ms.downloading;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -9,40 +9,43 @@ import java.util.concurrent.Executors;
 import sk.stuba.fiit.ms.database.Database;
 import sk.stuba.fiit.ms.session.Result;
 
-public final class DownloadManager {
+final class ResultsContentDownloadManager {
 
-    private final Object mutex = new Object();
+    private final Object lock = new Object();
 
-    private final Set<Result> results = new HashSet<Result>();
+    private final Set<Result> results;
 
     private final ExecutorService executorService;
 
-    private final int DOWNLOADERS = 10;
+    private final int THREADS = 10;
 
     private final Database db;
 
-    public DownloadManager(final List<Result> results, final Database db) {
+    public ResultsContentDownloadManager(final List<Result> results, final Database db) {
+        this.results = new HashSet<Result>();
+
         this.db = db;
 
         for (Result result : results) {
             this.results.add(result);
         }
 
-        this.executorService = Executors.newFixedThreadPool(DOWNLOADERS);
+        this.executorService = Executors.newFixedThreadPool(THREADS);
     }
 
     public void start() {
-        for (int i = 0; i < DOWNLOADERS; i++) {
+        for (int i = 0; i < THREADS; i++) {
             executorService.execute(new Runnable() {
                 public void run() {
-                    Downloader downloader = new Downloader(db);
+                    ResultContentDownloader downloader = new ResultContentDownloader(db);
 
                     while (true) {
                         Result result;
 
-                        synchronized (mutex) {
+                        synchronized (lock) {
                             if (!results.isEmpty()) {
                                 result = results.iterator().next();
+
                                 results.remove(result);
 
                                 String url = result.getUrl();
@@ -55,7 +58,7 @@ public final class DownloadManager {
                             }
                         }
 
-                        downloader.download(result);
+                        downloader.downloadContent(result);
                     }
                 }
             });
