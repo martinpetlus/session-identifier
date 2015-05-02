@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 public final class TextNormalizer {
 
-    private static final Stemmer stemmer = new Stemmer();
+    private static final PorterStemmer porterStemmer = new PorterStemmer();
 
     private static String stopWords = "";
 
@@ -21,7 +21,7 @@ public final class TextNormalizer {
                 word = word.trim();
 
                 if (sb.length() != 0) {
-                    sb.append("|");
+                    sb.append('|');
                 }
 
                 sb.append(word);
@@ -35,36 +35,8 @@ public final class TextNormalizer {
 
     private TextNormalizer() {}
 
-    private static String stemWord(final String word) {
-        for (int i = 0; i < word.length(); i++) {
-            stemmer.add(word.charAt(i));
-        }
-
-        stemmer.stem();
-
-        return stemmer.toString();
-    }
-
-    private static String stemWords(final String words) {
-        StringBuilder sb = new StringBuilder();
-
-        String[] parts = words.split("\\s+");
-
-        for (int i = 0; i < parts.length; i++) {
-            parts[i] = stemWord(parts[i]);
-
-            sb.append(parts[i]);
-
-            if (i + 1 < parts.length) {
-                sb.append(" ");
-            }
-        }
-
-        return sb.toString();
-    }
-
-    public static String normalize(String s) {
-        s = s.trim().toLowerCase();
+    public static synchronized String normalize(final String str) {
+        String s = str.trim().toLowerCase();
 
         // Remove unicode characters
         s = s.replaceAll("\\\\u[0-9a-f]{4}", "");
@@ -91,7 +63,21 @@ public final class TextNormalizer {
         // Remove short words
         s = s.replaceAll("^[\\w]{1,1}\\s+|\\s+[\\w]{1,1}\\s+|\\s+[\\w]{1,1}$", " ");
 
-        return stemWords(s.trim());
+        return join(porterStemmer.stem(split(s.trim())));
+    }
+
+    public static String join(final String[] s) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < s.length; i++) {
+            sb.append(s[i]);
+
+            if (i + 1 < s.length) {
+                sb.append(' ');
+            }
+        }
+
+        return sb.toString();
     }
 
     public static String[] split(final String s) {
