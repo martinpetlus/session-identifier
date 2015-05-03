@@ -1,3 +1,15 @@
 {
+  "session_track_2011": false,
 
+  "session_track_2012": false,
+
+  "session_track_2013": false,
+
+  "session_track_2014": false,
+
+  "soke_sessions": true,
+
+  "download_contents_of_clicked_results": false,
+
+  "ratio_between_training_and_testing_sessions": 0.8
 }
