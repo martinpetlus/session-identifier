@@ -7,6 +7,9 @@ import sk.stuba.fiit.ms.session.Session;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Identifies sessions in consecutive fashion with given consecutive approach.
+ */
 public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
 
     private final ConsecutiveApproach consecutiveApproach;

@@ -6,6 +6,9 @@ import sk.stuba.fiit.ms.learning.SVMModel;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
+/**
+ * Our method stack approach to check match between search and session in the stack.
+ */
 public final class MethodStackApproach implements StackApproach {
 
     private final SVMModel svmModel;
