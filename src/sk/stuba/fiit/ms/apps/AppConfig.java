@@ -15,24 +15,64 @@ public final class AppConfig {
         this.jsonConfig = jsonConfig;
     }
 
+    private JSONObject getSessionTrack2011Config() {
+        return getJSONObject("2011", getSessionTracksSessionsConfig());
+    }
+
+    private JSONObject getSessionTrack2012Config() {
+        return getJSONObject("2012", getSessionTracksSessionsConfig());
+    }
+
+    private JSONObject getSessionTrack2013Config() {
+        return getJSONObject("2013", getSessionTracksSessionsConfig());
+    }
+
+    private JSONObject getSessionTrack2014Config() {
+        return getJSONObject("2014", getSessionTracksSessionsConfig());
+    }
+
     public boolean loadSessionTrack2011() {
-        return getBoolean("2011", getSessionTrackSessionsConfig());
+        return getBoolean("load", getSessionTrack2011Config());
+    }
+
+    public String getSessionTrack2011File() {
+        return getString("file", getSessionTrack2011Config());
     }
 
     public boolean loadSessionTrack2012() {
-        return getBoolean("2012", getSessionTrackSessionsConfig());
+        return getBoolean("load", getSessionTrack2012Config());
+    }
+
+    public String getSessionTrack2012File() {
+        return getString("file", getSessionTrack2012Config());
     }
 
     public boolean loadSessionTrack2013() {
-        return getBoolean("2013", getSessionTrackSessionsConfig());
+        return getBoolean("load", getSessionTrack2013Config());
+    }
+
+    public String getSessionTrack2013File() {
+        return getString("file", getSessionTrack2013Config());
     }
 
     public boolean loadSessionTrack2014() {
-        return getBoolean("2014", getSessionTrackSessionsConfig());
+        return getBoolean("load", getSessionTrack2014Config());
+    }
+
+    public String getSessionTrack2014File() {
+        return getString("file", getSessionTrack2014Config());
+    }
+
+    private JSONObject getSokeSessionsConfig() {
+        return getJSONObject("soke_sessions", jsonConfig);
     }
 
     public boolean loadSokeSessions() {
-        return getBoolean("soke_sessions", jsonConfig);
+        return getBoolean("load", getSokeSessionsConfig());
+    }
+
+    public String getSokeSessionsFile() {
+        return getString("file", getSokeSessionsConfig());
     }
 
     public boolean loadingSessionTrackSessions(){
@@ -41,11 +81,11 @@ public final class AppConfig {
     }
 
     public boolean shuffleSessionTrackTestingQueries() {
-        return getBoolean("shuffle_testing_queries", jsonConfig);
+        return getBoolean("shuffle_testing_queries", getSessionTracksSessionsConfig());
     }
 
-    private JSONObject getSessionTrackSessionsConfig() {
-        return getJSONObject("session_track_sessions", jsonConfig);
+    private JSONObject getSessionTracksSessionsConfig() {
+        return getJSONObject("session_tracks_sessions", jsonConfig);
     }
 
     public boolean downloadContentsOfClickedResults() {
@@ -70,6 +110,10 @@ public final class AppConfig {
 
     private static JSONObject getJSONObject(final String property, final JSONObject jsonObject) {
         return (JSONObject) jsonObject.get(property);
+    }
+
+    private static String getString(final String property, final JSONObject jsonObject) {
+        return (String) jsonObject.get(property);
     }
 
     private static boolean getBoolean(final String property, final JSONObject jsonObject) {

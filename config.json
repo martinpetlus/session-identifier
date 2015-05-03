@@ -1,17 +1,32 @@
 {
-  "session_track_sessions": {
-    "2011": false,
+  "session_tracks_sessions": {
+    "2011": {
+      "load": false,
+      "file": "data/sessiontrack2011.RL4.xml"
+    },
 
-    "2012": false,
+    "2012": {
+      "load": false,
+      "file": "data/sessiontrack2012.xml"
+    },
 
-    "2013": false,
+    "2013": {
+      "load": false,
+      "file": "data/sessiontrack2013.xml"
+    },
 
-    "2014": false,
+    "2014": {
+      "load": false,
+      "file": "data/sessiontrack2014.xml"
+    },
 
     "shuffle_testing_queries": true
   },
 
-  "soke_sessions": true,
+  "soke_sessions": {
+    "load": true,
+    "file": "data/soke-20150424.json"
+  },
 
   "download_contents_of_clicked_results": false,
 

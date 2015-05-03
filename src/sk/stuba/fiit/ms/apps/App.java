@@ -38,32 +38,32 @@ public final class App {
         if (config.loadSessionTrack2011()) {
             log("Loading SessionTrack2011...");
 
-            new SessionTrackParser(new SessionTrack2011()).parse("data/sessiontrack2011.RL4.xml", sessions);
+            new SessionTrackParser(new SessionTrack2011()).parse(config.getSessionTrack2011File(), sessions);
         }
 
         if (config.loadSessionTrack2012()) {
             log("Loading SessionTrack2012...");
 
-            new SessionTrackParser(new SessionTrack2012()).parse("data/sessiontrack2012.xml", sessions);
+            new SessionTrackParser(new SessionTrack2012()).parse(config.getSessionTrack2012File(), sessions);
         }
 
         if (config.loadSessionTrack2013()) {
             log("Loading SessionTrack2013...");
 
-            new SessionTrackParser(new SessionTrack2013()).parse("data/sessiontrack2013.xml", sessions);
+            new SessionTrackParser(new SessionTrack2013()).parse(config.getSessionTrack2013File(), sessions);
         }
 
         if (config.loadSessionTrack2014()) {
             log("Loading SessionTrack2014...");
 
-            new SessionTrackParser(new SessionTrack2014()).parse("data/sessiontrack2014.xml", sessions);
+            new SessionTrackParser(new SessionTrack2014()).parse(config.getSessionTrack2014File(), sessions);
         }
 
         // Load Soke sessions only if we are not loading Session track sessions
         if (!config.loadingSessionTrackSessions() && config.loadSokeSessions()) {
             log("Loading Soke sessions...");
 
-            new SokeParser().parse("data/soke-20150424.json", sessions);
+            new SokeParser().parse(config.getSokeSessionsFile(), sessions);
         }
 
         log("Number of loaded sessions: " + sessions.size());
