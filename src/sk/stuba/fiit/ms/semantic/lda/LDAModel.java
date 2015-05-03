@@ -37,6 +37,14 @@ public final class LDAModel {
         return model.getNumTopics();
     }
 
+    /**
+     * Learn hidden topics from given file.
+     * @param filename file that contains docs
+     * @param formatter formatter of search into doc
+     * @param topics number of hidden topics
+     * @param iterations number of iterations of LDA
+     * @return learned LDA model
+     */
     public static LDAModel estimate(final String filename,
                                     final SearchFormatter formatter,
                                     final int topics,
@@ -71,6 +79,11 @@ public final class LDAModel {
         }
     }
 
+    /**
+     * Inferences topics for given search.
+     * @param search search to inference topics from
+     * @return array of topics probabilities
+     */
     public double[] inference(final Search search) {
         InstanceList test = new InstanceList(instances.getPipe());
 

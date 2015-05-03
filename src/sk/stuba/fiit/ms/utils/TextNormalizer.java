@@ -37,6 +37,12 @@ public final class TextNormalizer {
 
     private TextNormalizer() {}
 
+    /**
+     * Normalizes the input string for further processing (removes stop words,
+     * HTML encodes, escape sequences, unicode characters, short words).
+     * @param str string to be normalized
+     * @return normalized string
+     */
     public static synchronized String normalize(final String str) {
         String s = str.trim().toLowerCase();
 
@@ -59,15 +65,17 @@ public final class TextNormalizer {
 
         s = s.replaceAll("[\\s\\W_]+", " ");
 
-        // Remove numbers
-        s = s.replaceAll("\\s+\\d+\\s+", " ");
-
         // Remove short words
         s = s.replaceAll("^[\\w]{1,1}\\s+|\\s+[\\w]{1,1}\\s+|\\s+[\\w]{1,1}$", " ");
 
         return join(porterStemmer.stem(split(s.trim())));
     }
 
+    /**
+     * Joins the tokens of normalized string into original string.
+     * @param s tokens to be joined
+     * @return joined tokens
+     */
     public static String join(final String[] s) {
         StringBuilder sb = new StringBuilder();
 
@@ -82,6 +90,11 @@ public final class TextNormalizer {
         return sb.toString();
     }
 
+    /**
+     * Method used for splitting normalized string into tokens.
+     * @param s string to be split into tokens
+     * @return tokens of the string
+     */
     public static String[] split(final String s) {
         return s.split("\\s+");
     }

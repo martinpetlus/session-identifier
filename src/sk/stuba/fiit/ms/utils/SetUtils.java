@@ -7,18 +7,12 @@ public final class SetUtils {
 
     private SetUtils() {}
 
-    public static String[] union(final String[][] sentences) {
-        Set<String> set = new HashSet<String>();
-
-        for (String[] sentence : sentences) {
-            for (String word : sentence) {
-                set.add(word);
-            }
-        }
-
-        return set.toArray(new String[set.size()]);
-    }
-
+    /**
+     * Returns union of two string arrays.
+     * @param one first string array
+     * @param two second string array
+     * @return union of two string arrays
+     */
     public static String[] union(final String[] one, final String[] two) {
         Set<String> set = new HashSet<String>();
 
@@ -33,6 +27,12 @@ public final class SetUtils {
         return set.toArray(new String[set.size()]);
     }
 
+    /**
+     * Returns intersection of two string arrays.
+     * @param one first string array
+     * @param two second string array
+     * @return intersection of two string arrays
+     */
     public static String[] intersection(final String[] one, final String[] two) {
         Set<String> set1 = new HashSet<String>();
         Set<String> set2 = new HashSet<String>();

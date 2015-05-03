@@ -20,6 +20,9 @@ public final class Search {
 
     private final List<Click> clicks;
 
+    /**
+     * Comparator used for sorting searches from the oldest to the newest by the time stamp they were issued.
+     */
     public static final Comparator<Search> OLDEST = new Comparator<Search>() {
 
         @Override
