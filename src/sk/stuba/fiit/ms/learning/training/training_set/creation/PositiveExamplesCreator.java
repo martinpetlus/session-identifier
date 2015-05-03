@@ -6,6 +6,9 @@ import sk.stuba.fiit.ms.features.extraction.SessionSearchExtractor;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
+/**
+ * Creates positive training examples.
+ */
 public final class PositiveExamplesCreator implements ExamplesCreator {
 
     private final SessionSearchExtractor extractor;

@@ -8,6 +8,9 @@ import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.session.identifiers.stack.StackSessionIdentifier;
 
+/**
+ * Creates negative training examples.
+ */
 public final class NegativeExamplesCreator implements ExamplesCreator {
 
     private final SessionSearchExtractor extractor;

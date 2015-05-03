@@ -20,6 +20,11 @@ public final class TrainingSetCreator {
         negativeCreator = new NegativeExamplesCreator(extractor);
     }
 
+    /**
+     * Creates whole training set from list of sessions.
+     * @param sessions sessions to create training examples from
+     * @return training set of examples
+     */
     public TrainingSet generateTrainingSet(final List<Session> sessions) {
         // Create copy of the sessions for sorting purpose
         List<Session> sortedSessions = new ArrayList<Session>(sessions);
