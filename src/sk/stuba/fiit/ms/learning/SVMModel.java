@@ -41,7 +41,6 @@ public final class SVMModel {
 
         svm_parameter param = new svm_parameter();
 
-        // Linear kernel uses only C param, so we have to tune only this
         // Default values from:
         // - http://www.csie.ntu.edu.tw/~cjlin/libsvm/
         // - https://github.com/cjlin1/libsvm/blob/master/java/svm_train.java
@@ -52,7 +51,10 @@ public final class SVMModel {
         param.coef0 = 0;
         param.nu = 0.5;
         param.cache_size = 100;
+
+        // Linear kernel uses only C param, so we have to tune only this
         param.C = C;
+
         param.eps = 0.01;
         param.p = 0.1;
         param.shrinking = 1;
@@ -109,9 +111,7 @@ public final class SVMModel {
             }
         }
 
-        sb.append("]\n");
-
-        sb.append("Dual coefficients:\n[");
+        sb.append("]\nDual coefficients:\n[");
 
         for (int i = 0; i < model.sv_coef.length; i++) {
             for (int j = 0; j < model.sv_coef[i].length; j++) {
