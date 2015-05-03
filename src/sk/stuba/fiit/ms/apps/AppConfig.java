@@ -15,37 +15,36 @@ public final class AppConfig {
         this.jsonConfig = jsonConfig;
     }
 
-    public boolean useSessionTrack2011() {
-        return getBoolean("2011", getSessionTrackSessions());
+    public boolean loadSessionTrack2011() {
+        return getBoolean("2011", getSessionTrackSessionsConfig());
     }
 
-    public boolean useSessionTrack2012() {
-        return getBoolean("2012", getSessionTrackSessions());
+    public boolean loadSessionTrack2012() {
+        return getBoolean("2012", getSessionTrackSessionsConfig());
     }
 
-    public boolean useSessionTrack2013() {
-        return getBoolean("2013", getSessionTrackSessions());
+    public boolean loadSessionTrack2013() {
+        return getBoolean("2013", getSessionTrackSessionsConfig());
     }
 
-    public boolean useSessionTrack2014() {
-        return getBoolean("2014", getSessionTrackSessions());
+    public boolean loadSessionTrack2014() {
+        return getBoolean("2014", getSessionTrackSessionsConfig());
     }
 
-    /**
-     * We can load sessions from session tracks (2011, 2012,
-     * 2013, 2014), or Soke sessions, but not both at same time.
-     * @return true if we are loading Soke sessions
-     */
-    public boolean useSokeSessions() {
-        if (useSessionTrack2011() || useSessionTrack2012() ||
-            useSessionTrack2013() || useSessionTrack2014()) {
-            return false;
-        } else {
-            return getBoolean("soke_sessions", jsonConfig);
-        }
+    public boolean loadSokeSessions() {
+        return getBoolean("soke_sessions", jsonConfig);
     }
 
-    private JSONObject getSessionTrackSessions() {
+    public boolean loadingSessionTrackSessions(){
+        return loadSessionTrack2011() || loadSessionTrack2012() ||
+            loadSessionTrack2013() || loadSessionTrack2014();
+    }
+
+    public boolean shuffleSessionTrackTestingQueries() {
+        return getBoolean("shuffle_testing_queries", jsonConfig);
+    }
+
+    private JSONObject getSessionTrackSessionsConfig() {
         return getJSONObject("session_track_sessions", jsonConfig);
     }
 

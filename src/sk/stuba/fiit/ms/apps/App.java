@@ -35,31 +35,32 @@ public final class App {
 
         Sessions sessions = new Sessions();
 
-        if (config.useSessionTrack2011()) {
+        if (config.loadSessionTrack2011()) {
             log("Loading SessionTrack2011...");
 
             new SessionTrackParser(new SessionTrack2011()).parse("data/sessiontrack2011.RL4.xml", sessions);
         }
 
-        if (config.useSessionTrack2012()) {
+        if (config.loadSessionTrack2012()) {
             log("Loading SessionTrack2012...");
 
             new SessionTrackParser(new SessionTrack2012()).parse("data/sessiontrack2012.xml", sessions);
         }
 
-        if (config.useSessionTrack2013()) {
+        if (config.loadSessionTrack2013()) {
             log("Loading SessionTrack2013...");
 
             new SessionTrackParser(new SessionTrack2013()).parse("data/sessiontrack2013.xml", sessions);
         }
 
-        if (config.useSessionTrack2014()) {
+        if (config.loadSessionTrack2014()) {
             log("Loading SessionTrack2014...");
 
             new SessionTrackParser(new SessionTrack2014()).parse("data/sessiontrack2014.xml", sessions);
         }
 
-        if (config.useSokeSessions()) {
+        // Load Soke sessions only if we are not loading Session track sessions
+        if (!config.loadingSessionTrackSessions() && config.loadSokeSessions()) {
             log("Loading Soke sessions...");
 
             new SokeParser().parse("data/soke-20150424.json", sessions);
@@ -150,22 +151,29 @@ public final class App {
 
         // Shuffle test sessions search results for session identification
         SessionTrackShuffler sessionTrackShuffler = new SessionTrackShuffler();
-        List<Search> searches = sessionTrackShuffler.shuffle(testingSessions);
+
+        List<Search> searches;
+
+        if (config.loadingSessionTrackSessions() && config.shuffleSessionTrackTestingQueries()) {
+            searches = sessionTrackShuffler.shuffle(testingSessions);
+        } else {
+            searches = Session.collectSearches(testingSessions);
+        }
 
         // Evaluate baseline using Cosine similarity of queries
-        eval("Baseline using Cosine similarity of queries", testingSessions,
+        eval("Baseline using Cosine similarity of queries", testingSessions, searches,
             new ConsecutiveSessionIdentifier(new CosineSimilarityConsecutiveApproach()));
 
         // Evaluate baseline using Jaccard similarity of queries
-        eval("Baseline using Jaccard similarity of queries", testingSessions,
+        eval("Baseline using Jaccard similarity of queries", testingSessions, searches,
             new ConsecutiveSessionIdentifier(new JaccardSimilarityConsecutiveApproach()));
 
         // Evaluate baseline using Temporal distance of queries
-        eval("Baseline using Temporal distance of queries", testingSessions,
+        eval("Baseline using Temporal distance of queries", testingSessions, searches,
             new ConsecutiveSessionIdentifier(new TemporalDistanceConsecutiveApproach()));
 
         // Evaluate Our method
-        List<Session> identifiedSessions = eval("Our method", testingSessions,
+        List<Session> identifiedSessions = eval("Our method", testingSessions, searches,
             new StackSessionIdentifier(new MethodStackApproach(extractor, svmModel, normalizer)));
 
         // Print identified sessions from test sessions
@@ -192,12 +200,6 @@ public final class App {
 
             log("-----------------");
         }
-    }
-
-    private static List<Session> eval(final String resultsType,
-                             final List<Session> originalSessions,
-                             final SessionIdentifier identifier) {
-        return eval(resultsType, originalSessions, Session.collectSearches(originalSessions), identifier);
     }
 
     private static List<Session> eval(final String resultsType,
