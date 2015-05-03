@@ -112,7 +112,8 @@ public final class App {
         log("Training LDA model...");
 
         int topics = 100;
-        LDAModel lda = LDAModel.estimate(LDAFileFormatter.FILE, formatter, topics);
+        LDAModel lda = LDAModel.estimate(LDAFileFormatter.FILE,
+            formatter, topics, config.getLDAIterations());
 
         log("Traning LDA model done");
 

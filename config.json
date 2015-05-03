@@ -11,5 +11,7 @@
 
   "download_contents_of_clicked_results": false,
 
-  "ratio_between_training_and_testing_sessions": 0.8
+  "ratio_between_training_and_testing_sessions": 0.8,
+
+  "LDA_iterations": 1000
 }

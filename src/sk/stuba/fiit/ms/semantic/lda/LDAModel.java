@@ -37,7 +37,10 @@ public final class LDAModel {
         return model.getNumTopics();
     }
 
-    public static LDAModel estimate(final String filename, final SearchFormatter formatter, final int topics) {
+    public static LDAModel estimate(final String filename,
+                                    final SearchFormatter formatter,
+                                    final int topics,
+                                    final int iterations) {
         try {
             List<Pipe> pipeList = new ArrayList<Pipe>();
 
@@ -57,7 +60,7 @@ public final class LDAModel {
 
             model.setNumThreads(2);
 
-            model.setNumIterations(300);
+            model.setNumIterations(iterations);
 
             model.estimate();
 

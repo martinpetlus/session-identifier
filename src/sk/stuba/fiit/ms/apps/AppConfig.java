@@ -43,6 +43,10 @@ public final class AppConfig {
         return ((Double) jsonConfig.get("ratio_between_training_and_testing_sessions")).doubleValue();
     }
 
+    public int getLDAIterations() {
+        return ((Long) jsonConfig.get("LDA_iterations")).intValue();
+    }
+
     public static AppConfig load(final String configFile) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
 
