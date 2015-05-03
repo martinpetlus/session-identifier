@@ -16,39 +16,51 @@ public final class AppConfig {
     }
 
     public boolean useSessionTrack2011() {
-        return ((Boolean) jsonConfig.get("session_track_2011")).booleanValue();
+        return getBoolean("session_track_2011");
     }
 
     public boolean useSessionTrack2012() {
-        return ((Boolean) jsonConfig.get("session_track_2012")).booleanValue();
+        return getBoolean("session_track_2012");
     }
 
     public boolean useSessionTrack2013() {
-        return ((Boolean) jsonConfig.get("session_track_2013")).booleanValue();
+        return getBoolean("session_track_2013");
     }
 
     public boolean useSessionTrack2014() {
-        return ((Boolean) jsonConfig.get("session_track_2014")).booleanValue();
+        return getBoolean("session_track_2014");
     }
 
     public boolean useSokeSessions() {
-        return ((Boolean) jsonConfig.get("soke_sessions")).booleanValue();
+        return getBoolean("soke_sessions");
     }
 
     public boolean downloadContentsOfClickedResults() {
-        return ((Boolean) jsonConfig.get("download_contents_of_clicked_results")).booleanValue();
+        return getBoolean("download_contents_of_clicked_results");
     }
 
     public double getRatioBetweenTrainingAndTestingSessions() {
-        return ((Double) jsonConfig.get("ratio_between_training_and_testing_sessions")).doubleValue();
+        return getDouble("ratio_between_training_and_testing_sessions");
     }
 
     public int getLDAIterations() {
-        return ((Long) jsonConfig.get("LDA_iterations")).intValue();
+        return getInt("LDA_iterations");
     }
 
     public int getLDATopics() {
-        return ((Long) jsonConfig.get("LDA_topics")).intValue();
+        return getInt("LDA_topics");
+    }
+
+    private boolean getBoolean(final String property) {
+        return ((Boolean) jsonConfig.get(property)).booleanValue();
+    }
+
+    private double getDouble(final String property) {
+        return ((Double) jsonConfig.get(property)).doubleValue();
+    }
+
+    private int getInt(final String property) {
+        return ((Long) jsonConfig.get(property)).intValue();
     }
 
     public static AppConfig load(final String configFile) throws IOException, ParseException {
