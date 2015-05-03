@@ -6,16 +6,15 @@ import java.util.List;
 
 public final class Session {
 
-    private static int numberOfInstances = 0;
-
     private int userId;
-
-    private final int id;
 
     private final List<Search> searches;
 
     private Intent intent;
 
+    /**
+     * Comparator used for sorting sessions from the oldest to the newest by their oldest search.
+     */
     public static final Comparator<Session> OLDEST = new Comparator<Session>() {
 
         @Override
@@ -25,13 +24,18 @@ public final class Session {
 
     };
 
+    /**
+     * Creates new empty session.
+     */
     public Session() {
         this(null);
     }
 
+    /**
+     * Creates new session with specified searches in it.
+     * @param searches searches to be present in the session
+     */
     public Session(final List<Search> searches) {
-        this.id = ++numberOfInstances;
-
         this.searches = new ArrayList<Search>();
 
         if (searches != null) {
@@ -43,26 +47,44 @@ public final class Session {
         this.userId = -1;
     }
 
+    /**
+     * Sets the user id of this session.
+     * @param userId user id to set
+     */
     public void setUserId(final int userId) {
         this.userId = userId;
     }
 
+    /**
+     * Returns the user id of this session.
+     * @return user id of this session
+     */
     public int getUserId() {
         return userId;
     }
 
-    public int getId() {
-        return id;
-    }
-
+    /**
+     * Returns intent of the session.
+     * @return intent of the session
+     */
     public Intent getIntent() {
         return intent;
     }
 
+    /**
+     * Sets intent of the session.
+     * @param intent intent to set
+     */
     public void setIntent(final Intent intent) {
         this.intent = intent;
     }
 
+    /**
+     * Add search to the session. Searches are ordered by the time stamp their were issued.
+     * Search have to contain results to be added.
+     * @param search search to add to this session
+     * @return true if search has been added
+     */
     public boolean add(final Search search) {
         if (search.getResults().isEmpty()) {
             return false;
@@ -81,6 +103,10 @@ public final class Session {
         return true;
     }
 
+    /**
+     * Returns the newest search from session or null if empty.
+     * @return newest search
+     */
     public Search getNewestSearch() {
         if (searches.isEmpty()) {
             return null;
@@ -89,6 +115,10 @@ public final class Session {
         }
     }
 
+    /**
+     * Returns the oldest search from session or null if empty.
+     * @return oldest search
+     */
     public Search getOldestSearch() {
         if (searches.isEmpty()) {
             return null;
@@ -97,14 +127,18 @@ public final class Session {
         }
     }
 
-    public Search getSearch(int index) {
-        return searches.get(index);
-    }
-
+    /**
+     * Returns copy of a list of all searches in this session.
+     * @return copy of session searches
+     */
     public List<Search> getAllSearches() {
         return new ArrayList<Search>(searches);
     }
 
+    /**
+     * Return list of all results of searches in this session.
+     * @return results of all searches in this session
+     */
     public List<Result> getAllResults() {
         List<Result> results = new ArrayList<Result>();
 
@@ -115,10 +149,18 @@ public final class Session {
         return results;
     }
 
+    /**
+     * Return number of searches in this session.
+     * @return number of searches
+     */
     public int getNumberOfSearches() {
         return searches.size();
     }
 
+    /**
+     * Return true if the session is empty, otherwise false.
+     * @return true if session is empty
+     */
     public boolean isEmpty() {
         return searches.isEmpty();
     }
@@ -129,9 +171,7 @@ public final class Session {
 
         sb.append(getClass().getSimpleName()).append('[');
 
-        sb.append("id=").append(id);
-
-        sb.append(" intent=").append(intent);
+        sb.append("intent=").append(intent);
 
         sb.append(" user_id=").append(userId);
 
@@ -140,6 +180,11 @@ public final class Session {
         return sb.append(']').toString();
     }
 
+    /**
+     * Creates new instance of session with specified searches in it.
+     * @param searches list of searches to be present in new session
+     * @return new session with specified searches in it
+     */
     public static Session newInstance(final Search... searches) {
         Session session = new Session();
 
@@ -150,10 +195,11 @@ public final class Session {
         return session;
     }
 
-    public static Session newInstance(final List<Search> searches) {
-        return new Session(searches);
-    }
-
+    /**
+     * Returns collected searches present int given session.
+     * @param sessions sessions to collect searches from
+     * @return list of searches
+     */
     public static List<Search> collectSearches(final List<Session> sessions) {
         List<Search> searches = new ArrayList<Search>();
 
