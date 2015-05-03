@@ -43,6 +43,10 @@ public final class AppConfig {
         return getDouble("ratio_between_training_and_testing_sessions");
     }
 
+    public double getSVM_C() {
+        return getDouble("SVM_C");
+    }
+
     public int getLDAIterations() {
         return getInt("LDA_iterations");
     }

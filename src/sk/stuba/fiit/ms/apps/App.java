@@ -139,7 +139,7 @@ public final class App {
         // Train SVM from training examples
         log("Training SVM classifier...");
 
-        SVMModel svmModel = SVMModel.train(trainingExamples, trainingLabels);
+        SVMModel svmModel = SVMModel.train(trainingExamples, trainingLabels, config.getSVM_C());
 
         log("Training SVM classifier done");
 

@@ -15,7 +15,7 @@ public final class SVMModel {
         this.model = model;
     }
 
-    public static SVMModel train(final double[][] trainingSet, final double[] trainingLabels) {
+    public static SVMModel train(final double[][] trainingSet, final double[] trainingLabels, final double C) {
         svm_problem prob = new svm_problem();
 
         int trainingExamples = trainingSet.length;
@@ -52,7 +52,7 @@ public final class SVMModel {
         param.coef0 = 0;
         param.nu = 0.5;
         param.cache_size = 100;
-        param.C = 3.7;
+        param.C = C;
         param.eps = 0.01;
         param.p = 0.1;
         param.shrinking = 1;

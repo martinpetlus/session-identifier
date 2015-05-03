@@ -15,5 +15,7 @@
 
   "LDA_topics": 100,
 
-  "LDA_iterations": 1000
+  "LDA_iterations": 1000,
+
+  "SVM_C": 3.7
 }
