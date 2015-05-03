@@ -78,8 +78,8 @@ public final class App {
         }
 
         // Separate training and testing sessions
-        SessionsSplitter sessionsSplitter = new SessionsSplitter(config.
-            getRatioBetweenTrainingAndTestingSessions());
+        SessionsSplitter sessionsSplitter = new SessionsSplitter(
+            config.getRatioBetweenTrainingAndTestingSessions());
 
         sessionsSplitter.splitSessions(sessions.getSessions());
 
@@ -108,14 +108,13 @@ public final class App {
         LDAFileFormatter formatter = new LDAFileFormatter();
         formatter.write(trainingSessions);
 
-        // Train LDA model from train sessions
+        // Train LDA model from training sessions
         log("Training LDA model...");
 
-        int topics = 100;
-        LDAModel lda = LDAModel.estimate(LDAFileFormatter.FILE,
-            formatter, topics, config.getLDAIterations());
+        LDAModel lda = LDAModel.estimate(LDAFileFormatter.FILE, formatter,
+            config.getLDATopics(), config.getLDAIterations());
 
-        log("Traning LDA model done");
+        log("Training LDA model done");
 
         // Create session extractor with trained LDA
         SessionExtractor extractor = new SessionExtractor(lda);

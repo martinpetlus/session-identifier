@@ -47,6 +47,10 @@ public final class AppConfig {
         return ((Long) jsonConfig.get("LDA_iterations")).intValue();
     }
 
+    public int getLDATopics() {
+        return ((Long) jsonConfig.get("LDA_topics")).intValue();
+    }
+
     public static AppConfig load(final String configFile) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
 
