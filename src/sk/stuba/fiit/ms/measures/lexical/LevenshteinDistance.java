@@ -1,6 +1,9 @@
 package sk.stuba.fiit.ms.measures.lexical;
 
-// Implementation from http://en.wikipedia.org/wiki/Levenshtein_distance
+/**
+ * Class that implements Levenshtein distance of two texts.
+ * Implementation from http://en.wikipedia.org/wiki/Levenshtein_distance
+ */
 public final class LevenshteinDistance extends LexicalDistance {
 
     private LevenshteinDistance() {}

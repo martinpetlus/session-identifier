@@ -2,6 +2,9 @@ package sk.stuba.fiit.ms.measures.lexical;
 
 import sk.stuba.fiit.ms.utils.SetUtils;
 
+/**
+ * Class that implements Jaccard similarity.
+ */
 public final class JaccardLexicalSimilarity extends LexicalSimilarity {
 
     private JaccardLexicalSimilarity() {}
