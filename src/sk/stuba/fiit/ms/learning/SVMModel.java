@@ -89,46 +89,47 @@ public final class SVMModel {
         return Double.compare(v, 1.0) == 0;
     }
 
-    public void print() {
-        System.out.println("Support vectors:");
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
 
-        System.out.print("[");
+        sb.append("Support vectors:\n[");
 
         for (int i = 0; i < model.SV.length; i++) {
             for (int j = 0; j < model.SV[i].length; j++) {
                 if (j > 0) {
-                    System.out.print(" ");
+                    sb.append(' ');
                 }
 
-                System.out.print(model.SV[i][j].value);
+                sb.append(model.SV[i][j].value);
             }
 
             if (i + 1 < model.SV.length) {
-                System.out.println(";");
+                sb.append(";\n");
             }
         }
 
-        System.out.println("]");
+        sb.append("]\n");
 
-        System.out.println("Dual coefs:");
-
-        System.out.print("[");
+        sb.append("Dual coefficients:\n[");
 
         for (int i = 0; i < model.sv_coef.length; i++) {
             for (int j = 0; j < model.sv_coef[i].length; j++) {
                 if (j > 0) {
-                    System.out.print(" ");
+                    sb.append(' ');
                 }
 
-                System.out.print(model.sv_coef[i][j]);
+                sb.append(model.sv_coef[i][j]);
             }
 
             if (i + 1 < model.sv_coef.length) {
-                System.out.println(";");
+                sb.append(";\n");
             }
         }
 
-        System.out.println("]");
+        sb.append("]\n");
+
+        return sb.toString();
     }
 
 }
