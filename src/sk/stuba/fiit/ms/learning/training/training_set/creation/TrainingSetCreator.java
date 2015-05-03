@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import sk.stuba.fiit.ms.features.extraction.SessionExtractor;
+import sk.stuba.fiit.ms.features.extraction.SessionSearchExtractor;
 import sk.stuba.fiit.ms.learning.training.training_set.TrainingSet;
 import sk.stuba.fiit.ms.session.Session;
 
@@ -14,7 +14,7 @@ public final class TrainingSetCreator {
 
     private final ExamplesCreator negativeCreator;
 
-    public TrainingSetCreator(final SessionExtractor extractor) {
+    public TrainingSetCreator(final SessionSearchExtractor extractor) {
         positiveCreator = new PositiveExamplesCreator(extractor);
 
         negativeCreator = new NegativeExamplesCreator(extractor);

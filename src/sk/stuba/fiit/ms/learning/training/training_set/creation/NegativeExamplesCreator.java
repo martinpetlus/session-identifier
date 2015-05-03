@@ -3,16 +3,16 @@ package sk.stuba.fiit.ms.learning.training.training_set.creation;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.stuba.fiit.ms.features.extraction.SessionExtractor;
+import sk.stuba.fiit.ms.features.extraction.SessionSearchExtractor;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 import sk.stuba.fiit.ms.session.identifiers.stack.StackSessionIdentifier;
 
 public final class NegativeExamplesCreator implements ExamplesCreator {
 
-    private final SessionExtractor extractor;
+    private final SessionSearchExtractor extractor;
 
-    public NegativeExamplesCreator(final SessionExtractor extractor) {
+    public NegativeExamplesCreator(final SessionSearchExtractor extractor) {
         this.extractor = extractor;
     }
 

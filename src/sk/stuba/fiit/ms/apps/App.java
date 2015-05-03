@@ -17,7 +17,7 @@ import sk.stuba.fiit.ms.session.identifiers.consecutive.TemporalDistanceConsecut
 import sk.stuba.fiit.ms.session.identifiers.stack.MethodStackApproach;
 import sk.stuba.fiit.ms.session.identifiers.stack.StackSessionIdentifier;
 import sk.stuba.fiit.ms.features.FeatureNormalizer;
-import sk.stuba.fiit.ms.features.extraction.SessionExtractor;
+import sk.stuba.fiit.ms.features.extraction.SessionSearchExtractor;
 import sk.stuba.fiit.ms.learning.SVMModel;
 import sk.stuba.fiit.ms.learning.training.training_set.TrainingSet;
 import sk.stuba.fiit.ms.learning.training.training_set.creation.TrainingSetCreator;
@@ -116,10 +116,10 @@ public final class App {
 
         log("Training LDA model done");
 
-        // Create session extractor with trained LDA
-        SessionExtractor extractor = new SessionExtractor(lda);
+        // Create extractor with trained LDA
+        SessionSearchExtractor extractor = SessionSearchExtractor.buildDefault(lda);
 
-        log(extractor.getFeatureExtractor());
+        log(extractor);
 
         // Create training examples
         log("Creating training examples...");

@@ -5,24 +5,37 @@ import java.util.List;
 
 import sk.stuba.fiit.ms.features.PairFeature;
 import sk.stuba.fiit.ms.features.SessionFeature;
+import sk.stuba.fiit.ms.features.lexical.QueryClickedSnippetsMeasure;
+import sk.stuba.fiit.ms.features.lexical.QueryClickedTitlesMeasure;
+import sk.stuba.fiit.ms.features.lexical.QueryMeasure;
+import sk.stuba.fiit.ms.features.semantic.SemanticCosineOfSearches;
+import sk.stuba.fiit.ms.features.temporal.TemporalDistanceNewest;
+import sk.stuba.fiit.ms.features.temporal.TemporalDistanceOldest;
+import sk.stuba.fiit.ms.features.url.CommonClickedHosts;
+import sk.stuba.fiit.ms.features.url.CommonClickedUrls;
+import sk.stuba.fiit.ms.features.url.CommonHosts;
+import sk.stuba.fiit.ms.features.url.CommonUrls;
 import sk.stuba.fiit.ms.learning.Features;
+import sk.stuba.fiit.ms.measures.lexical.CosineLexicalSimilarity;
+import sk.stuba.fiit.ms.measures.lexical.LevenshteinDistance;
+import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
-public final class FeatureExtractor {
+public final class SessionSearchExtractor {
 
     private final List<PairFeature> pairFeatures;
 
     private final List<SessionFeature> sessionFeatures;
 
-    private FeatureExtractor(final Builder builder) {
+    private SessionSearchExtractor(final Builder builder) {
         pairFeatures = new ArrayList<PairFeature>(builder.pairFeatures);
         sessionFeatures = new ArrayList<SessionFeature>(builder.sessionFeatures);
     }
 
     public double[] extractFeatures(final Session session, final Search search) {
-        final int numOfSessionFeatures = sessionFeatures.size();
-        final int numOfPairFeatures = pairFeatures.size() * Features.transformExpansion();
+        int numOfSessionFeatures = sessionFeatures.size();
+        int numOfPairFeatures = pairFeatures.size() * Features.transformExpansion();
 
         double[] featureVector = new double[numOfSessionFeatures + numOfPairFeatures];
 
@@ -85,18 +98,53 @@ public final class FeatureExtractor {
 
         public void addSessionFeature(final SessionFeature feature) { sessionFeatures.add(feature); }
 
-        public FeatureExtractor build() {
-            return new FeatureExtractor(this);
+        public SessionSearchExtractor build() {
+            return new SessionSearchExtractor(this);
         }
 
+    }
+
+    public static SessionSearchExtractor buildDefault(final LDAModel model) {
+        SessionSearchExtractor.Builder builder = new SessionSearchExtractor.Builder();
+
+//        builder.addPairFeature(new QuerySimilarity(JaccardLexicalSimilarity.newInstance()));
+//        builder.addPairFeature(new QueryTitleSimilarity(CosineLexicalSimilarity.newInstance()));
+//        builder.addPairFeature(new QueryTitleSimilarity(JaccardLexicalSimilarity.newInstance()));
+//
+//        builder.addPairFeature(new CommonUrls());
+//        builder.addPairFeature(new CommonClickedUrls());
+//
+//        builder.addPairFeature(new SemanticCosineOfSearches(model));
+
+        // Session features
+        builder.addSessionFeature(new SemanticCosineOfSearches(model));
+
+        builder.addSessionFeature(new QueryMeasure(CosineLexicalSimilarity.newInstance()));
+        builder.addSessionFeature(new QueryMeasure(LevenshteinDistance.newInstance()));
+
+        builder.addSessionFeature(new QueryClickedTitlesMeasure(CosineLexicalSimilarity.newInstance()));
+        builder.addSessionFeature(new QueryClickedSnippetsMeasure(CosineLexicalSimilarity.newInstance()));
+
+        builder.addSessionFeature(new CommonHosts());
+        builder.addSessionFeature(new CommonClickedHosts());
+
+        builder.addSessionFeature(new CommonClickedUrls());
+        builder.addSessionFeature(new CommonUrls());
+
+        builder.addSessionFeature(new TemporalDistanceNewest());
+        builder.addSessionFeature(new TemporalDistanceOldest());
+
+        // Pair features
+        builder.addPairFeature(new QueryMeasure(CosineLexicalSimilarity.newInstance()));
+
+        return builder.build();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(this.getClass().getSimpleName());
-        sb.append('[');
+        sb.append(this.getClass().getSimpleName()).append('[');
 
         if (!sessionFeatures.isEmpty()) {
             sb.append("SessionFeatures:(");
