@@ -5,6 +5,9 @@ import sk.stuba.fiit.ms.session.Session;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that splits session between training and testing.
+ */
 public final class SessionsSplitter {
 
     private List<Session> trainingSessions;
