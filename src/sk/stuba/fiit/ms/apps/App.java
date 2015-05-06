@@ -87,6 +87,9 @@ public final class App {
         List<Session> testingSessions = sessionsSplitter.getTestingSessions();
         List<Session> trainingSessions = sessionsSplitter.getTrainingSessions();
 
+        log("Number of training sessions: " + trainingSessions.size());
+        log("Number of testing sessions: " + testingSessions.size());
+
         // Print number of testing queries
         int testingQueries = 0;
 
