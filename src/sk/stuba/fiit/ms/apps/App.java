@@ -97,7 +97,7 @@ public final class App {
             testingQueries += testSession.getNumberOfSearches();
         }
 
-        log("Number of testing queries: " + testingQueries );
+        log("Number of testing queries: " + testingQueries);
 
         // Print number of training queries
         int trainingQueries = 0;
