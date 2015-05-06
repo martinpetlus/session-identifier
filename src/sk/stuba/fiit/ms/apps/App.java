@@ -112,16 +112,20 @@ public final class App {
         LDAFileFormatter formatter = new LDAFileFormatter();
         formatter.write(trainingSessions);
 
-        // Train LDA model from training sessions
-        log("Training LDA model...");
+        LDAModel ldaModel = null;
 
-        LDAModel lda = LDAModel.estimate(LDAFileFormatter.FILE, formatter,
-            config.getLDATopics(), config.getLDAIterations());
+        if (config.useLDA()) {
+            // Train LDA model from training sessions
+            log("Training LDA model...");
 
-        log("Training LDA model done");
+            ldaModel = LDAModel.estimate(LDAFileFormatter.FILE, formatter,
+                config.getLDATopics(), config.getLDAIterations());
 
-        // Create extractor with trained LDA
-        SessionSearchExtractor extractor = SessionSearchExtractor.buildDefault(lda);
+            log("Training LDA model done");
+        }
+
+        // Create extractor
+        SessionSearchExtractor extractor = SessionSearchExtractor.buildDefault(ldaModel);
 
         log(extractor);
 

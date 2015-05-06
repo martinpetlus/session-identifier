@@ -104,7 +104,7 @@ public final class SessionSearchExtractor {
 
     }
 
-    public static SessionSearchExtractor buildDefault(final LDAModel model) {
+    public static SessionSearchExtractor buildDefault(final LDAModel ldaModel) {
         SessionSearchExtractor.Builder builder = new SessionSearchExtractor.Builder();
 
 //        builder.addPairFeature(new QuerySimilarity(JaccardLexicalSimilarity.newInstance()));
@@ -117,7 +117,9 @@ public final class SessionSearchExtractor {
 //        builder.addPairFeature(new SemanticCosineOfSearches(model));
 
         // Session features
-        builder.addSessionFeature(new SemanticCosineOfSearches(model));
+        if (ldaModel != null) {
+            builder.addSessionFeature(new SemanticCosineOfSearches(ldaModel));
+        }
 
         builder.addSessionFeature(new QueryMeasure(CosineLexicalSimilarity.newInstance()));
         builder.addSessionFeature(new QueryMeasure(LevenshteinDistance.newInstance()));

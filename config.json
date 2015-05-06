@@ -32,6 +32,8 @@
 
   "ratio_between_training_and_testing_sessions": 0.8,
 
+  "LDA": true,
+
   "LDA_topics": 100,
 
   "LDA_iterations": 1000,

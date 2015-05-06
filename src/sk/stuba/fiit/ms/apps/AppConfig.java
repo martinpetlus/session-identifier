@@ -59,6 +59,10 @@ public final class AppConfig {
         return getBoolean("load", getSessionTrack2014Config());
     }
 
+    public boolean useLDA() {
+        return getBoolean("LDA", jsonConfig);
+    }
+
     public String getSessionTrack2014File() {
         return getString("file", getSessionTrack2014Config());
     }
