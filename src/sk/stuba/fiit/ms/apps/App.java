@@ -108,13 +108,13 @@ public final class App {
 
         log("Number of training queries: " + trainingQueries);
 
-        // Write training sessions to file for LDA
-        LDAFileFormatter formatter = new LDAFileFormatter();
-        formatter.write(trainingSessions);
-
         LDAModel ldaModel = null;
 
         if (config.useLDA()) {
+            // Write training sessions to file for LDA
+            LDAFileFormatter formatter = new LDAFileFormatter();
+            formatter.write(trainingSessions);
+
             // Train LDA model from training sessions
             log("Training LDA model...");
 
