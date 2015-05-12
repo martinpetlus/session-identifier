@@ -16,11 +16,19 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
 
     private final List<Session> sessions;
 
+    /**
+     * Creates instance of this consecutive identifier with given consecutive approach.
+     * @param consecutiveApproach consecutive approach to be used in identification
+     */
     public ConsecutiveSessionIdentifier(final ConsecutiveApproach consecutiveApproach) {
         this.consecutiveApproach = consecutiveApproach;
         this.sessions = new ArrayList<Session>();
     }
 
+    /**
+     * Identifies search into session using this identifier and consecutive approach.
+     * @param search search to be identified into session
+     */
     @Override
     protected void identify(final Search search) {
         // If there are no identified sessions yet
@@ -43,11 +51,18 @@ public final class ConsecutiveSessionIdentifier extends SessionIdentifier {
         }
     }
 
+    /**
+     * Clear identfied sessions.
+     */
     @Override
     protected void clear() {
         sessions.clear();
     }
 
+    /**
+     * Returns identified sessions.
+     * @return identified sessions
+     */
     @Override
     public List<Session> getIdentifiedSessions() {
         return new ArrayList<Session>(sessions);

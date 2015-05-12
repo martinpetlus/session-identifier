@@ -22,17 +22,31 @@ import sk.stuba.fiit.ms.semantic.lda.LDAModel;
 import sk.stuba.fiit.ms.session.Search;
 import sk.stuba.fiit.ms.session.Session;
 
+/**
+ * Extractor class that extracts features between session and search using
+ * features chosen when creating instance of this extractor.
+ */
 public final class SessionSearchExtractor {
 
     private final List<PairFeature> pairFeatures;
 
     private final List<SessionFeature> sessionFeatures;
 
+    /**
+     * Constructs instance of extractor with chosen features.
+     * @param builder builder with chosen features
+     */
     private SessionSearchExtractor(final Builder builder) {
         pairFeatures = new ArrayList<PairFeature>(builder.pairFeatures);
         sessionFeatures = new ArrayList<SessionFeature>(builder.sessionFeatures);
     }
 
+    /**
+     * Extracts features between given session and search.
+     * @param session session to extract features from and from search
+     * @param search search to extract features from and from session
+     * @return returns vector of extracted features
+     */
     public double[] extractFeatures(final Session session, final Search search) {
         int numOfSessionFeatures = sessionFeatures.size();
         int numOfPairFeatures = pairFeatures.size() * Features.transformExpansion();
@@ -104,6 +118,12 @@ public final class SessionSearchExtractor {
 
     }
 
+    /**
+     * Builds default session extractor with default features.
+     * @param ldaModel LDA model to be used in semantic features,
+     *                 or null to create default extractor without semantic features
+     * @return returns default extractor
+     */
     public static SessionSearchExtractor buildDefault(final LDAModel ldaModel) {
         SessionSearchExtractor.Builder builder = new SessionSearchExtractor.Builder();
 

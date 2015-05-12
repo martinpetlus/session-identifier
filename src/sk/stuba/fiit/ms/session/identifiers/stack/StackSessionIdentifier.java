@@ -9,18 +9,30 @@ import sk.stuba.fiit.ms.session.Session;
 
 public final class StackSessionIdentifier extends SessionIdentifier {
 
-    // Milliseconds per day: 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+    /**
+     * Used ina algorithm to prevent joining queries into too old previous sessions.
+     * This value is set to 1 day.
+     * milliseconds per day: 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+     */
     public static final long MAX_OLD = 86_400_000L;
 
     private final StackApproach stackApproach;
 
     private final List<Session> stack;
 
+    /**
+     * Constructs instance of stack session identifier with given stack approach.
+     * @param stackApproach stack approach to be used in this identifier
+     */
     public StackSessionIdentifier(final StackApproach stackApproach) {
         this.stackApproach = stackApproach;
         this.stack = new ArrayList<Session>();
     }
 
+    /**
+     * Identifies search into session using stack session algorithm with given approach.
+     * @param search search to be identified into session
+     */
     @Override
     protected  void identify(final Search search) {
         // If the stack has no sessions yet
@@ -54,11 +66,18 @@ public final class StackSessionIdentifier extends SessionIdentifier {
         stack.add(Session.newInstance(search));
     }
 
+    /**
+     * Clears already identified sessions.
+     */
     @Override
     protected void clear() {
         stack.clear();
     }
 
+    /**
+     * Returns identified sessions.
+     * @return identified sessions
+     */
     @Override
     public List<Session> getIdentifiedSessions() {
         return new ArrayList<Session>(stack);
