@@ -85,11 +85,7 @@ public final class Session {
      * @param search search to add to this session
      * @return true if search has been added
      */
-    public boolean add(final Search search) {
-        if (search.getResults().isEmpty()) {
-            return false;
-        }
-
+    public void add(final Search search) {
         int i = 0;
 
         for (; i < searches.size(); i++) {
@@ -99,8 +95,6 @@ public final class Session {
         }
 
         searches.add(i, search);
-
-        return true;
     }
 
     /**
